@@ -1,0 +1,1 @@
+{"root":["./.nuxt/nuxt.d.ts","./app/app.config.ts","./app/app.vue","./app/components/applogo.vue","./app/components/templatemenu.vue","./app/layouts/admin.vue","./app/layouts/default.vue","./app/pages/index.vue","./app/pages/login.vue","./app/pages/admin/index.vue","./.nuxt/nuxt.node.d.ts","./nuxt.config.ts"],"version":"5.9.3"}
