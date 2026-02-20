@@ -1,36 +1,35 @@
-/**
- * Navigation Composable
- * Centralized navigation data
- */
+// app/composables/useNavigation.ts
 
 export const useNavigation = () => {
+  // Data untuk Menu Navigasi
   const navItems = [
-    { label: 'Beranda', to: '/', icon: 'i-heroicons-home' },
-    { label: 'Tentang', to: '/tentang', icon: 'i-heroicons-information-circle' },
-    { label: 'Fitur', to: '/fitur', icon: 'i-heroicons-sparkles' },
-    { label: 'Login', to: '/login', icon: 'i-heroicons-arrow-right-on-rectangle' }
+    { label: 'Beranda', to: '/' },
+    { label: 'Tentang', to: '/tentang' },
+    { label: 'Fitur', to: '/fitur' },
+    { label: 'Login', to: '/login' }
   ]
 
+  // Data untuk Customer Service & Sosial Media
   const socialLinks = [
     {
       name: 'WhatsApp',
-      icon: 'i-heroicons-chat-bubble-left-right',
-      href: 'https://wa.me/6281234567890',
       label: '+62 812-3456-7890',
+      href: 'https://wa.me/6281234567890',
+      icon: 'i-simple-icons-whatsapp', // Memakai icon whatsapp dari simple-icons
       color: 'green'
     },
     {
       name: 'Email',
-      icon: 'i-heroicons-envelope',
-      href: 'mailto:admin@koperasimerahputih.com',
       label: 'admin@koperasi.com',
+      href: 'mailto:admin@koperasi.com',
+      icon: 'i-heroicons-envelope', // Memakai icon amplop dari heroicons
       color: 'blue'
     },
     {
-      name: 'Instagram',
-      icon: 'i-heroicons-camera',
-      href: 'https://instagram.com/koperasimerahputih',
+      name: 'Instagram', // Ini akan muncul di jejeran icon bawah
       label: '@koperasimerahputih',
+      href: 'https://instagram.com/koperasimerahputih',
+      icon: 'i-simple-icons-instagram',
       color: 'pink'
     }
   ]

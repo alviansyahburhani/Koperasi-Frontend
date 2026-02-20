@@ -8,7 +8,7 @@ declare module '@vue/runtime-core' {
     FloatingCard: typeof import('./components/ui/FloatingCard.vue')['default']
     HeroImage: typeof import('./components/ui/HeroImage.vue')['default']
     HeroSection: typeof import('./components/feature/HeroSection.vue')['default']
-    Header: typeof import('./components/layout/Header.vue')['default']
-    Footer: typeof import('./components/layout/Footer.vue')['default']
+    Header: typeof import('./components/layout/AppHeader.vue')['default']
+    Footer: typeof import('./components/layout/AppFooter.vue')['default']
   }
 }

@@ -1,18 +1,17 @@
 <script setup lang="ts">
-/**
- * Default Layout
- * Public pages layout - Clean & Simple
- */
+import AppFooter from '~/components/layout/AppFooter.vue';
+import AppHeader from '~/components/layout/AppHeader.vue';
+
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-white">
-    <Header />
-    
+  <div class="min-h-screen flex flex-col bg-slate-50">
+    <AppHeader/> 
+
     <main class="flex-grow">
       <slot />
     </main>
-    
-    <Footer />
+
+    <AppFooter/>
   </div>
 </template>

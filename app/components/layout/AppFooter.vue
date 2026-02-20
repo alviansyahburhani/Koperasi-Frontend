@@ -150,7 +150,7 @@ const getColorClasses = (color: string) => {
             &copy; {{ currentYear }} <span class="text-white font-semibold">Koperasi Merah Putih</span>. All rights reserved.
           </p>
           <p class="text-xs text-red-200 mt-1">
-            Built with ❤️ for Indonesian Cooperatives
+            Built for Indonesian Cooperatives
           </p>
         </div>
 
