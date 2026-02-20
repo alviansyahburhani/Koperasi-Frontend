@@ -1,0 +1,27 @@
+name: CI/CD Nuxt App
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Sesuaikan dengan versi Node kamu
+          cache: 'npm'       # Ini biar install-nya cepat (pake cache)
+
+      - name: Install dependencies
+        run: npm ci          # Ini versi "pasti" dari npm install untuk server
+
+      - name: Build project
+        run: npm run build   # Pastikan ada script 'build' di package.json
