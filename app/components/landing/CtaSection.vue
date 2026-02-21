@@ -21,10 +21,10 @@
         
         <div class="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">
           <NuxtLink 
-            to="/daftar-koperasi" 
+            to="pendaftaran/koperasi" 
             class="inline-flex justify-center items-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-red-600/30 active:scale-95"
           >
-            Mulai Gratis Sekarang
+            Daftarkan Koperasi Anda
           </NuxtLink>
           
           <NuxtLink 

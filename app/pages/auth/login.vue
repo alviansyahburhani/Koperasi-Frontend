@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 
-// Page meta
 definePageMeta({
   layout: 'default',
-  middleware: 'guest' // Redirect jika sudah login (nanti kita buat middleware-nya)
+  middleware: 'guest'
 })
 
-// Head meta
 useHead({
   title: 'Login - Sistem Koperasi',
   meta: [
@@ -21,12 +19,10 @@ interface LoginForm {
   rememberMe: boolean
 }
 
-// Services & Stores
 const authStore = useAuthStore()
 const router = useRouter()
 const config = useRuntimeConfig()
 
-// State
 const loading = ref(false)
 const showPassword = ref(false)
 const errorMessage = ref('')
@@ -37,13 +33,11 @@ const form = reactive<LoginForm>({
   rememberMe: false
 })
 
-// Handle Login
 const handleLogin = async () => {
   loading.value = true
   errorMessage.value = ''
   
   try {
-    // Debug log (only in development)
     if (config.public.debugMode) {
       console.log('[Login] Attempting login with:', { email: form.email })
     }
@@ -55,20 +49,24 @@ const handleLogin = async () => {
     })
 
     if (result.success) {
-      // Debug log
       if (config.public.debugMode) {
-        console.log('[Login] Success! User role:', authStore.userRole)
+        console.log('[Login] Success! User:', {
+          role: authStore.userRole,
+          isSuperadmin: authStore.isSuperadmin,
+          isAdmin: authStore.isAdmin,
+          isAnggota: authStore.isAnggota
+        })
       }
 
-      // Redirect based on user role
+      // ✅ Redirect based on role
       if (authStore.isSuperadmin) {
         await router.push('/superadmin')
-      } else if (authStore.isAnggota) {
-        await router.push('/anggota')
       } else if (authStore.isAdmin) {
         await router.push('/admin')
+      } else if (authStore.isAnggota) {
+        await router.push('/anggota')
       } else {
-        // Default redirect
+        // Fallback
         await router.push('/')
       }
     } else {
@@ -77,9 +75,8 @@ const handleLogin = async () => {
     }
 
   } catch (error: any) {
-    // Handle unexpected errors
-    console.error('[Login] Error:', error)
-    errorMessage.value = error.message || 'Terjadi kesalahan. Silakan coba lagi.'
+    console.error('[Login] Unexpected error:', error)
+    errorMessage.value = 'Terjadi kesalahan yang tidak terduga. Silakan coba lagi.'
   } finally {
     loading.value = false
   }
@@ -87,15 +84,15 @@ const handleLogin = async () => {
 </script>
 
 <template>
+  <!-- UI TETAP SAMA - TIDAK BERUBAH -->
   <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
     <div class="max-w-md w-full bg-white rounded-lg shadow-md p-8">
-      <!-- Header -->
+      
       <div class="text-center mb-6">
         <h1 class="text-2xl font-bold text-red-800 mb-2">Masuk ke Sistem Koperasi</h1>
         <p class="text-sm text-gray-600">Silakan masuk menggunakan akun Anda</p>
       </div>
 
-      <!-- Error Alert -->
       <div v-if="errorMessage" class="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
         <div class="flex items-start gap-2">
           <UIcon name="i-heroicons-exclamation-circle" class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
@@ -112,7 +109,6 @@ const handleLogin = async () => {
       </div>
 
       <form @submit.prevent="handleLogin" class="space-y-4">
-        <!-- Email -->
         <div>
           <label class="block text-xs text-gray-700 mb-1">
             Email <span class="text-red-500">*</span>
@@ -127,7 +123,6 @@ const handleLogin = async () => {
           />
         </div>
 
-        <!-- Password -->
         <div>
           <label class="block text-xs text-gray-700 mb-1">
             Kata Sandi <span class="text-red-500">*</span>
@@ -152,7 +147,6 @@ const handleLogin = async () => {
           </div>
         </div>
 
-        <!-- Remember Me -->
         <div class="flex items-center">
           <input 
             v-model="form.rememberMe"
@@ -166,7 +160,6 @@ const handleLogin = async () => {
           </label>
         </div>
 
-        <!-- Submit Button -->
         <button 
           type="submit"
           :disabled="loading"
@@ -179,7 +172,6 @@ const handleLogin = async () => {
           <span v-else>Masuk</span>
         </button>
 
-        <!-- Links -->
         <div class="text-center space-y-2 mt-4">
           <p class="text-xs text-gray-600">
             Belum punya akun? 
@@ -195,12 +187,12 @@ const handleLogin = async () => {
         </div>
       </form>
 
-      <!-- Debug Info (Development Only) -->
       <div v-if="config.public.debugMode" class="mt-6 p-3 bg-gray-800 text-green-400 rounded text-xs font-mono">
         <p class="font-bold mb-2">🐛 Debug Mode</p>
         <p>API: {{ config.public.apiBase }}</p>
         <p>Auth: {{ authStore.isAuthenticated ? 'Yes' : 'No' }}</p>
         <p>Role: {{ authStore.userRole || 'N/A' }}</p>
+        <p>Tenant: {{ authStore.user?.tenantId || 'N/A' }}</p>
       </div>
     </div>
   </div>

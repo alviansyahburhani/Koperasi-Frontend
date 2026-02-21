@@ -1,10 +1,16 @@
-import { RoleConfig } from '~/utils/roles'
-
 export default defineNuxtRouteMiddleware(() => {
-  const user = useState<any>('auth-user')
+  const authStore = useAuthStore()
   
-  if (user.value && user.value.role) {
-    const config = RoleConfig[user.value.role as keyof typeof RoleConfig]
-    return navigateTo(config?.dashboardRoute || '/')
+  if (authStore.isAuthenticated && authStore.user) {
+    // Redirect based on role
+    if (authStore.isSuperadmin) {
+      return navigateTo('/superadmin')
+    } else if (authStore.isAdmin) {
+      return navigateTo('/admin')
+    } else if (authStore.isAnggota) {
+      return navigateTo('/anggota')
+    }
+    
+    return navigateTo('/')
   }
 })

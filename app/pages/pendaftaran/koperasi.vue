@@ -1,361 +1,293 @@
-<script setup lang="ts">
-definePageMeta({
-  layout: 'default'
-})
+<script setup>
+import { reactive, ref } from 'vue'
 
-useHead({
-  title: 'Daftar Koperasi - Koperasi Merah Putih',
-  meta: [
-    { name: 'description', content: 'Daftarkan koperasi Anda ke platform digital Koperasi Merah Putih' }
-  ]
-})
+// --- LOGIKA FORM ---
+const currentStep = ref(1)
+const totalSteps = 4
+const isSubmitting = ref(false)
 
-interface RegistrationForm {
-  namaKoperasi: string
-  email: string
-  telepon: string
-  alamat: string
-  provinsi: string
-  kabupaten: string
-  kecamatan: string
-  kelurahan: string
-  kodePos: string
-  jumlahAnggota: string
-  nomorBadanHukum: string
-  tanggalBadanHukum: string
-  namaKetua: string
-  emailKetua: string
-  teleponKetua: string
-}
-
-const router = useRouter()
-const loading = ref(false)
-
-const form = reactive<RegistrationForm>({
-  namaKoperasi: '',
+const formData = reactive({
+  // Step 1: Kedudukan
+  cooperativeName: '',
+  subdomain: '',
+  skAhuKoperasi: '',
+  province: '',
+  city: '',
+  district: '',
+  village: '',
+  alamatLengkap: '',
+  petaLokasi: '',
+  // Step 2: PIC
+  picFullName: '',
+  picNik: '',
+  picGender: 'Laki-laki',
+  picPlaceOfBirth: '',
+  picDateOfBirth: '',
+  picOccupation: '',
+  picPhoneNumber: '',
+  picAddress: '',
+  // Step 3: Akun
   email: '',
-  telepon: '',
-  alamat: '',
-  provinsi: '',
-  kabupaten: '',
-  kecamatan: '',
-  kelurahan: '',
-  kodePos: '',
-  jumlahAnggota: '',
-  nomorBadanHukum: '',
-  tanggalBadanHukum: '',
-  namaKetua: '',
-  emailKetua: '',
-  teleponKetua: ''
+  password: '',
+  confirmPassword: '',
+  // Step 4: Dokumen
+  files: {
+    pengesahan: null,
+    daftarUmum: null,
+    aktaNotaris: null,
+    npwp: null
+  }
 })
 
-const handleSubmit = async () => {
-  loading.value = true
+const errors = reactive({})
+
+const validateStep = (step) => {
+  Object.keys(errors).forEach(key => delete errors[key])
+
+  if (step === 1) {
+    if (!formData.cooperativeName) errors.cooperativeName = 'Nama Koperasi wajib diisi'
+    if (!formData.subdomain) errors.subdomain = 'Subdomain wajib diisi'
+    if (!formData.province) errors.province = 'Provinsi wajib diisi'
+    if (!formData.city) errors.city = 'Kabupaten/Kota wajib diisi'
+    if (!formData.district) errors.district = 'Kecamatan wajib diisi'
+    if (!formData.village) errors.village = 'Desa/Kelurahan wajib diisi'
+    if (!formData.alamatLengkap) errors.alamatLengkap = 'Alamat lengkap wajib diisi'
+  }
   
-  // TODO: Implementasi API call
-  setTimeout(() => {
-    loading.value = false
-    alert('Permohonan pendaftaran berhasil dikirim! Tim kami akan menghubungi Anda segera.')
-    router.push('/')
-  }, 1500)
+  if (step === 2) {
+    if (!formData.picFullName) errors.picFullName = 'Nama lengkap PIC wajib diisi'
+    if (formData.picNik.length !== 16) errors.picNik = 'NIK harus 16 digit'
+    if (!formData.picPhoneNumber) errors.picPhoneNumber = 'Nomor telepon wajib diisi'
+    if (!formData.picAddress) errors.picAddress = 'Alamat PIC wajib diisi'
+  }
+
+  if (step === 3) {
+    if (!formData.email) errors.email = 'Email wajib diisi'
+    if (formData.password.length < 8) errors.password = 'Password minimal 8 karakter'
+    if (formData.password !== formData.confirmPassword) errors.confirmPassword = 'Password tidak cocok'
+  }
+
+  return Object.keys(errors).length === 0
 }
+
+const nextStep = () => {
+  if (validateStep(currentStep.value)) {
+    if (currentStep.value < totalSteps) currentStep.value++
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+}
+
+const prevStep = () => {
+  if (currentStep.value > 1) currentStep.value--
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+const handleFile = (e, key) => {
+  formData.files[key] = e.target.files[0]
+}
+
+const submitForm = async () => {
+  isSubmitting.value = true
+  // Simulasi integrasi backend NestJS
+  setTimeout(() => {
+    alert('Pendaftaran Berhasil Dikirim!')
+    isSubmitting.value = false
+  }, 2000)
+}
+
+// --- STYLING CONSTANTS ---
+const inputClass = "w-full px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-gray-700 text-sm placeholder:text-gray-300 focus:ring-2 focus:ring-red-500/20 focus:border-red-500 outline-none transition-all duration-200"
+const labelClass = "block text-[13px] font-semibold text-gray-700 mb-1.5 uppercase tracking-wide"
+const sectionTitleClass = "text-xl font-bold text-[#8B1E3F] mb-6 flex items-center gap-3 border-b border-gray-100 pb-4"
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50 py-12 px-4">
-    <div class="max-w-3xl mx-auto">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <div class="min-h-screen bg-[#F8FAFC] pt-16 pb-20 font-['Inter',sans-serif] text-left">
+    <main class="max-w-4xl mx-auto px-6">
       
-      <!-- Header -->
-      <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-red-800 mb-3">Daftar Koperasi Baru</h1>
-        <p class="text-sm text-gray-600">
-          Bergabunglah dengan platform digital Koperasi Merah Putih untuk transformasi pengelolaan koperasi modern
-        </p>
+      <div class="text-center mb-12">
+        <h1 class="text-3xl font-extrabold text-[#8B1E3F] tracking-tight mb-2">Form Permohonan Akun Koperasi</h1>
+        <p class="text-sm text-gray-500 font-medium">Lengkapi data koperasi Anda untuk pendaftaran sistem.</p>
       </div>
 
-      <!-- Form Card -->
-      <div class="bg-white rounded-lg shadow-md p-8">
-        <form @submit.prevent="handleSubmit" class="space-y-6">
-          
-          <!-- Section 1: Data Koperasi -->
-          <div>
-            <h2 class="text-lg font-bold text-gray-800 mb-4 pb-2 border-b">Data Koperasi</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- Nama Koperasi -->
-              <div class="md:col-span-2">
-                <label class="block text-xs text-gray-700 mb-1">
-                  Nama Koperasi <span class="text-red-500">*</span>
-                </label>
-                <input 
-                  v-model="form.namaKoperasi"
-                  type="text"
-                  required
-                  placeholder="Contoh: Koperasi Sejahtera Bersama"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
-              </div>
-
-              <!-- Email Koperasi -->
-              <div>
-                <label class="block text-xs text-gray-700 mb-1">
-                  Email Koperasi <span class="text-red-500">*</span>
-                </label>
-                <input 
-                  v-model="form.email"
-                  type="email"
-                  required
-                  placeholder="email@koperasi.com"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
-              </div>
-
-              <!-- Telepon Koperasi -->
-              <div>
-                <label class="block text-xs text-gray-700 mb-1">
-                  No. Telepon <span class="text-red-500">*</span>
-                </label>
-                <input 
-                  v-model="form.telepon"
-                  type="tel"
-                  required
-                  placeholder="08123456789"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
-              </div>
-
-              <!-- Jumlah Anggota -->
-              <div>
-                <label class="block text-xs text-gray-700 mb-1">
-                  Jumlah Anggota <span class="text-red-500">*</span>
-                </label>
-                <input 
-                  v-model="form.jumlahAnggota"
-                  type="number"
-                  required
-                  placeholder="Contoh: 50"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
-              </div>
-
-              <!-- Nomor Badan Hukum -->
-              <div>
-                <label class="block text-xs text-gray-700 mb-1">
-                  Nomor Badan Hukum <span class="text-red-500">*</span>
-                </label>
-                <input 
-                  v-model="form.nomorBadanHukum"
-                  type="text"
-                  required
-                  placeholder="Contoh: 123/BH/XXI/2024"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
-              </div>
-
-              <!-- Tanggal Badan Hukum -->
-              <div>
-                <label class="block text-xs text-gray-700 mb-1">
-                  Tanggal Badan Hukum <span class="text-red-500">*</span>
-                </label>
-                <input 
-                  v-model="form.tanggalBadanHukum"
-                  type="date"
-                  required
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
-              </div>
-            </div>
+      <div class="flex justify-between items-center mb-12 max-w-2xl mx-auto relative px-4">
+        <div class="absolute top-1/2 left-0 w-full h-[2px] bg-gray-200 -z-0"></div>
+        <div 
+          class="absolute top-1/2 left-0 h-[2px] bg-[#C41E3A] transition-all duration-700 ease-in-out -z-0" 
+          :style="{ width: ((currentStep - 1) / (totalSteps - 1) * 100) + '%' }"
+        ></div>
+        
+        <div v-for="s in totalSteps" :key="s" class="z-10 flex flex-col items-center">
+          <div 
+            :class="[
+              'w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 shadow-sm', 
+              currentStep >= s ? 'bg-[#C41E3A] text-white scale-110' : 'bg-white border-2 border-gray-200 text-gray-400'
+            ]"
+          >
+            {{ s }}
           </div>
-
-          <!-- Section 2: Alamat Koperasi -->
-          <div>
-            <h2 class="text-lg font-bold text-gray-800 mb-4 pb-2 border-b">Alamat Koperasi</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- Alamat Lengkap -->
-              <div class="md:col-span-2">
-                <label class="block text-xs text-gray-700 mb-1">
-                  Alamat Lengkap <span class="text-red-500">*</span>
-                </label>
-                <textarea 
-                  v-model="form.alamat"
-                  rows="3"
-                  required
-                  placeholder="Jalan, nomor, RT/RW, dll"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                ></textarea>
-              </div>
-
-              <!-- Provinsi -->
-              <div>
-                <label class="block text-xs text-gray-700 mb-1">
-                  Provinsi <span class="text-red-500">*</span>
-                </label>
-                <select 
-                  v-model="form.provinsi"
-                  required
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                >
-                  <option value="">-- Pilih Provinsi --</option>
-                  <option value="jawa-barat">Jawa Barat</option>
-                  <option value="jawa-tengah">Jawa Tengah</option>
-                  <option value="jawa-timur">Jawa Timur</option>
-                  <option value="dki-jakarta">DKI Jakarta</option>
-                  <!-- TODO: Load from API -->
-                </select>
-              </div>
-
-              <!-- Kabupaten/Kota -->
-              <div>
-                <label class="block text-xs text-gray-700 mb-1">
-                  Kabupaten/Kota <span class="text-red-500">*</span>
-                </label>
-                <input 
-                  v-model="form.kabupaten"
-                  type="text"
-                  required
-                  placeholder="Contoh: Bandung"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
-              </div>
-
-              <!-- Kecamatan -->
-              <div>
-                <label class="block text-xs text-gray-700 mb-1">
-                  Kecamatan <span class="text-red-500">*</span>
-                </label>
-                <input 
-                  v-model="form.kecamatan"
-                  type="text"
-                  required
-                  placeholder="Contoh: Coblong"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
-              </div>
-
-              <!-- Kelurahan/Desa -->
-              <div>
-                <label class="block text-xs text-gray-700 mb-1">
-                  Kelurahan/Desa <span class="text-red-500">*</span>
-                </label>
-                <input 
-                  v-model="form.kelurahan"
-                  type="text"
-                  required
-                  placeholder="Contoh: Lebak Gede"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
-              </div>
-
-              <!-- Kode Pos -->
-              <div>
-                <label class="block text-xs text-gray-700 mb-1">
-                  Kode Pos <span class="text-red-500">*</span>
-                </label>
-                <input 
-                  v-model="form.kodePos"
-                  type="text"
-                  required
-                  maxlength="5"
-                  placeholder="40132"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- Section 3: Data Ketua Koperasi -->
-          <div>
-            <h2 class="text-lg font-bold text-gray-800 mb-4 pb-2 border-b">Data Ketua Koperasi</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- Nama Ketua -->
-              <div class="md:col-span-2">
-                <label class="block text-xs text-gray-700 mb-1">
-                  Nama Lengkap Ketua <span class="text-red-500">*</span>
-                </label>
-                <input 
-                  v-model="form.namaKetua"
-                  type="text"
-                  required
-                  placeholder="Nama lengkap sesuai KTP"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
-              </div>
-
-              <!-- Email Ketua -->
-              <div>
-                <label class="block text-xs text-gray-700 mb-1">
-                  Email Ketua <span class="text-red-500">*</span>
-                </label>
-                <input 
-                  v-model="form.emailKetua"
-                  type="email"
-                  required
-                  placeholder="email.ketua@example.com"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
-              </div>
-
-              <!-- Telepon Ketua -->
-              <div>
-                <label class="block text-xs text-gray-700 mb-1">
-                  No. Telepon Ketua <span class="text-red-500">*</span>
-                </label>
-                <input 
-                  v-model="form.teleponKetua"
-                  type="tel"
-                  required
-                  placeholder="08123456789"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- Info -->
-          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <div class="flex items-start gap-3">
-              <UIcon name="i-heroicons-information-circle" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-              <div class="text-xs text-blue-800">
-                <p class="font-semibold mb-1">Informasi Penting:</p>
-                <ul class="list-disc list-inside space-y-1 text-blue-700">
-                  <li>Pastikan data yang Anda masukkan sudah benar</li>
-                  <li>Tim kami akan memverifikasi data dalam 1-3 hari kerja</li>
-                  <li>Anda akan menerima email notifikasi setelah verifikasi selesai</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Submit Button -->
-          <div class="flex gap-3">
-            <NuxtLink 
-              to="/"
-              class="flex-1 px-6 py-2.5 border border-gray-300 text-gray-700 text-sm font-semibold rounded-md hover:bg-gray-50 transition-colors text-center"
-            >
-              Batal
-            </NuxtLink>
-            <button 
-              type="submit"
-              :disabled="loading"
-              class="flex-1 px-6 py-2.5 bg-red-700 text-white text-sm font-semibold rounded-md hover:bg-red-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              {{ loading ? 'Mengirim...' : 'Kirim Permohonan' }}
-            </button>
-          </div>
-
-          <!-- Footer Link -->
-          <div class="text-center pt-4">
-            <p class="text-xs text-gray-600">
-              Sudah punya akun? 
-              <NuxtLink to="/auth/login" class="text-red-700 hover:underline font-medium">
-                Login di sini
-              </NuxtLink>
-            </p>
-          </div>
-        </form>
+        </div>
       </div>
-    </div>
+
+      <div class="bg-white rounded-3xl shadow-[0_10px_25px_-5px_rgba(0,0,0,0.05)] border border-gray-100 p-10">
+        
+        <div v-if="currentStep === 1" class="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-6">
+          <h2 :class="sectionTitleClass">1. Kedudukan Koperasi</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
+            <div class="md:col-span-1">
+              <label :class="labelClass">Nama Koperasi <span class="text-red-500">*</span></label>
+              <input v-model="formData.cooperativeName" type="text" :class="[inputClass, errors.cooperativeName ? 'border-red-500' : '']" placeholder="Contoh: Koperasi Maju Jaya" />
+              <p v-if="errors.cooperativeName" class="text-[10px] text-red-500 mt-1 font-medium">{{ errors.cooperativeName }}</p>
+            </div>
+            <div>
+              <label :class="labelClass">Subdomain <span class="text-red-500">*</span></label>
+              <div class="flex">
+                <input v-model="formData.subdomain" type="text" :class="inputClass + ' rounded-r-none border-r-0'" placeholder="majujaya" />
+                <span class="px-4 bg-gray-50 border border-gray-200 border-l-0 rounded-r-lg text-[11px] flex items-center text-gray-400 font-bold">.koperasi.com</span>
+              </div>
+            </div>
+            <div class="md:col-span-2">
+              <label :class="labelClass">SK AHU Koperasi <span class="text-red-500">*</span></label>
+              <input v-model="formData.skAhuKoperasi" type="text" :class="inputClass" placeholder="Masukkan nomor SK AHU" />
+            </div>
+            <div>
+              <label :class="labelClass">Provinsi <span class="text-red-500">*</span></label>
+              <input v-model="formData.province" type="text" :class="inputClass" placeholder="Masukkan Provinsi" />
+            </div>
+            <div>
+              <label :class="labelClass">Kabupaten/Kota <span class="text-red-500">*</span></label>
+              <input v-model="formData.city" type="text" :class="inputClass" placeholder="Masukkan Kabupaten/Kota" />
+            </div>
+            <div>
+              <label :class="labelClass">Kecamatan <span class="text-red-500">*</span></label>
+              <input v-model="formData.district" type="text" :class="inputClass" placeholder="Masukkan Kecamatan" />
+            </div>
+            <div>
+              <label :class="labelClass">Desa/Kelurahan <span class="text-red-500">*</span></label>
+              <input v-model="formData.village" type="text" :class="inputClass" placeholder="Masukkan Desa/Kelurahan" />
+            </div>
+            <div class="md:col-span-2">
+              <label :class="labelClass">Alamat Lengkap <span class="text-red-500">*</span></label>
+              <textarea v-model="formData.alamatLengkap" rows="3" :class="inputClass" placeholder="Jalan, nomor rumah, RT/RW, dll"></textarea>
+            </div>
+            <div class="md:col-span-2">
+              <label :class="labelClass">Link Google Maps <span class="text-gray-400 text-[11px] font-normal normal-case">(Opsional)</span></label>
+              <input v-model="formData.petaLokasi" type="url" :class="inputClass" placeholder="https://maps.app.goo.gl/..." />
+            </div>
+          </div>
+        </div>
+
+        <div v-if="currentStep === 2" class="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-6">
+          <h2 :class="sectionTitleClass">2. Informasi PIC (Penanggung Jawab)</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
+            <div class="md:col-span-2">
+              <label :class="labelClass">Nama Lengkap PIC <span class="text-red-500">*</span></label>
+              <input v-model="formData.picFullName" type="text" :class="inputClass" placeholder="Nama sesuai KTP" />
+            </div>
+            <div>
+              <label :class="labelClass">NIK PIC <span class="text-red-500">*</span></label>
+              <input v-model="formData.picNik" type="text" maxlength="16" :class="inputClass" placeholder="16 Digit NIK" />
+            </div>
+            <div>
+              <label :class="labelClass">Jenis Kelamin PIC <span class="text-red-500">*</span></label>
+              <select v-model="formData.picGender" :class="inputClass">
+                <option>Laki-laki</option>
+                <option>Perempuan</option>
+              </select>
+            </div>
+            <div>
+              <label :class="labelClass">Tempat Lahir PIC <span class="text-red-500">*</span></label>
+              <input v-model="formData.picPlaceOfBirth" type="text" :class="inputClass" />
+            </div>
+            <div>
+              <label :class="labelClass">Tanggal Lahir PIC <span class="text-red-500">*</span></label>
+              <input v-model="formData.picDateOfBirth" type="date" :class="inputClass" />
+            </div>
+            <div>
+              <label :class="labelClass">Pekerjaan PIC <span class="text-red-500">*</span></label>
+              <input v-model="formData.picOccupation" type="text" :class="inputClass" />
+            </div>
+            <div>
+              <label :class="labelClass">Nomor Telepon PIC <span class="text-red-500">*</span></label>
+              <input v-model="formData.picPhoneNumber" type="tel" :class="inputClass" placeholder="08xxxx" />
+            </div>
+            <div class="md:col-span-2">
+              <label :class="labelClass">Alamat Lengkap PIC <span class="text-red-500">*</span></label>
+              <textarea v-model="formData.picAddress" rows="3" :class="inputClass" placeholder="Alamat lengkap PIC"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="currentStep === 3" class="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-6">
+          <h2 :class="sectionTitleClass">3. Informasi Akun Koperasi</h2>
+          <div class="space-y-5">
+            <div>
+              <label :class="labelClass">Email Koperasi (Login) <span class="text-red-500">*</span></label>
+              <input v-model="formData.email" type="email" :class="inputClass" placeholder="admin@koperasi.com" />
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label :class="labelClass">Kata Sandi <span class="text-red-500">*</span></label>
+                <input v-model="formData.password" type="password" :class="inputClass" placeholder="Minimal 8 karakter" />
+              </div>
+              <div>
+                <label :class="labelClass">Ulangi Kata Sandi <span class="text-red-500">*</span></label>
+                <input v-model="formData.confirmPassword" type="password" :class="inputClass" placeholder="Konfirmasi sandi" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="currentStep === 4" class="animate-in fade-in duration-500 space-y-6">
+          <h2 :class="sectionTitleClass">4. Dokumen Pendukung (PDF)</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div v-for="(label, key) in {
+              pengesahan: 'Pengesahan Pendirian',
+              daftarUmum: 'Daftar Umum',
+              aktaNotaris: 'Akta Notaris',
+              npwp: 'NPWP Koperasi'
+            }" :key="key" class="p-5 border border-gray-100 bg-[#F9FAFB] rounded-2xl">
+              <label :class="labelClass">{{ label }} <span class="text-red-500">*</span></label>
+              <input type="file" accept="application/pdf" @change="e => handleFile(e, key)" class="text-xs mt-2 block w-full text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-red-50 file:text-[#C41E3A] hover:file:bg-red-100 cursor-pointer" />
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-between mt-12 pt-8 border-t border-gray-100">
+          <button 
+            type="button"
+            @click="prevStep" 
+            v-if="currentStep > 1" 
+            class="px-8 py-2.5 border border-gray-200 rounded-xl font-bold text-gray-500 hover:bg-gray-50 transition-all text-sm"
+          >
+            Kembali
+          </button>
+          <div v-else></div>
+          <button 
+            type="button"
+            @click="currentStep === totalSteps ? submitForm() : nextStep()" 
+            :class="[
+              'px-12 py-2.5 rounded-xl font-bold text-white transition-all shadow-md text-sm', 
+              isSubmitting ? 'bg-gray-400' : 'bg-[#C41E3A] hover:bg-[#A01830] shadow-red-200'
+            ]"
+          >
+            {{ currentStep === totalSteps ? (isSubmitting ? 'Mengirim...' : 'Kirim Pendaftaran') : 'Lanjut' }}
+          </button>
+        </div>
+      </div>
+    </main>
   </div>
 </template>
+
+<style scoped>
+.animate-in {
+  animation-duration: 500ms;
+  animation-fill-mode: both;
+}
+/* Menghilangkan scrollbar default pada textarea */
+textarea {
+  resize: vertical;
+}
+</style>

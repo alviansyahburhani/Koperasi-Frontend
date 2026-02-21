@@ -1,150 +1,163 @@
-import type { UseFetchOptions } from 'nuxt/app'
-
-export interface ApiError {
-  statusCode: number
-  message: string | string[]
-  error: string
-}
+/**
+ * API Service with Complete Error Handling
+ */
 
 export class ApiService {
-  private _initialized = false
-  private _baseURL: string = ''
-  private _timeout: number = 30000
-  private _debugMode: boolean = false
+  private baseURL: string
+  private timeout: number
+  private debugMode: boolean
+  private initialized: boolean = false
+
+  constructor() {
+    this.baseURL = ''
+    this.timeout = 30000
+    this.debugMode = false
+  }
 
   /**
-   * Initialize config (called once)
+   * Initialize config
    */
   private initConfig() {
-    if (!this._initialized) {
+    if (!this.initialized) {
       const config = useRuntimeConfig()
-      this._baseURL = config.public.apiBase as string
-      this._timeout = config.public.apiTimeout as number
-      this._debugMode = config.public.debugMode as boolean
-      this._initialized = true
+      this.baseURL = config.public.apiBase as string
+      this.timeout = config.public.apiTimeout as number
+      this.debugMode = config.public.debugMode as boolean
+      this.initialized = true
 
-      if (this._debugMode) {
-        console.log('[ApiService] Initialized with baseURL:', this._baseURL)
+      if (this.debugMode) {
+        console.log('[ApiService] Initialized:', { baseURL: this.baseURL })
       }
     }
   }
 
   /**
-   * Generic API call
+   * Get headers with auth token
    */
-  async call<T>(
+  private getHeaders(): HeadersInit {
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+
+    // Add auth token if exists
+    if (process.client) {
+      const token = localStorage.getItem('access_token')
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`
+      }
+    }
+
+    return headers
+  }
+
+  /**
+   * Handle API Error
+   * ✅ FIX: useErrorHandler hanya bisa dipanggil di Nuxt context
+   */
+  private handleError(error: any): never {
+    // Simple error handling tanpa composable
+    const statusCode = error.statusCode || error.response?.status || 500
+    const message = error.message || error.response?.data?.message || 'Terjadi kesalahan'
+
+    // Log di development
+    if (this.debugMode) {
+      console.error('[ApiService] Error:', {
+        statusCode,
+        message,
+        error
+      })
+    }
+
+    // Handle 401 - Auto logout
+    if (statusCode === 401 && process.client) {
+      localStorage.removeItem('access_token')
+      localStorage.removeItem('refresh_token')
+      navigateTo('/auth/login')
+    }
+
+    // Throw formatted error
+    throw createError({
+      statusCode,
+      message,
+      data: error.response?.data
+    })
+  }
+
+  /**
+   * Make HTTP Request
+   */
+  private async request<T>(
+    method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE',
     endpoint: string,
-    options: UseFetchOptions<T> = {}
+    data?: any
   ): Promise<T> {
-    // Initialize config first
     this.initConfig()
 
-    // Get token from localStorage
-    let token: string | null = null
-    if (process.client) {
-      token = localStorage.getItem('access_token')
-    }
+    const url = `${this.baseURL}${endpoint}`
 
-    // Build headers
-    const headers: Record<string, string> = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      ...options.headers as Record<string, string>,
-    }
-
-    if (token) {
-      headers['Authorization'] = `Bearer ${token}`
-    }
-
-    // Debug log
-    if (this._debugMode) {
-      console.log('[ApiService] Request:', {
-        method: options.method || 'GET',
-        url: `${this._baseURL}${endpoint}`,
-        headers,
-        body: options.body
-      })
+    if (this.debugMode) {
+      console.log(`[ApiService] ${method} ${url}`, data)
     }
 
     try {
-      const data = await $fetch<T>(endpoint, {
-        baseURL: this._baseURL,
-        method: options.method || 'GET',
-        headers,
-        body: options.body,
-        timeout: this._timeout,
-        
-        onResponseError: ({ response }) => {
-          const error = response._data as ApiError
-          
-          if (this._debugMode) {
-            console.error('[ApiService] Response Error:', {
-              status: response.status,
-              error: error
-            })
-          }
-
-          // Handle 401 - Unauthorized
-          if (response.status === 401 && process.client) {
-            localStorage.removeItem('access_token')
-            localStorage.removeItem('refresh_token')
-            
-            if (!window.location.pathname.includes('/auth/login')) {
-              window.location.href = '/auth/login'
-            }
-          }
-        },
-
-        onRequestError: ({ error }) => {
-          if (this._debugMode) {
-            console.error('[ApiService] Request Error:', error)
-          }
-        }
+      const response = await $fetch<T>(url, {
+        method,
+        headers: this.getHeaders(),
+        body: data,
+        timeout: this.timeout,
+        retry: method === 'GET' ? 2 : 0,
+        retryDelay: 1000,
       })
 
-      if (this._debugMode) {
-        console.log('[ApiService] Response:', data)
+      if (this.debugMode) {
+        console.log(`[ApiService] Response ${method} ${url}:`, response)
       }
 
-      return data
+      return response
 
     } catch (error: any) {
-      const apiError: ApiError = {
-        statusCode: error.statusCode || error.status || 500,
-        message: error.data?.message || error.message || 'Terjadi kesalahan pada server',
-        error: error.data?.error || 'Internal Server Error'
+      if (this.debugMode) {
+        console.error(`[ApiService] Error ${method} ${url}:`, error)
       }
 
-      throw apiError
+      this.handleError(error)
     }
   }
 
   /**
    * GET request
    */
-  async get<T>(endpoint: string, options?: UseFetchOptions<T>): Promise<T> {
-    return this.call<T>(endpoint, { ...options, method: 'GET' })
+  async get<T>(endpoint: string): Promise<T> {
+    return this.request<T>('GET', endpoint)
   }
 
   /**
    * POST request
    */
-  async post<T>(endpoint: string, body?: any, options?: UseFetchOptions<T>): Promise<T> {
-    return this.call<T>(endpoint, { ...options, method: 'POST', body })
+  async post<T>(endpoint: string, data?: any): Promise<T> {
+    return this.request<T>('POST', endpoint, data)
   }
 
   /**
    * PUT request
    */
-  async put<T>(endpoint: string, body?: any, options?: UseFetchOptions<T>): Promise<T> {
-    return this.call<T>(endpoint, { ...options, method: 'PUT', body })
+  async put<T>(endpoint: string, data: any): Promise<T> {
+    return this.request<T>('PUT', endpoint, data)
+  }
+
+  /**
+   * PATCH request
+   */
+  async patch<T>(endpoint: string, data: any): Promise<T> {
+    return this.request<T>('PATCH', endpoint, data)
   }
 
   /**
    * DELETE request
    */
-  async delete<T>(endpoint: string, options?: UseFetchOptions<T>): Promise<T> {
-    return this.call<T>(endpoint, { ...options, method: 'DELETE' })
+  async delete<T>(endpoint: string): Promise<T> {
+    return this.request<T>('DELETE', endpoint)
   }
 }
 

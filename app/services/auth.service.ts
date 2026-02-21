@@ -8,44 +8,124 @@ export interface LoginCredentials {
 export interface LoginResponse {
   accessToken: string
   refreshToken: string
+  warning?: {
+    code: string
+    message: string
+    subscriptionEndDate?: Date
+    actionRequired: string
+  }
 }
 
-export interface UserProfile {
+export interface JwtPayload {
   sub: string
   email: string
   role: string
+  tenantId?: string
+  subscriptionStatus?: string
+  isExpired?: boolean
+  isGracePeriod?: boolean
+  iat?: number
+  exp?: number
+}
+
+export interface UserProfile {
+  id: string
+  email: string
+  role: string
+  name?: string
+  tenantId?: string
 }
 
 export class AuthService {
   /**
-   * Login
+   * ✅ Detect if Super Admin based on URL
+   * Super Admin = localhost tanpa subdomain
+   * Tenant = subdomain.localhost
+   */
+  private isSuperAdminContext(): boolean {
+    if (!process.client) return false
+    
+    const hostname = window.location.hostname
+    const parts = hostname.split('.')
+    
+    // localhost atau 127.0.0.1 (tanpa subdomain) = Super Admin
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      return true
+    }
+    
+    // Jika ada subdomain (parts > 1) dan bukan 'www' = Tenant
+    if (parts.length > 1 && parts[0] !== 'www') {
+      return false
+    }
+    
+    // Default: assume super admin
+    return true
+  }
+
+  /**
+   * Login - Auto detect super admin vs tenant based on URL
    */
   async login(credentials: LoginCredentials): Promise<LoginResponse> {
-    // ✅ useRuntimeConfig dipanggil di dalam method (saat runtime)
     const config = useRuntimeConfig()
+    const isSuperAdmin = this.isSuperAdminContext()
 
     if (config.public.debugMode) {
-      console.log('[AuthService] Login attempt:', { email: credentials.email })
+      console.log('[AuthService] Login context:', { 
+        email: credentials.email,
+        hostname: process.client ? window.location.hostname : 'SSR',
+        isSuperAdmin,
+      })
     }
 
-    return apiService.post<LoginResponse>('/auth/login', {
+    // ✅ Use different endpoint based on context
+    const endpoint = isSuperAdmin 
+      ? '/api/admin/auth/login'   // Super admin login
+      : '/api/auth/login'         // Tenant login
+
+    if (config.public.debugMode) {
+      console.log('[AuthService] Using endpoint:', endpoint)
+    }
+
+    return apiService.post<LoginResponse>(endpoint, {
       email: credentials.email,
       password: credentials.password,
     })
   }
 
   /**
-   * Get User Profile
+   * Get User Profile from Backend
    */
   async getProfile(): Promise<UserProfile> {
-    return apiService.get<UserProfile>('/auth/profile')
+    const isSuperAdmin = this.isSuperAdminContext()
+    
+    // ✅ Use different endpoint based on context
+    const endpoint = isSuperAdmin
+      ? '/api/admin/auth/profile'  // Jika ada
+      : '/api/auth/profile'
+
+    const response = await apiService.get<any>(endpoint)
+    
+    return {
+      id: response.id || response.sub,
+      email: response.email,
+      role: response.role,
+      name: response.name,
+      tenantId: response.tenantId
+    }
   }
 
   /**
    * Refresh Token
    */
   async refreshToken(): Promise<{ accessToken: string }> {
-    return apiService.post<{ accessToken: string }>('/auth/refresh')
+    const isSuperAdmin = this.isSuperAdminContext()
+    
+    // ✅ Use different endpoint based on context
+    const endpoint = isSuperAdmin
+      ? '/api/admin/auth/refresh'
+      : '/api/auth/refresh'
+
+    return apiService.post<{ accessToken: string }>(endpoint, {})
   }
 
   /**
@@ -55,9 +135,54 @@ export class AuthService {
     if (process.client) {
       localStorage.removeItem('access_token')
       localStorage.removeItem('refresh_token')
+      localStorage.removeItem('user')
     }
+  }
+
+  /**
+   * Decode JWT Token
+   */
+  decodeToken(token: string): JwtPayload | null {
+    try {
+      const parts = token.split('.')
+      
+      if (parts.length !== 3) {
+        console.error('[AuthService] Invalid token format')
+        return null
+      }
+
+      const base64Url = parts[1]
+      
+      if (!base64Url) {
+        console.error('[AuthService] Token payload is missing')
+        return null
+      }
+
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      )
+
+      return JSON.parse(jsonPayload) as JwtPayload
+    } catch (error) {
+      console.error('[AuthService] Failed to decode token:', error)
+      return null
+    }
+  }
+
+  /**
+   * Check if token is expired
+   */
+  isTokenExpired(token: string): boolean {
+    const payload = this.decodeToken(token)
+    if (!payload || !payload.exp) return true
+
+    const now = Math.floor(Date.now() / 1000)
+    return payload.exp < now
   }
 }
 
-// Export singleton
 export const authService = new AuthService()
