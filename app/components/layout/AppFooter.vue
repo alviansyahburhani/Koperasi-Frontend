@@ -73,7 +73,7 @@ const getColorClasses = (color: string) => {
             </li>
             <li>
               <NuxtLink 
-                to="/daftar-koperasi"
+                to="pendaftaran/koperasi"
                 class="text-red-50 hover:text-white hover:translate-x-1 transition-all text-sm flex items-center gap-2 group"
               >
                 <UIcon name="i-heroicons-chevron-right" class="w-4 h-4 text-red-300 group-hover:text-white transition-transform" />

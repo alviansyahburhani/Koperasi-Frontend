@@ -6,7 +6,7 @@ export const useNavigation = () => {
     { label: 'Beranda', to: '/' },
     { label: 'Tentang', to: '/tentang' },
     { label: 'Fitur', to: '/fitur' },
-    { label: 'Login', to: '/login' }
+    { label: 'Login', to: '/auth/login' }
   ]
 
   // Data untuk Customer Service & Sosial Media
@@ -15,18 +15,18 @@ export const useNavigation = () => {
       name: 'WhatsApp',
       label: '+62 812-3456-7890',
       href: 'https://wa.me/6281234567890',
-      icon: 'i-simple-icons-whatsapp', // Memakai icon whatsapp dari simple-icons
+      icon: 'i-simple-icons-whatsapp',
       color: 'green'
     },
     {
       name: 'Email',
       label: 'admin@koperasi.com',
       href: 'mailto:admin@koperasi.com',
-      icon: 'i-heroicons-envelope', // Memakai icon amplop dari heroicons
+      icon: 'i-heroicons-envelope',
       color: 'blue'
     },
     {
-      name: 'Instagram', // Ini akan muncul di jejeran icon bawah
+      name: 'Instagram',
       label: '@koperasimerahputih',
       href: 'https://instagram.com/koperasimerahputih',
       icon: 'i-simple-icons-instagram',

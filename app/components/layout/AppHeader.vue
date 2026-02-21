@@ -32,9 +32,6 @@ const isActive = (path: string) => {
   >
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
       <NuxtLink to="/" class="flex items-center gap-2 group">
-        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
-          <span class="text-red-700 font-bold text-lg">KMP</span>
-        </div>
         <h1 class="font-bold text-white text-xl hidden sm:block tracking-wide">Koperasi Merah Putih</h1>
       </NuxtLink>
 
