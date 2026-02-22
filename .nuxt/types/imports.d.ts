@@ -159,22 +159,29 @@ declare global {
   const tryUseNuxtApp: typeof import('../../node_modules/nuxt/dist/app/nuxt').tryUseNuxtApp
   const unref: typeof import('../../node_modules/vue').unref
   const updateAppConfig: typeof import('../../node_modules/nuxt/dist/app/config').updateAppConfig
-  const useApi: typeof import('../../app/composables/useApi').useApi
+  const useAnggota: typeof import('../../app/composables/admin/useAnggota').useAnggota
+  const useAnggotaRegistration: typeof import('../../app/composables/public/useAnggotaRegistration').useAnggotaRegistration
+  const useApi: typeof import('../../app/composables/core/useApi').useApi
   const useAppConfig: typeof import('../../node_modules/nuxt/dist/app/config').useAppConfig
+  const useAppFileUpload: typeof import('../../app/composables/shared/useFileUpload').useAppFileUpload
+  const useAppToast: typeof import('../../app/composables/core/useAppToast').useAppToast
+  const useApplications: typeof import('../../app/composables/superadmin/useApplications').useApplications
   const useAsyncData: typeof import('../../node_modules/nuxt/dist/app/composables/asyncData').useAsyncData
   const useAttrs: typeof import('../../node_modules/vue').useAttrs
-  const useAuth: typeof import('../../app/composables/useAuth').useAuth
+  const useAuth: typeof import('../../app/composables/core/useAuth').useAuth
   const useAuthStore: typeof import('../../app/stores/auth').useAuthStore
   const useAvatarGroup: typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useAvatarGroup').useAvatarGroup
   const useColorMode: typeof import('../../node_modules/@nuxtjs/color-mode/dist/runtime/composables').useColorMode
   const useComponentIcons: typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useComponentIcons').useComponentIcons
   const useContentSearch: typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useContentSearch').useContentSearch
   const useCookie: typeof import('../../node_modules/nuxt/dist/app/composables/cookie').useCookie
+  const useCooperatives: typeof import('../../app/composables/superadmin/useCooperatives').useCooperatives
   const useCssModule: typeof import('../../node_modules/vue').useCssModule
   const useCssVars: typeof import('../../node_modules/vue').useCssVars
+  const useDataTable: typeof import('../../app/composables/shared/useDataTable').useDataTable
   const useEditorMenu: typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useEditorMenu').useEditorMenu
   const useError: typeof import('../../node_modules/nuxt/dist/app/composables/error').useError
-  const useErrorHandler: typeof import('../../app/composables/useErrorHandler').useErrorHandler
+  const useErrorHandler: typeof import('../../app/composables/core/useErrorHandler').useErrorHandler
   const useFetch: typeof import('../../node_modules/nuxt/dist/app/composables/fetch').useFetch
   const useFieldGroup: typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useFieldGroup').useFieldGroup
   const useFileUpload: typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useFileUpload').useFileUpload
@@ -184,19 +191,28 @@ declare global {
   const useHydration: typeof import('../../node_modules/nuxt/dist/app/composables/hydrate').useHydration
   const useId: typeof import('../../node_modules/vue').useId
   const useKbd: typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useKbd').useKbd
+  const useKoperasiRegistration: typeof import('../../app/composables/public/useKoperasiRegistration').useKoperasiRegistration
   const useLazyAsyncData: typeof import('../../node_modules/nuxt/dist/app/composables/asyncData').useLazyAsyncData
   const useLazyFetch: typeof import('../../node_modules/nuxt/dist/app/composables/fetch').useLazyFetch
   const useLink: typeof import('../../node_modules/vue-router').useLink
   const useLoadingIndicator: typeof import('../../node_modules/nuxt/dist/app/composables/loading-indicator').useLoadingIndicator
   const useLocale: typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useLocale').useLocale
-  const useMenu: typeof import('../../app/composables/useMenu').useMenu
+  const useMasterData: typeof import('../../app/composables/superadmin/useMasterData').useMasterData
+  const useMenu: typeof import('../../app/composables/shared/useMenu').useMenu
+  const useModal: typeof import('../../app/composables/core/useModal').useModal
   const useModel: typeof import('../../node_modules/vue').useModel
-  const useNavigation: typeof import('../../app/composables/useNavigation').useNavigation
+  const useMyPinjaman: typeof import('../../app/composables/anggota/useMyPinjaman').useMyPinjaman
+  const useMyProfile: typeof import('../../app/composables/anggota/useMyProfile').useMyProfile
+  const useMySimpanan: typeof import('../../app/composables/anggota/useMySimpanan').useMySimpanan
+  const useNavigation: typeof import('../../app/composables/public/useNavigation').useNavigation
   const useNuxtApp: typeof import('../../node_modules/nuxt/dist/app/nuxt').useNuxtApp
   const useNuxtData: typeof import('../../node_modules/nuxt/dist/app/composables/asyncData').useNuxtData
+  const useNuxtDevTools: typeof import('../../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools').useNuxtDevTools
   const useOverlay: typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useOverlay').useOverlay
-  const usePermission: typeof import('../../app/composables/usePermission').usePermission
+  const usePagination: typeof import('../../app/composables/shared/usePagination').usePagination
+  const usePermission: typeof import('../../app/composables/core/usePermission').usePermission
   const usePinia: typeof import('../../node_modules/@pinia/nuxt/dist/runtime/composables').usePinia
+  const usePinjaman: typeof import('../../app/composables/admin/usePinjaman').usePinjaman
   const usePortal: typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/usePortal').usePortal
   const usePreviewMode: typeof import('../../node_modules/nuxt/dist/app/composables/preview').usePreviewMode
   const useRequestEvent: typeof import('../../node_modules/nuxt/dist/app/composables/ssr').useRequestEvent
@@ -247,11 +263,16 @@ declare global {
   const useServerHeadSafe: typeof import('../../node_modules/nuxt/dist/app/composables/head').useServerHeadSafe
   const useServerSeoMeta: typeof import('../../node_modules/nuxt/dist/app/composables/head').useServerSeoMeta
   const useShadowRoot: typeof import('../../node_modules/vue').useShadowRoot
+  const useSimpanan: typeof import('../../app/composables/admin/useSimpanan').useSimpanan
   const useSlots: typeof import('../../node_modules/vue').useSlots
   const useState: typeof import('../../node_modules/nuxt/dist/app/composables/state').useState
   const useTemplateRef: typeof import('../../node_modules/vue').useTemplateRef
+  const useTenantMonitoring: typeof import('../../app/composables/superadmin/useTenantMonitoring').useTenantMonitoring
+  const useTenantStore: typeof import('../../app/stores/tenant').useTenantStore
   const useToast: typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useToast').useToast
   const useTransitionState: typeof import('../../node_modules/vue').useTransitionState
+  const useUiStore: typeof import('../../app/stores/ui').useUiStore
+  const useWilayah: typeof import('../../app/composables/shared/useWilayah').useWilayah
   const watch: typeof import('../../node_modules/vue').watch
   const watchEffect: typeof import('../../node_modules/vue').watchEffect
   const watchPostEffect: typeof import('../../node_modules/vue').watchPostEffect
@@ -440,22 +461,29 @@ declare module 'vue' {
     readonly tryUseNuxtApp: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/nuxt')['tryUseNuxtApp']>
     readonly unref: UnwrapRef<typeof import('../../node_modules/vue')['unref']>
     readonly updateAppConfig: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/config')['updateAppConfig']>
-    readonly useApi: UnwrapRef<typeof import('../../app/composables/useApi')['useApi']>
+    readonly useAnggota: UnwrapRef<typeof import('../../app/composables/admin/useAnggota')['useAnggota']>
+    readonly useAnggotaRegistration: UnwrapRef<typeof import('../../app/composables/public/useAnggotaRegistration')['useAnggotaRegistration']>
+    readonly useApi: UnwrapRef<typeof import('../../app/composables/core/useApi')['useApi']>
     readonly useAppConfig: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/config')['useAppConfig']>
+    readonly useAppFileUpload: UnwrapRef<typeof import('../../app/composables/shared/useFileUpload')['useAppFileUpload']>
+    readonly useAppToast: UnwrapRef<typeof import('../../app/composables/core/useAppToast')['useAppToast']>
+    readonly useApplications: UnwrapRef<typeof import('../../app/composables/superadmin/useApplications')['useApplications']>
     readonly useAsyncData: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['useAsyncData']>
     readonly useAttrs: UnwrapRef<typeof import('../../node_modules/vue')['useAttrs']>
-    readonly useAuth: UnwrapRef<typeof import('../../app/composables/useAuth')['useAuth']>
+    readonly useAuth: UnwrapRef<typeof import('../../app/composables/core/useAuth')['useAuth']>
     readonly useAuthStore: UnwrapRef<typeof import('../../app/stores/auth')['useAuthStore']>
     readonly useAvatarGroup: UnwrapRef<typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useAvatarGroup')['useAvatarGroup']>
     readonly useColorMode: UnwrapRef<typeof import('../../node_modules/@nuxtjs/color-mode/dist/runtime/composables')['useColorMode']>
     readonly useComponentIcons: UnwrapRef<typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useComponentIcons')['useComponentIcons']>
     readonly useContentSearch: UnwrapRef<typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useContentSearch')['useContentSearch']>
     readonly useCookie: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/cookie')['useCookie']>
+    readonly useCooperatives: UnwrapRef<typeof import('../../app/composables/superadmin/useCooperatives')['useCooperatives']>
     readonly useCssModule: UnwrapRef<typeof import('../../node_modules/vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('../../node_modules/vue')['useCssVars']>
+    readonly useDataTable: UnwrapRef<typeof import('../../app/composables/shared/useDataTable')['useDataTable']>
     readonly useEditorMenu: UnwrapRef<typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useEditorMenu')['useEditorMenu']>
     readonly useError: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/error')['useError']>
-    readonly useErrorHandler: UnwrapRef<typeof import('../../app/composables/useErrorHandler')['useErrorHandler']>
+    readonly useErrorHandler: UnwrapRef<typeof import('../../app/composables/core/useErrorHandler')['useErrorHandler']>
     readonly useFetch: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/fetch')['useFetch']>
     readonly useFieldGroup: UnwrapRef<typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useFieldGroup')['useFieldGroup']>
     readonly useFileUpload: UnwrapRef<typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useFileUpload')['useFileUpload']>
@@ -465,19 +493,28 @@ declare module 'vue' {
     readonly useHydration: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/hydrate')['useHydration']>
     readonly useId: UnwrapRef<typeof import('../../node_modules/vue')['useId']>
     readonly useKbd: UnwrapRef<typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useKbd')['useKbd']>
+    readonly useKoperasiRegistration: UnwrapRef<typeof import('../../app/composables/public/useKoperasiRegistration')['useKoperasiRegistration']>
     readonly useLazyAsyncData: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['useLazyAsyncData']>
     readonly useLazyFetch: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/fetch')['useLazyFetch']>
     readonly useLink: UnwrapRef<typeof import('../../node_modules/vue-router')['useLink']>
     readonly useLoadingIndicator: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/loading-indicator')['useLoadingIndicator']>
     readonly useLocale: UnwrapRef<typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useLocale')['useLocale']>
-    readonly useMenu: UnwrapRef<typeof import('../../app/composables/useMenu')['useMenu']>
+    readonly useMasterData: UnwrapRef<typeof import('../../app/composables/superadmin/useMasterData')['useMasterData']>
+    readonly useMenu: UnwrapRef<typeof import('../../app/composables/shared/useMenu')['useMenu']>
+    readonly useModal: UnwrapRef<typeof import('../../app/composables/core/useModal')['useModal']>
     readonly useModel: UnwrapRef<typeof import('../../node_modules/vue')['useModel']>
-    readonly useNavigation: UnwrapRef<typeof import('../../app/composables/useNavigation')['useNavigation']>
+    readonly useMyPinjaman: UnwrapRef<typeof import('../../app/composables/anggota/useMyPinjaman')['useMyPinjaman']>
+    readonly useMyProfile: UnwrapRef<typeof import('../../app/composables/anggota/useMyProfile')['useMyProfile']>
+    readonly useMySimpanan: UnwrapRef<typeof import('../../app/composables/anggota/useMySimpanan')['useMySimpanan']>
+    readonly useNavigation: UnwrapRef<typeof import('../../app/composables/public/useNavigation')['useNavigation']>
     readonly useNuxtApp: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/nuxt')['useNuxtApp']>
     readonly useNuxtData: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['useNuxtData']>
+    readonly useNuxtDevTools: UnwrapRef<typeof import('../../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools')['useNuxtDevTools']>
     readonly useOverlay: UnwrapRef<typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useOverlay')['useOverlay']>
-    readonly usePermission: UnwrapRef<typeof import('../../app/composables/usePermission')['usePermission']>
+    readonly usePagination: UnwrapRef<typeof import('../../app/composables/shared/usePagination')['usePagination']>
+    readonly usePermission: UnwrapRef<typeof import('../../app/composables/core/usePermission')['usePermission']>
     readonly usePinia: UnwrapRef<typeof import('../../node_modules/@pinia/nuxt/dist/runtime/composables')['usePinia']>
+    readonly usePinjaman: UnwrapRef<typeof import('../../app/composables/admin/usePinjaman')['usePinjaman']>
     readonly usePortal: UnwrapRef<typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/usePortal')['usePortal']>
     readonly usePreviewMode: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/preview')['usePreviewMode']>
     readonly useRequestEvent: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/ssr')['useRequestEvent']>
@@ -528,11 +565,16 @@ declare module 'vue' {
     readonly useServerHeadSafe: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/head')['useServerHeadSafe']>
     readonly useServerSeoMeta: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/head')['useServerSeoMeta']>
     readonly useShadowRoot: UnwrapRef<typeof import('../../node_modules/vue')['useShadowRoot']>
+    readonly useSimpanan: UnwrapRef<typeof import('../../app/composables/admin/useSimpanan')['useSimpanan']>
     readonly useSlots: UnwrapRef<typeof import('../../node_modules/vue')['useSlots']>
     readonly useState: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/state')['useState']>
     readonly useTemplateRef: UnwrapRef<typeof import('../../node_modules/vue')['useTemplateRef']>
+    readonly useTenantMonitoring: UnwrapRef<typeof import('../../app/composables/superadmin/useTenantMonitoring')['useTenantMonitoring']>
+    readonly useTenantStore: UnwrapRef<typeof import('../../app/stores/tenant')['useTenantStore']>
     readonly useToast: UnwrapRef<typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useToast')['useToast']>
     readonly useTransitionState: UnwrapRef<typeof import('../../node_modules/vue')['useTransitionState']>
+    readonly useUiStore: UnwrapRef<typeof import('../../app/stores/ui')['useUiStore']>
+    readonly useWilayah: UnwrapRef<typeof import('../../app/composables/shared/useWilayah')['useWilayah']>
     readonly watch: UnwrapRef<typeof import('../../node_modules/vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('../../node_modules/vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('../../node_modules/vue')['watchPostEffect']>
