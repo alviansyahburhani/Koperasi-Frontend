@@ -71,7 +71,7 @@ const handleLogin = async () => {
       // Show error message
       errorMessage.value = result.message
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Login] Unexpected error:', error)
     errorMessage.value = 'Terjadi kesalahan yang tidak terduga. Silakan coba lagi.'
   } finally {

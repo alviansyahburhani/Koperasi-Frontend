@@ -19,9 +19,10 @@ const handleSubmit = async () => {
     })
 
     step.value = 'success'
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Handle error
-    alert(error.data?.message || 'Terjadi kesalahan')
+    const errData = error as { data?: { message?: string } }
+    alert(errData.data?.message || 'Terjadi kesalahan')
   } finally {
     loading.value = false
   }

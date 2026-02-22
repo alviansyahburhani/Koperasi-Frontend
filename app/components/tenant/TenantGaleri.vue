@@ -45,7 +45,7 @@ const galeriList = [
 const isOpen = ref(false)
 const selectedImage = ref(galeriList[0])
 
-const openLightbox = (img: any) => {
+const openLightbox = (img: (typeof galeriList)[0]) => {
   selectedImage.value = img
   isOpen.value = true
 }

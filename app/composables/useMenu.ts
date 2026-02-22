@@ -11,11 +11,11 @@ export const useMenu = () => {
         if (!item.permission) return true
 
         if (typeof item.permission === 'string') {
-          return can(item.permission as any)
+          return can(item.permission as Permission)
         }
 
         if (Array.isArray(item.permission)) {
-          return item.permission.some((p) => can(p as any))
+          return item.permission.some((p) => can(p as Permission))
         }
 
         return false
