@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     // Public keys (exposed to client)
     public: {
       // API Config
-      apiBase: process.env.NUXT_PUBLIC_API_BASE_URL || 'http://localhost:3002',
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:3002',
       apiTimeout: parseInt(process.env.NUXT_PUBLIC_API_TIMEOUT || '30000'),
 
       // App URL
@@ -31,7 +31,16 @@ export default defineNuxtConfig({
 
   // Auto-imports
   imports: {
-    dirs: ['stores', 'services'],
+    dirs: [
+      'stores',
+      'services',
+      'composables/core',
+      'composables/shared',
+      'composables/public',
+      'composables/superadmin',
+      'composables/admin',
+      'composables/anggota',
+    ],
   },
 
   // Dev Server Config
