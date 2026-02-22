@@ -3,26 +3,26 @@ import type { Permission } from '~/types'
 
 interface Props {
   permission?: Permission | Permission[]
-  fallback?: boolean  // Show fallback message instead of hiding
+  fallback?: boolean // Show fallback message instead of hiding
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  fallback: false
+  fallback: false,
 })
 
 const { can, canAny } = usePermission()
 
 const hasAccess = computed(() => {
   if (!props.permission) return true
-  
+
   if (typeof props.permission === 'string') {
     return can(props.permission)
   }
-  
+
   if (Array.isArray(props.permission)) {
     return canAny(props.permission)
   }
-  
+
   return false
 })
 </script>

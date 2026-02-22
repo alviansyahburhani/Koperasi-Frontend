@@ -7,17 +7,10 @@ import {
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 } from 'chart.js'
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-)
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 interface Props {
   labels: string[]
@@ -27,7 +20,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  backgroundColor: '#10b981'
+  backgroundColor: '#10b981',
 })
 
 const chartData = computed(() => ({
@@ -38,9 +31,9 @@ const chartData = computed(() => ({
       data: props.data,
       backgroundColor: props.backgroundColor,
       borderRadius: 6,
-      borderSkipped: false
-    }
-  ]
+      borderSkipped: false,
+    },
+  ],
 }))
 
 const chartOptions = {
@@ -55,49 +48,49 @@ const chartOptions = {
         padding: 15,
         font: {
           size: 12,
-          family: 'Inter, sans-serif'
-        }
-      }
+          family: 'Inter, sans-serif',
+        },
+      },
     },
     tooltip: {
       backgroundColor: 'rgba(0, 0, 0, 0.8)',
       padding: 12,
       titleFont: {
         size: 13,
-        family: 'Inter, sans-serif'
+        family: 'Inter, sans-serif',
       },
       bodyFont: {
         size: 14,
-        family: 'Inter, sans-serif'
+        family: 'Inter, sans-serif',
       },
-      cornerRadius: 8
-    }
+      cornerRadius: 8,
+    },
   },
   scales: {
     y: {
       beginAtZero: true,
       ticks: {
         font: {
-          size: 11
+          size: 11,
         },
-        color: '#6b7280'
+        color: '#6b7280',
       },
       grid: {
-        color: 'rgba(0, 0, 0, 0.05)'
-      }
+        color: 'rgba(0, 0, 0, 0.05)',
+      },
     },
     x: {
       ticks: {
         font: {
-          size: 11
+          size: 11,
         },
-        color: '#6b7280'
+        color: '#6b7280',
       },
       grid: {
-        display: false
-      }
-    }
-  }
+        display: false,
+      },
+    },
+  },
 }
 </script>
 

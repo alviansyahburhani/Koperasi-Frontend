@@ -7,7 +7,7 @@ interface Props {
 
 interface Emits {
   (e: 'close'): void
-  (e: 'confirm', data: { decision: 'approve' | 'reject', note?: string }): void
+  (e: 'confirm', data: { decision: 'approve' | 'reject'; note?: string }): void
 }
 
 const props = defineProps<Props>()
@@ -28,7 +28,7 @@ const handleSubmit = async () => {
   setTimeout(() => {
     emit('confirm', {
       decision: props.decision!,
-      note: note.value
+      note: note.value,
     })
     loading.value = false
     note.value = ''
@@ -42,27 +42,34 @@ const handleClose = () => {
   }
 }
 
-watch(() => props.isOpen, (val) => {
-  if (!val) {
-    note.value = ''
+watch(
+  () => props.isOpen,
+  (val) => {
+    if (!val) {
+      note.value = ''
+    }
   }
-})
+)
 </script>
 
 <template>
-  <div
-    v-if="isOpen"
-    class="fixed inset-0 z-50 overflow-y-auto"
-    @click.self="handleClose"
-  >
+  <div v-if="isOpen" class="fixed inset-0 z-50 overflow-y-auto" @click.self="handleClose">
     <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
       <!-- Backdrop -->
-      <div class="fixed inset-0 transition-opacity bg-gray-900 bg-opacity-75" @click="handleClose"></div>
+      <div
+        class="fixed inset-0 transition-opacity bg-gray-900 bg-opacity-75"
+        @click="handleClose"
+      ></div>
 
       <!-- Modal -->
-      <div class="relative inline-block w-full max-w-lg px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:p-6">
+      <div
+        class="relative inline-block w-full max-w-lg px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:p-6"
+      >
         <!-- Icon -->
-        <div class="flex items-center justify-center w-12 h-12 mx-auto rounded-full mb-4" :class="decision === 'approve' ? 'bg-green-100' : 'bg-red-100'">
+        <div
+          class="flex items-center justify-center w-12 h-12 mx-auto rounded-full mb-4"
+          :class="decision === 'approve' ? 'bg-green-100' : 'bg-red-100'"
+        >
           <UIcon
             :name="decision === 'approve' ? 'i-lucide-check-circle-2' : 'i-lucide-x-circle'"
             class="w-6 h-6"
@@ -76,9 +83,10 @@ watch(() => props.isOpen, (val) => {
             {{ decision === 'approve' ? 'Setujui Permohonan' : 'Tolak Permohonan' }}
           </h3>
           <p class="mt-2 text-sm text-gray-600">
-            {{ decision === 'approve' 
-              ? `Apakah Anda yakin ingin menyetujui permohonan dari "${cooperativeName}"?` 
-              : `Apakah Anda yakin ingin menolak permohonan dari "${cooperativeName}"?` 
+            {{
+              decision === 'approve'
+                ? `Apakah Anda yakin ingin menyetujui permohonan dari "${cooperativeName}"?`
+                : `Apakah Anda yakin ingin menolak permohonan dari "${cooperativeName}"?`
             }}
           </p>
         </div>
@@ -87,9 +95,7 @@ watch(() => props.isOpen, (val) => {
         <form @submit.prevent="handleSubmit" class="space-y-4">
           <!-- Note for Approval (Optional) -->
           <div v-if="decision === 'approve'">
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              Catatan (Opsional)
-            </label>
+            <label class="block text-sm font-medium text-gray-700 mb-2"> Catatan (Opsional) </label>
             <textarea
               v-model="note"
               rows="3"
@@ -128,9 +134,9 @@ watch(() => props.isOpen, (val) => {
               :disabled="loading"
               :class="[
                 'flex-1 px-4 py-2.5 text-sm font-medium text-white rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed',
-                decision === 'approve' 
-                  ? 'bg-green-600 hover:bg-green-700' 
-                  : 'bg-red-600 hover:bg-red-700'
+                decision === 'approve'
+                  ? 'bg-green-600 hover:bg-green-700'
+                  : 'bg-red-600 hover:bg-red-700',
               ]"
             >
               <span v-if="!loading">

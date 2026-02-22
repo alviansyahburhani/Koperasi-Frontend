@@ -23,18 +23,13 @@ export const useApi = () => {
     endpoint: string,
     options: UseApiOptions = {}
   ): Promise<ApiResponse<T>> {
-    const {
-      method = 'GET',
-      body,
-      headers = {},
-      token
-    } = options
+    const { method = 'GET', body, headers = {}, token } = options
 
     try {
       // Prepare headers
       const requestHeaders: Record<string, string> = {
         'Content-Type': 'application/json',
-        ...headers
+        ...headers,
       }
 
       // Add auth token if provided
@@ -46,18 +41,18 @@ export const useApi = () => {
       const response = await $fetch<ApiResponse<T>>(`${baseURL}${endpoint}`, {
         method,
         headers: requestHeaders,
-        body: body ? JSON.stringify(body) : undefined
+        body: body ? JSON.stringify(body) : undefined,
       })
 
       return response
     } catch (error: any) {
       // Handle error
       console.error('API Error:', error)
-      
+
       return {
         success: false,
         message: error.message || 'Terjadi kesalahan pada server',
-        errors: error.data?.errors
+        errors: error.data?.errors,
       }
     }
   }
@@ -103,6 +98,6 @@ export const useApi = () => {
     post,
     put,
     patch,
-    delete: del
+    delete: del,
   }
 }

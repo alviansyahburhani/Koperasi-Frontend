@@ -2,7 +2,7 @@
 /**
  * FloatingCard Component
  * Animated floating card with icon and stats
- * 
+ *
  * @example
  * <FloatingCard
  *   icon="i-heroicons-shield-check"
@@ -24,7 +24,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   iconColor: 'green',
   position: 'bottom-left',
-  delay: false
+  delay: false,
 })
 
 const iconBgClasses = {
@@ -32,21 +32,21 @@ const iconBgClasses = {
   green: 'bg-green-100 text-green-600',
   blue: 'bg-blue-100 text-blue-600',
   orange: 'bg-orange-100 text-orange-600',
-  purple: 'bg-purple-100 text-purple-600'
+  purple: 'bg-purple-100 text-purple-600',
 }
 
 const positionClasses = {
   'bottom-left': '-bottom-8 -left-4 sm:-left-8',
-  'top-right': '-top-8 -right-4 sm:-right-8'
+  'top-right': '-top-8 -right-4 sm:-right-8',
 }
 </script>
 
 <template>
-  <div 
+  <div
     :class="[
       'absolute bg-white p-4 rounded-2xl shadow-xl border border-slate-100 z-20',
       positionClasses[position],
-      delay ? 'animate-float-delay' : 'animate-float'
+      delay ? 'animate-float-delay' : 'animate-float',
     ]"
   >
     <div class="flex items-center gap-4">
@@ -65,9 +65,15 @@ const positionClasses = {
 
 <style scoped>
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .animate-float {
