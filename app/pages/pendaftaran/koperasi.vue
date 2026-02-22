@@ -128,11 +128,11 @@ const sectionTitleClass =
       </div>
 
       <div class="flex justify-between items-center mb-12 max-w-2xl mx-auto relative px-4">
-        <div class="absolute top-1/2 left-0 w-full h-[2px] bg-gray-200 -z-0"></div>
+        <div class="absolute top-1/2 left-0 w-full h-[2px] bg-gray-200 -z-0"/>
         <div
           class="absolute top-1/2 left-0 h-[2px] bg-[#C41E3A] transition-all duration-700 ease-in-out -z-0"
           :style="{ width: ((currentStep - 1) / (totalSteps - 1)) * 100 + '%' }"
-        ></div>
+        />
 
         <div v-for="s in totalSteps" :key="s" class="z-10 flex flex-col items-center">
           <div
@@ -164,7 +164,7 @@ const sectionTitleClass =
                 type="text"
                 :class="[inputClass, errors.cooperativeName ? 'border-red-500' : '']"
                 placeholder="Contoh: Koperasi Maju Jaya"
-              />
+              >
               <p v-if="errors.cooperativeName" class="text-[10px] text-red-500 mt-1 font-medium">
                 {{ errors.cooperativeName }}
               </p>
@@ -177,7 +177,7 @@ const sectionTitleClass =
                   type="text"
                   :class="inputClass + ' rounded-r-none border-r-0'"
                   placeholder="majujaya"
-                />
+                >
                 <span
                   class="px-4 bg-gray-50 border border-gray-200 border-l-0 rounded-r-lg text-[11px] flex items-center text-gray-400 font-bold"
                   >.koperasi.com</span
@@ -191,7 +191,7 @@ const sectionTitleClass =
                 type="text"
                 :class="inputClass"
                 placeholder="Masukkan nomor SK AHU"
-              />
+              >
             </div>
             <div>
               <label :class="labelClass">Provinsi <span class="text-red-500">*</span></label>
@@ -200,7 +200,7 @@ const sectionTitleClass =
                 type="text"
                 :class="inputClass"
                 placeholder="Masukkan Provinsi"
-              />
+              >
             </div>
             <div>
               <label :class="labelClass">Kabupaten/Kota <span class="text-red-500">*</span></label>
@@ -209,7 +209,7 @@ const sectionTitleClass =
                 type="text"
                 :class="inputClass"
                 placeholder="Masukkan Kabupaten/Kota"
-              />
+              >
             </div>
             <div>
               <label :class="labelClass">Kecamatan <span class="text-red-500">*</span></label>
@@ -218,7 +218,7 @@ const sectionTitleClass =
                 type="text"
                 :class="inputClass"
                 placeholder="Masukkan Kecamatan"
-              />
+              >
             </div>
             <div>
               <label :class="labelClass">Desa/Kelurahan <span class="text-red-500">*</span></label>
@@ -227,7 +227,7 @@ const sectionTitleClass =
                 type="text"
                 :class="inputClass"
                 placeholder="Masukkan Desa/Kelurahan"
-              />
+              >
             </div>
             <div class="md:col-span-2">
               <label :class="labelClass">Alamat Lengkap <span class="text-red-500">*</span></label>
@@ -236,7 +236,7 @@ const sectionTitleClass =
                 rows="3"
                 :class="inputClass"
                 placeholder="Jalan, nomor rumah, RT/RW, dll"
-              ></textarea>
+              />
             </div>
             <div class="md:col-span-2">
               <label :class="labelClass"
@@ -250,7 +250,7 @@ const sectionTitleClass =
                 type="url"
                 :class="inputClass"
                 placeholder="https://maps.app.goo.gl/..."
-              />
+              >
             </div>
           </div>
         </div>
@@ -270,7 +270,7 @@ const sectionTitleClass =
                 type="text"
                 :class="inputClass"
                 placeholder="Nama sesuai KTP"
-              />
+              >
             </div>
             <div>
               <label :class="labelClass">NIK PIC <span class="text-red-500">*</span></label>
@@ -280,7 +280,7 @@ const sectionTitleClass =
                 maxlength="16"
                 :class="inputClass"
                 placeholder="16 Digit NIK"
-              />
+              >
             </div>
             <div>
               <label :class="labelClass"
@@ -295,17 +295,17 @@ const sectionTitleClass =
               <label :class="labelClass"
                 >Tempat Lahir PIC <span class="text-red-500">*</span></label
               >
-              <input v-model="formData.picPlaceOfBirth" type="text" :class="inputClass" />
+              <input v-model="formData.picPlaceOfBirth" type="text" :class="inputClass" >
             </div>
             <div>
               <label :class="labelClass"
                 >Tanggal Lahir PIC <span class="text-red-500">*</span></label
               >
-              <input v-model="formData.picDateOfBirth" type="date" :class="inputClass" />
+              <input v-model="formData.picDateOfBirth" type="date" :class="inputClass" >
             </div>
             <div>
               <label :class="labelClass">Pekerjaan PIC <span class="text-red-500">*</span></label>
-              <input v-model="formData.picOccupation" type="text" :class="inputClass" />
+              <input v-model="formData.picOccupation" type="text" :class="inputClass" >
             </div>
             <div>
               <label :class="labelClass"
@@ -316,7 +316,7 @@ const sectionTitleClass =
                 type="tel"
                 :class="inputClass"
                 placeholder="08xxxx"
-              />
+              >
             </div>
             <div class="md:col-span-2">
               <label :class="labelClass"
@@ -327,7 +327,7 @@ const sectionTitleClass =
                 rows="3"
                 :class="inputClass"
                 placeholder="Alamat lengkap PIC"
-              ></textarea>
+              />
             </div>
           </div>
         </div>
@@ -347,7 +347,7 @@ const sectionTitleClass =
                 type="email"
                 :class="inputClass"
                 placeholder="admin@koperasi.com"
-              />
+              >
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -357,7 +357,7 @@ const sectionTitleClass =
                   type="password"
                   :class="inputClass"
                   placeholder="Minimal 8 karakter"
-                />
+                >
               </div>
               <div>
                 <label :class="labelClass"
@@ -368,7 +368,7 @@ const sectionTitleClass =
                   type="password"
                   :class="inputClass"
                   placeholder="Konfirmasi sandi"
-                />
+                >
               </div>
             </div>
           </div>
@@ -391,30 +391,30 @@ const sectionTitleClass =
               <input
                 type="file"
                 accept="application/pdf"
-                @change="(e) => handleFile(e, key)"
                 class="text-xs mt-2 block w-full text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-red-50 file:text-[#C41E3A] hover:file:bg-red-100 cursor-pointer"
-              />
+                @change="(e) => handleFile(e, key)"
+              >
             </div>
           </div>
         </div>
 
         <div class="flex justify-between mt-12 pt-8 border-t border-gray-100">
           <button
-            type="button"
-            @click="prevStep"
             v-if="currentStep > 1"
+            type="button"
             class="px-8 py-2.5 border border-gray-200 rounded-xl font-bold text-gray-500 hover:bg-gray-50 transition-all text-sm"
+            @click="prevStep"
           >
             Kembali
           </button>
-          <div v-else></div>
+          <div v-else/>
           <button
             type="button"
-            @click="currentStep === totalSteps ? submitForm() : nextStep()"
             :class="[
               'px-12 py-2.5 rounded-xl font-bold text-white transition-all shadow-md text-sm',
               isSubmitting ? 'bg-gray-400' : 'bg-[#C41E3A] hover:bg-[#A01830] shadow-red-200',
             ]"
+            @click="currentStep === totalSteps ? submitForm() : nextStep()"
           >
             {{
               currentStep === totalSteps

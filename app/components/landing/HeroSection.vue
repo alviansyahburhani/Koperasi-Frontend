@@ -7,10 +7,10 @@
     <div class="absolute inset-0 z-0 pointer-events-none">
       <div
         class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-red-100 rounded-full blur-3xl opacity-50 animate-blob"
-      ></div>
+      />
       <div
         class="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-slate-100 rounded-full blur-3xl opacity-60 animate-blob animation-delay-2000"
-      ></div>
+      />
     </div>
 
     <div class="container mx-auto px-4 relative z-10">
@@ -26,7 +26,7 @@
           <h1
             class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-6 leading-tight animate-fade-in-up delay-100"
           >
-            Transformasi Digital <br class="hidden lg:block" />
+            Transformasi Digital <br class="hidden lg:block" >
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-400">
               Koperasi Indonesia
             </span>
@@ -42,7 +42,7 @@
           <div class="relative max-w-md mx-auto lg:mx-0 mb-10 group animate-fade-in-up delay-300">
             <div
               class="absolute inset-0 bg-red-400 rounded-full blur opacity-20 group-hover:opacity-30 transition duration-500"
-            ></div>
+            />
             <div
               class="relative flex items-center bg-white border border-slate-200 rounded-full p-1.5 shadow-lg focus-within:ring-2 focus-within:ring-red-100 transition-all"
             >
@@ -53,7 +53,7 @@
                 type="text"
                 placeholder="Cari koperasi terdaftar..."
                 class="flex-1 bg-transparent border-none focus:ring-0 px-3 py-2 text-slate-700 placeholder-slate-400 outline-none w-full text-sm sm:text-base"
-              />
+              >
               <UButton
                 color="red"
                 class="rounded-full px-6 py-2.5 font-bold transition-transform active:scale-95"
@@ -71,16 +71,16 @@
             <div
               class="bg-slate-50 border-b border-slate-100 px-4 py-3 rounded-t-xl flex items-center gap-2"
             >
-              <div class="w-3 h-3 rounded-full bg-red-400"></div>
-              <div class="w-3 h-3 rounded-full bg-amber-400"></div>
-              <div class="w-3 h-3 rounded-full bg-green-400"></div>
+              <div class="w-3 h-3 rounded-full bg-red-400"/>
+              <div class="w-3 h-3 rounded-full bg-amber-400"/>
+              <div class="w-3 h-3 rounded-full bg-green-400"/>
             </div>
             <div class="aspect-[16/10] bg-slate-100 rounded-b-xl overflow-hidden relative group">
               <img
                 src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop"
                 alt="Dashboard Koperasi"
                 class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
-              />
+              >
             </div>
           </div>
 

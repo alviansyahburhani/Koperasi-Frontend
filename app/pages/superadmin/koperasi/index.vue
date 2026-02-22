@@ -174,8 +174,8 @@ const exportData = () => {
       </div>
       <div class="mt-4 sm:mt-0">
         <button
-          @click="exportData"
           class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+          @click="exportData"
         >
           <UIcon name="i-lucide-download" class="w-4 h-4" />
           Export Data
@@ -249,7 +249,7 @@ const exportData = () => {
                 type="text"
                 placeholder="Cari nama koperasi, subdomain, atau kota..."
                 class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-              />
+              >
             </div>
           </div>
 
@@ -279,8 +279,8 @@ const exportData = () => {
               <option value="members">Jumlah Anggota</option>
             </select>
             <button
-              @click="sortOrder = sortOrder === 'asc' ? 'desc' : 'asc'"
               class="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              @click="sortOrder = sortOrder === 'asc' ? 'desc' : 'asc'"
             >
               <UIcon
                 :name="sortOrder === 'asc' ? 'i-lucide-arrow-up' : 'i-lucide-arrow-down'"

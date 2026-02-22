@@ -2,7 +2,7 @@
   <section class="pt-8 pb-32 bg-white relative overflow-hidden">
     <div
       class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[50rem] h-[40rem] bg-red-50/60 rounded-full blur-[100px] pointer-events-none"
-    ></div>
+    />
 
     <div class="container mx-auto px-4 relative z-10 text-center">
       <div class="max-w-3xl mx-auto flex flex-col items-center">
@@ -15,7 +15,7 @@
         <h2
           class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6 leading-[1.1]"
         >
-          Satu Platform. <br />
+          Satu Platform. <br >
           <span class="text-red-600">Ribuan Kemudahan.</span>
         </h2>
 

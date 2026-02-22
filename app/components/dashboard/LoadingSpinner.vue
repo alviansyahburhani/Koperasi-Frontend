@@ -6,6 +6,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   size: 'md',
+  text: undefined,
 })
 
 const sizeClasses = computed(() => {
@@ -20,7 +21,7 @@ const sizeClasses = computed(() => {
 
 <template>
   <div class="flex flex-col items-center justify-center py-12">
-    <div :class="['animate-spin rounded-full border-b-2 border-red-600', sizeClasses]"></div>
+    <div :class="['animate-spin rounded-full border-b-2 border-red-600', sizeClasses]"/>
     <p v-if="text" class="mt-4 text-sm text-gray-600">{{ text }}</p>
   </div>
 </template>

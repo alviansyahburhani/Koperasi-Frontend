@@ -120,8 +120,8 @@ const handleLogout = async () => {
               <p class="text-xs text-purple-200 truncate">{{ user?.email }}</p>
             </div>
             <button
-              @click="handleLogout"
               class="ml-2 text-purple-200 hover:text-white transition-colors"
+              @click="handleLogout"
             >
               <UIcon name="i-lucide-log-out" class="h-5 w-5" />
             </button>
@@ -135,7 +135,7 @@ const handleLogout = async () => {
       v-if="showMobileSidebar"
       class="lg:hidden fixed inset-0 z-40 bg-gray-900 bg-opacity-75"
       @click="showMobileSidebar = false"
-    ></div>
+    />
 
     <aside
       v-if="showMobileSidebar"
@@ -152,7 +152,7 @@ const handleLogout = async () => {
               <p class="text-xs text-purple-200">Management Panel</p>
             </div>
           </div>
-          <button @click="showMobileSidebar = false" class="text-purple-200 hover:text-white">
+          <button class="text-purple-200 hover:text-white" @click="showMobileSidebar = false">
             <UIcon name="i-lucide-x" class="w-6 h-6" />
           </button>
         </div>
@@ -168,9 +168,9 @@ const handleLogout = async () => {
                   v-for="child in item.children"
                   :key="child.to"
                   :to="child.to"
-                  @click="showMobileSidebar = false"
                   class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-purple-100 hover:bg-purple-700 transition-colors"
                   active-class="bg-purple-700 text-white"
+                  @click="showMobileSidebar = false"
                 >
                   <UIcon :name="child.icon" class="mr-3 flex-shrink-0 h-5 w-5" />
                   {{ child.label }}
@@ -181,9 +181,9 @@ const handleLogout = async () => {
             <NuxtLink
               v-else
               :to="item.to"
-              @click="showMobileSidebar = false"
               class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-purple-100 hover:bg-purple-700 transition-colors"
               active-class="bg-purple-700 text-white"
+              @click="showMobileSidebar = false"
             >
               <UIcon :name="item.icon" class="mr-3 flex-shrink-0 h-5 w-5" />
               {{ item.label }}
@@ -204,15 +204,15 @@ const handleLogout = async () => {
       <!-- Top Bar -->
       <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">
         <button
-          @click="showMobileSidebar = true"
           class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none lg:hidden"
+          @click="showMobileSidebar = true"
         >
           <UIcon name="i-lucide-menu" class="h-6 w-6" />
         </button>
 
         <div class="flex-1 px-4 flex justify-between items-center">
           <div class="flex items-center gap-2">
-            <div class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+            <div class="h-2 w-2 rounded-full bg-green-500 animate-pulse"/>
             <span class="text-sm text-gray-600">System Online</span>
           </div>
 
@@ -238,7 +238,7 @@ const handleLogout = async () => {
               <UIcon name="i-lucide-bell" class="h-6 w-6" />
               <span
                 class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"
-              ></span>
+              />
             </button>
 
             <!-- Settings -->

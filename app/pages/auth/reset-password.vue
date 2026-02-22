@@ -94,7 +94,7 @@ const handleSubmit = async () => {
           </p>
         </div>
 
-        <form @submit.prevent="handleSubmit" class="space-y-4">
+        <form class="space-y-4" @submit.prevent="handleSubmit">
           <!-- Password Baru -->
           <div>
             <label class="block text-xs font-medium text-gray-700 mb-1">
@@ -107,11 +107,11 @@ const handleSubmit = async () => {
                 required
                 placeholder="Minimal 8 karakter"
                 class="w-full px-3 py-2.5 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-              />
+              >
               <button
                 type="button"
-                @click="showPassword = !showPassword"
                 class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                @click="showPassword = !showPassword"
               >
                 <UIcon :name="showPassword ? 'i-lucide-eye-off' : 'i-lucide-eye'" class="w-4 h-4" />
               </button>
@@ -125,7 +125,7 @@ const handleSubmit = async () => {
                     class="h-full transition-all duration-300"
                     :class="passwordStrength.color"
                     :style="{ width: passwordStrength.width }"
-                  ></div>
+                  />
                 </div>
                 <span
                   class="text-xs font-medium"
@@ -149,11 +149,11 @@ const handleSubmit = async () => {
                 required
                 placeholder="Ketik ulang kata sandi"
                 class="w-full px-3 py-2.5 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-              />
+              >
               <button
                 type="button"
-                @click="showPasswordConfirm = !showPasswordConfirm"
                 class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                @click="showPasswordConfirm = !showPasswordConfirm"
               >
                 <UIcon
                   :name="showPasswordConfirm ? 'i-lucide-eye-off' : 'i-lucide-eye'"
@@ -232,7 +232,7 @@ const handleSubmit = async () => {
           Kata sandi Anda telah berhasil diatur ulang. Anda akan dialihkan ke halaman login...
         </p>
         <div class="flex justify-center">
-          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"/>
         </div>
       </div>
 

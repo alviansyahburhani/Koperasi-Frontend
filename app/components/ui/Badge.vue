@@ -19,6 +19,7 @@ interface Props {
 withDefaults(defineProps<Props>(), {
   variant: 'primary',
   size: 'md',
+  icon: undefined,
   pulse: false,
 })
 

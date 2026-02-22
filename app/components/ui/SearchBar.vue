@@ -61,7 +61,7 @@ function handleSearch() {
         :disabled="disabled"
         class="flex-1 bg-transparent border-none focus:ring-0 px-4 py-2 text-slate-700 outline-none w-full disabled:opacity-50 disabled:cursor-not-allowed"
         @keydown.enter.prevent="handleSearch"
-      />
+      >
 
       <UButton
         :color="buttonColor"

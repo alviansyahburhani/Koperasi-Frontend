@@ -47,7 +47,7 @@ const handleSubmit = async () => {
           </p>
         </div>
 
-        <form @submit.prevent="handleSubmit" class="space-y-4">
+        <form class="space-y-4" @submit.prevent="handleSubmit">
           <div>
             <label class="block text-xs font-medium text-gray-700 mb-1">
               Email <span class="text-red-500">*</span>
@@ -58,7 +58,7 @@ const handleSubmit = async () => {
               required
               placeholder="nama@email.com"
               class="w-full px-3 py-2.5 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            />
+            >
           </div>
 
           <button
@@ -106,7 +106,7 @@ const handleSubmit = async () => {
           </div>
         </div>
 
-        <button @click="step = 'request'" class="text-sm text-red-700 hover:underline font-medium">
+        <button class="text-sm text-red-700 hover:underline font-medium" @click="step = 'request'">
           Kirim ulang email
         </button>
 

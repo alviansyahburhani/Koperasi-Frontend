@@ -95,8 +95,8 @@ const roleConfig = computed(() => (role.value ? RoleConfig[role.value] : null))
               <p class="text-xs text-gray-500 truncate">{{ user?.email }}</p>
             </div>
             <button
-              @click="handleLogout"
               class="ml-2 text-gray-400 hover:text-red-600 transition-colors"
+              @click="handleLogout"
             >
               <UIcon name="i-lucide-log-out" class="h-5 w-5" />
             </button>
@@ -110,7 +110,7 @@ const roleConfig = computed(() => (role.value ? RoleConfig[role.value] : null))
       v-if="showMobileSidebar"
       class="lg:hidden fixed inset-0 z-40 bg-gray-900 bg-opacity-75"
       @click="showMobileSidebar = false"
-    ></div>
+    />
 
     <!-- Mobile Sidebar -->
     <aside
@@ -131,7 +131,7 @@ const roleConfig = computed(() => (role.value ? RoleConfig[role.value] : null))
               <p class="text-xs text-gray-500">{{ roleConfig?.label }}</p>
             </div>
           </div>
-          <button @click="showMobileSidebar = false" class="text-gray-500 hover:text-gray-700">
+          <button class="text-gray-500 hover:text-gray-700" @click="showMobileSidebar = false">
             <UIcon name="i-lucide-x" class="w-6 h-6" />
           </button>
         </div>
@@ -147,9 +147,9 @@ const roleConfig = computed(() => (role.value ? RoleConfig[role.value] : null))
                   v-for="child in item.children"
                   :key="child.to"
                   :to="child.to || '#'"
-                  @click="showMobileSidebar = false"
                   class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 hover:text-red-600 transition-colors"
                   active-class="bg-red-50 text-red-600"
+                  @click="showMobileSidebar = false"
                 >
                   <UIcon :name="child.icon" class="mr-3 flex-shrink-0 h-5 w-5" />
                   {{ child.label }}
@@ -160,9 +160,9 @@ const roleConfig = computed(() => (role.value ? RoleConfig[role.value] : null))
             <NuxtLink
               v-else
               :to="item.to || '#'"
-              @click="showMobileSidebar = false"
               class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100 hover:text-red-600 transition-colors"
               active-class="bg-red-50 text-red-600"
+              @click="showMobileSidebar = false"
             >
               <UIcon :name="item.icon" class="mr-3 flex-shrink-0 h-5 w-5" />
               {{ item.label }}
@@ -183,8 +183,8 @@ const roleConfig = computed(() => (role.value ? RoleConfig[role.value] : null))
       <!-- Top Bar -->
       <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">
         <button
-          @click="showMobileSidebar = true"
           class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none lg:hidden"
+          @click="showMobileSidebar = true"
         >
           <UIcon name="i-lucide-menu" class="h-6 w-6" />
         </button>
@@ -203,7 +203,7 @@ const roleConfig = computed(() => (role.value ? RoleConfig[role.value] : null))
               <UIcon name="i-lucide-bell" class="h-6 w-6" />
               <span
                 class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"
-              ></span>
+              />
             </button>
 
             <!-- User Avatar (Desktop) -->

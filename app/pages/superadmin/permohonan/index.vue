@@ -136,46 +136,46 @@ const getStatusBadge = (status: string) => {
       <div class="border-b border-gray-200">
         <nav class="flex -mb-px overflow-x-auto">
           <button
-            @click="filterStatus = 'ALL'"
             :class="[
               filterStatus === 'ALL'
                 ? 'border-red-500 text-red-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
               'whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm transition-colors',
             ]"
+            @click="filterStatus = 'ALL'"
           >
             Semua ({{ statusCounts.all }})
           </button>
           <button
-            @click="filterStatus = 'PENDING'"
             :class="[
               filterStatus === 'PENDING'
                 ? 'border-red-500 text-red-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
               'whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm transition-colors',
             ]"
+            @click="filterStatus = 'PENDING'"
           >
             Pending ({{ statusCounts.pending }})
           </button>
           <button
-            @click="filterStatus = 'APPROVED'"
             :class="[
               filterStatus === 'APPROVED'
                 ? 'border-red-500 text-red-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
               'whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm transition-colors',
             ]"
+            @click="filterStatus = 'APPROVED'"
           >
             Disetujui ({{ statusCounts.approved }})
           </button>
           <button
-            @click="filterStatus = 'REJECTED'"
             :class="[
               filterStatus === 'REJECTED'
                 ? 'border-red-500 text-red-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
               'whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm transition-colors',
             ]"
+            @click="filterStatus = 'REJECTED'"
           >
             Ditolak ({{ statusCounts.rejected }})
           </button>
@@ -193,7 +193,7 @@ const getStatusBadge = (status: string) => {
             type="text"
             placeholder="Cari nama koperasi, subdomain, atau PIC..."
             class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-          />
+          >
         </div>
       </div>
 
