@@ -43,21 +43,21 @@ export class AuthService {
    * Tenant = subdomain.localhost
    */
   private isSuperAdminContext(): boolean {
-    if (!process.client) return false
-    
+    if (!import.meta.client) return false
+
     const hostname = window.location.hostname
     const parts = hostname.split('.')
-    
+
     // localhost atau 127.0.0.1 (tanpa subdomain) = Super Admin
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
       return true
     }
-    
+
     // Jika ada subdomain (parts > 1) dan bukan 'www' = Tenant
     if (parts.length > 1 && parts[0] !== 'www') {
       return false
     }
-    
+
     // Default: assume super admin
     return true
   }
@@ -70,17 +70,17 @@ export class AuthService {
     const isSuperAdmin = this.isSuperAdminContext()
 
     if (config.public.debugMode) {
-      console.log('[AuthService] Login context:', { 
+      console.log('[AuthService] Login context:', {
         email: credentials.email,
-        hostname: process.client ? window.location.hostname : 'SSR',
+        hostname: import.meta.client ? window.location.hostname : 'SSR',
         isSuperAdmin,
       })
     }
 
     // ✅ Use different endpoint based on context
-    const endpoint = isSuperAdmin 
-      ? '/api/admin/auth/login'   // Super admin login
-      : '/api/auth/login'         // Tenant login
+    const endpoint = isSuperAdmin
+      ? '/api/admin/auth/login' // Super admin login
+      : '/api/auth/login' // Tenant login
 
     if (config.public.debugMode) {
       console.log('[AuthService] Using endpoint:', endpoint)
@@ -97,20 +97,20 @@ export class AuthService {
    */
   async getProfile(): Promise<UserProfile> {
     const isSuperAdmin = this.isSuperAdminContext()
-    
+
     // ✅ Use different endpoint based on context
     const endpoint = isSuperAdmin
-      ? '/api/admin/auth/profile'  // Jika ada
+      ? '/api/admin/auth/profile' // Jika ada
       : '/api/auth/profile'
 
-    const response = await apiService.get<any>(endpoint)
-    
+    const response = await apiService.get<unknown>(endpoint)
+
     return {
       id: response.id || response.sub,
       email: response.email,
       role: response.role,
       name: response.name,
-      tenantId: response.tenantId
+      tenantId: response.tenantId,
     }
   }
 
@@ -119,11 +119,9 @@ export class AuthService {
    */
   async refreshToken(): Promise<{ accessToken: string }> {
     const isSuperAdmin = this.isSuperAdminContext()
-    
+
     // ✅ Use different endpoint based on context
-    const endpoint = isSuperAdmin
-      ? '/api/admin/auth/refresh'
-      : '/api/auth/refresh'
+    const endpoint = isSuperAdmin ? '/api/admin/auth/refresh' : '/api/auth/refresh'
 
     return apiService.post<{ accessToken: string }>(endpoint, {})
   }
@@ -132,7 +130,7 @@ export class AuthService {
    * Logout
    */
   async logout(): Promise<void> {
-    if (process.client) {
+    if (import.meta.client) {
       localStorage.removeItem('access_token')
       localStorage.removeItem('refresh_token')
       localStorage.removeItem('user')
@@ -145,14 +143,14 @@ export class AuthService {
   decodeToken(token: string): JwtPayload | null {
     try {
       const parts = token.split('.')
-      
+
       if (parts.length !== 3) {
         console.error('[AuthService] Invalid token format')
         return null
       }
 
       const base64Url = parts[1]
-      
+
       if (!base64Url) {
         console.error('[AuthService] Token payload is missing')
         return null
@@ -162,7 +160,7 @@ export class AuthService {
       const jsonPayload = decodeURIComponent(
         atob(base64)
           .split('')
-          .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
           .join('')
       )
 

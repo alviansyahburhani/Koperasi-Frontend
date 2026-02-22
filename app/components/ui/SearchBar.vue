@@ -19,10 +19,10 @@ interface Props {
   disabled?: boolean
 }
 
-interface Emits {
-  (e: 'update:modelValue', value: string): void
-  (e: 'search', value: string): void
-}
+const emit = defineEmits<{
+  'update:modelValue': [value: string]
+  search: [query: string]
+}>()
 
 const props = withDefaults(defineProps<Props>(), {
   placeholder: 'Cari...',
@@ -31,21 +31,13 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
 })
 
-const emit = defineEmits<Emits>()
-
 const inputValue = computed({
   get: () => props.modelValue,
-  set: (value) => emit('update:modelValue', value),
+  set: value => emit('update:modelValue', value),
 })
 
 function handleSearch() {
   emit('search', inputValue.value)
-}
-
-function handleKeyPress(e: KeyboardEvent) {
-  if (e.key === 'Enter') {
-    handleSearch()
-  }
 }
 </script>
 
@@ -68,7 +60,7 @@ function handleKeyPress(e: KeyboardEvent) {
         :placeholder="placeholder"
         :disabled="disabled"
         class="flex-1 bg-transparent border-none focus:ring-0 px-4 py-2 text-slate-700 outline-none w-full disabled:opacity-50 disabled:cursor-not-allowed"
-        @keypress="handleKeyPress"
+        @keydown.enter.prevent="handleSearch"
       />
 
       <UButton

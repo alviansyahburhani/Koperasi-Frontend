@@ -1,14 +1,14 @@
 <script setup lang="ts">
 definePageMeta({
-  middleware: 'auth'
+  middleware: 'auth',
 })
 
 useHead({
-  title: 'Dashboard - Super Admin'
+  title: 'Dashboard - Super Admin',
 })
 
 const authStore = useAuthStore()
-const router = useRouter()
+const _router = useRouter()
 
 // Protect route - only super admin
 onMounted(() => {
@@ -22,7 +22,7 @@ const stats = ref({
   totalTenants: 0,
   activeTenants: 0,
   pendingTenants: 0,
-  suspendedTenants: 0
+  suspendedTenants: 0,
 })
 
 // Sidebar menu items
@@ -31,26 +31,26 @@ const menuItems = [
     label: 'Dashboard',
     icon: 'i-heroicons-home',
     to: '/superadmin',
-    badge: null
+    badge: null,
   },
   {
     label: 'Permohonan Koperasi',
     icon: 'i-heroicons-inbox',
     to: '/superadmin/permohonan',
-    badge: stats.value.pendingTenants || null
+    badge: stats.value.pendingTenants || null,
   },
   {
     label: 'Daftar Koperasi',
     icon: 'i-heroicons-building-office-2',
     to: '/superadmin/koperasi',
-    badge: null
+    badge: null,
   },
   {
     label: 'Pengaturan Platform',
     icon: 'i-heroicons-cog-6-tooth',
     to: '/superadmin/pengaturan',
-    badge: null
-  }
+    badge: null,
+  },
 ]
 
 // Logout handler
@@ -83,10 +83,7 @@ const handleLogout = async () => {
         >
           <UIcon :name="item.icon" class="w-5 h-5 mr-3 flex-shrink-0" />
           <span class="flex-1">{{ item.label }}</span>
-          <span
-            v-if="item.badge"
-            class="px-2 py-0.5 text-xs font-semibold bg-red-600 rounded-full"
-          >
+          <span v-if="item.badge" class="px-2 py-0.5 text-xs font-semibold bg-red-600 rounded-full">
             {{ item.badge }}
           </span>
         </NuxtLink>
@@ -95,15 +92,19 @@ const handleLogout = async () => {
       <!-- User Info & Logout -->
       <div class="p-4 border-t border-gray-800">
         <div class="flex items-center mb-3">
-          <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
-            <span class="text-lg font-bold">{{ authStore.user?.email?.charAt(0).toUpperCase() }}</span>
+          <div
+            class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0"
+          >
+            <span class="text-lg font-bold">{{
+              authStore.user?.email?.charAt(0).toUpperCase()
+            }}</span>
           </div>
           <div class="ml-3 flex-1 min-w-0">
             <p class="text-sm font-medium text-white truncate">{{ authStore.user?.email }}</p>
             <p class="text-xs text-gray-400">Super Administrator</p>
           </div>
         </div>
-        
+
         <button
           @click="handleLogout"
           class="w-full flex items-center justify-center px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors text-sm font-medium"
@@ -197,8 +198,8 @@ const handleLogout = async () => {
               <div class="text-center py-8">
                 <UIcon name="i-heroicons-inbox" class="w-16 h-16 mx-auto mb-3 text-gray-400" />
                 <p class="text-gray-600 mb-2">Belum ada permohonan pending</p>
-                <NuxtLink 
-                  to="/superadmin/permohonan" 
+                <NuxtLink
+                  to="/superadmin/permohonan"
                   class="text-blue-600 hover:text-blue-700 font-medium text-sm"
                 >
                   Lihat semua permohonan →

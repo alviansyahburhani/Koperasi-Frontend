@@ -84,7 +84,7 @@ export const useAuthStore = defineStore('auth', {
         this.isAuthenticated = true
 
         // Save to localStorage
-        if (process.client) {
+        if (import.meta.client) {
           localStorage.setItem('access_token', response.accessToken)
           localStorage.setItem('refresh_token', response.refreshToken)
         }
@@ -95,7 +95,7 @@ export const useAuthStore = defineStore('auth', {
         if (payload) {
           // ✅ FIX: Check if this is super admin login (no subdomain)
           const isSuperAdminContext = authService.isSuperAdminContext()
-          
+
           if (config.public.debugMode) {
             console.log('[AuthStore] Is Super Admin context:', isSuperAdminContext)
             console.log('[AuthStore] JWT payload:', payload)
@@ -105,13 +105,13 @@ export const useAuthStore = defineStore('auth', {
             id: payload.sub,
             email: payload.email,
             // ✅ FIX: Set 'SUPERADMIN' if login from localhost without subdomain
-            role: isSuperAdminContext ? 'SUPERADMIN' : (payload.role || 'ANGGOTA'),
+            role: isSuperAdminContext ? 'SUPERADMIN' : payload.role || 'ANGGOTA',
             tenantId: payload.tenantId,
             name: payload.email.split('@')[0], // Fallback name
           }
 
           // Save user to localStorage
-          if (process.client) {
+          if (import.meta.client) {
             localStorage.setItem('user', JSON.stringify(this.user))
           }
 
@@ -128,10 +128,9 @@ export const useAuthStore = defineStore('auth', {
 
         return {
           success: true,
-          message: 'Login berhasil!'
+          message: 'Login berhasil!',
         }
-
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error('[AuthStore] Login error:', error)
 
         // Clear state on error
@@ -150,16 +149,13 @@ export const useAuthStore = defineStore('auth', {
         } else if (error.statusCode === 500) {
           message = 'Server sedang bermasalah. Silakan coba lagi nanti.'
         } else if (error.message) {
-          message = Array.isArray(error.message) 
-            ? error.message[0] 
-            : error.message
+          message = Array.isArray(error.message) ? error.message[0] : error.message
         }
 
         return {
           success: false,
-          message
+          message,
         }
-
       } finally {
         this.loading = false
       }
@@ -171,7 +167,7 @@ export const useAuthStore = defineStore('auth', {
     async fetchProfile() {
       try {
         const profile = await authService.getProfile()
-        
+
         if (useRuntimeConfig().public.debugMode) {
           console.log('[AuthStore] Profile fetched from API:', profile)
         }
@@ -179,10 +175,9 @@ export const useAuthStore = defineStore('auth', {
         this.user = profile
 
         // Update localStorage
-        if (process.client) {
+        if (import.meta.client) {
           localStorage.setItem('user', JSON.stringify(profile))
         }
-
       } catch (error) {
         console.error('[AuthStore] Fetch profile error:', error)
         throw error
@@ -205,7 +200,7 @@ export const useAuthStore = defineStore('auth', {
         this.isAuthenticated = false
 
         // Clear localStorage
-        if (process.client) {
+        if (import.meta.client) {
           localStorage.removeItem('access_token')
           localStorage.removeItem('refresh_token')
           localStorage.removeItem('user')
@@ -220,7 +215,7 @@ export const useAuthStore = defineStore('auth', {
      * Initialize auth from storage (called on app start)
      */
     async initAuth() {
-      if (process.server) return
+      if (import.meta.server) return
 
       const accessToken = localStorage.getItem('access_token')
       const refreshToken = localStorage.getItem('refresh_token')
@@ -249,11 +244,11 @@ export const useAuthStore = defineStore('auth', {
             if (payload) {
               // ✅ FIX: Check context to set correct role
               const isSuperAdminContext = authService.isSuperAdminContext()
-              
+
               this.user = {
                 id: payload.sub,
                 email: payload.email,
-                role: isSuperAdminContext ? 'SUPERADMIN' : (payload.role || 'ANGGOTA'),
+                role: isSuperAdminContext ? 'SUPERADMIN' : payload.role || 'ANGGOTA',
                 tenantId: payload.tenantId,
                 name: payload.email.split('@')[0],
               }
@@ -263,13 +258,12 @@ export const useAuthStore = defineStore('auth', {
           if (useRuntimeConfig().public.debugMode) {
             console.log('[AuthStore] Auth restored from storage:', {
               user: this.user,
-              authenticated: this.isAuthenticated
+              authenticated: this.isAuthenticated,
             })
           }
-
         } catch (error) {
           console.error('[AuthStore] Failed to restore auth:', error)
-          
+
           // Clear invalid data
           localStorage.removeItem('access_token')
           localStorage.removeItem('refresh_token')

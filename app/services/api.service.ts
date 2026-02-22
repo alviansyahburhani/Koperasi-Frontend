@@ -37,11 +37,11 @@ export class ApiService {
   private getHeaders(): HeadersInit {
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      Accept: 'application/json',
     }
 
     // Add auth token if exists
-    if (process.client) {
+    if (import.meta.client) {
       const token = localStorage.getItem('access_token')
       if (token) {
         headers['Authorization'] = `Bearer ${token}`
@@ -53,9 +53,9 @@ export class ApiService {
 
   /**
    * Handle API Error
-   * ✅ FIX: useErrorHandler hanya bisa dipanggil di Nuxt context
+   * ✅ FIX: useErrorHandler hunknowna bisa dipanggil di Nuxt context
    */
-  private handleError(error: any): never {
+  private handleError(error: unknown): never {
     // Simple error handling tanpa composable
     const statusCode = error.statusCode || error.response?.status || 500
     const message = error.message || error.response?.data?.message || 'Terjadi kesalahan'
@@ -65,12 +65,12 @@ export class ApiService {
       console.error('[ApiService] Error:', {
         statusCode,
         message,
-        error
+        error,
       })
     }
 
     // Handle 401 - Auto logout
-    if (statusCode === 401 && process.client) {
+    if (statusCode === 401 && import.meta.client) {
       localStorage.removeItem('access_token')
       localStorage.removeItem('refresh_token')
       navigateTo('/auth/login')
@@ -80,7 +80,7 @@ export class ApiService {
     throw createError({
       statusCode,
       message,
-      data: error.response?.data
+      data: error.response?.data,
     })
   }
 
@@ -90,7 +90,7 @@ export class ApiService {
   private async request<T>(
     method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE',
     endpoint: string,
-    data?: any
+    data?: unknown
   ): Promise<T> {
     this.initConfig()
 
@@ -115,8 +115,7 @@ export class ApiService {
       }
 
       return response
-
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (this.debugMode) {
         console.error(`[ApiService] Error ${method} ${url}:`, error)
       }
@@ -135,21 +134,21 @@ export class ApiService {
   /**
    * POST request
    */
-  async post<T>(endpoint: string, data?: any): Promise<T> {
+  async post<T>(endpoint: string, data?: unknown): Promise<T> {
     return this.request<T>('POST', endpoint, data)
   }
 
   /**
    * PUT request
    */
-  async put<T>(endpoint: string, data: any): Promise<T> {
+  async put<T>(endpoint: string, data: unknown): Promise<T> {
     return this.request<T>('PUT', endpoint, data)
   }
 
   /**
    * PATCH request
    */
-  async patch<T>(endpoint: string, data: any): Promise<T> {
+  async patch<T>(endpoint: string, data: unknown): Promise<T> {
     return this.request<T>('PATCH', endpoint, data)
   }
 

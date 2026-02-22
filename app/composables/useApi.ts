@@ -7,7 +7,7 @@ import type { ApiResponse } from '../types'
 
 interface UseApiOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
-  body?: any
+  body?: unknown
   headers?: Record<string, string>
   token?: string
 }
@@ -19,7 +19,7 @@ export const useApi = () => {
   /**
    * Make API request
    */
-  async function request<T = any>(
+  async function request<T = unknown>(
     endpoint: string,
     options: UseApiOptions = {}
   ): Promise<ApiResponse<T>> {
@@ -45,7 +45,7 @@ export const useApi = () => {
       })
 
       return response
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Handle error
       console.error('API Error:', error)
 
@@ -60,35 +60,35 @@ export const useApi = () => {
   /**
    * GET request
    */
-  function get<T = any>(endpoint: string, token?: string) {
+  function get<T = unknown>(endpoint: string, token?: string) {
     return request<T>(endpoint, { method: 'GET', token })
   }
 
   /**
    * POST request
    */
-  function post<T = any>(endpoint: string, body: any, token?: string) {
+  function post<T = unknown>(endpoint: string, body: unknown, token?: string) {
     return request<T>(endpoint, { method: 'POST', body, token })
   }
 
   /**
    * PUT request
    */
-  function put<T = any>(endpoint: string, body: any, token?: string) {
+  function put<T = unknown>(endpoint: string, body: unknown, token?: string) {
     return request<T>(endpoint, { method: 'PUT', body, token })
   }
 
   /**
    * PATCH request
    */
-  function patch<T = any>(endpoint: string, body: any, token?: string) {
+  function patch<T = unknown>(endpoint: string, body: unknown, token?: string) {
     return request<T>(endpoint, { method: 'PATCH', body, token })
   }
 
   /**
    * DELETE request
    */
-  function del<T = any>(endpoint: string, token?: string) {
+  function del<T = unknown>(endpoint: string, token?: string) {
     return request<T>(endpoint, { method: 'DELETE', token })
   }
 

@@ -4,7 +4,7 @@ import { Role } from '~/types'
 export const useAuth = () => {
   const user = useState<User | null>('auth-user', () => {
     // Check if we're in browser and have stored session
-    if (process.client) {
+    if (import.meta.client) {
       const stored = localStorage.getItem('user')
       if (stored) {
         return JSON.parse(stored)
@@ -75,7 +75,7 @@ export const useAuth = () => {
     user.value = userData
 
     // ✅ Store in localStorage if remember me
-    if (process.client && credentials.remember) {
+    if (import.meta.client && credentials.remember) {
       localStorage.setItem('user', JSON.stringify(userData))
     }
 
@@ -85,7 +85,7 @@ export const useAuth = () => {
   const logout = async () => {
     user.value = null
 
-    if (process.client) {
+    if (import.meta.client) {
       localStorage.removeItem('user')
     }
 

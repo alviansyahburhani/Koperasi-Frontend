@@ -14,7 +14,7 @@ export function formatCurrency(amount: number): string {
     style: 'currency',
     currency: CURRENCY.CODE,
     minimumFractionDigits: 0,
-    maximumFractionDigits: 0
+    maximumFractionDigits: 0,
   }).format(amount)
 }
 
@@ -32,16 +32,26 @@ export function formatNumber(num: number): string {
  */
 export function formatDate(date: string | Date): string {
   const d = typeof date === 'string' ? new Date(date) : date
-  
+
   const months = [
-    'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember',
   ]
-  
+
   const day = d.getDate()
   const month = months[d.getMonth()]
   const year = d.getFullYear()
-  
+
   return `${day} ${month} ${year}`
 }
 
@@ -54,7 +64,7 @@ export function formatDateTime(date: string | Date): string {
   const dateStr = formatDate(d)
   const hours = d.getHours().toString().padStart(2, '0')
   const minutes = d.getMinutes().toString().padStart(2, '0')
-  
+
   return `${dateStr}, ${hours}:${minutes}`
 }
 
@@ -65,14 +75,14 @@ export function formatDateTime(date: string | Date): string {
 export function formatPhone(phone: string): string {
   // Remove non-numeric characters
   const cleaned = phone.replace(/\D/g, '')
-  
+
   // Format: 0812-3456-7890
   const match = cleaned.match(/^(\d{4})(\d{4})(\d+)$/)
-  
+
   if (match) {
     return `${match[1]}-${match[2]}-${match[3]}`
   }
-  
+
   return phone
 }
 
@@ -83,11 +93,11 @@ export function formatPhone(phone: string): string {
 export function formatNIK(nik: string): string {
   const cleaned = nik.replace(/\D/g, '')
   const match = cleaned.match(/^(\d{4})(\d{4})(\d{4})(\d{4})$/)
-  
+
   if (match) {
     return `${match[1]}-${match[2]}-${match[3]}-${match[4]}`
   }
-  
+
   return nik
 }
 
@@ -107,7 +117,7 @@ export function truncate(text: string, maxLength: number): string {
 export function getInitials(name: string): string {
   return name
     .split(' ')
-    .map(word => word[0])
+    .map((word) => word[0])
     .join('')
     .toUpperCase()
     .substring(0, 2)
@@ -129,5 +139,5 @@ export function formatFileSize(bytes: number): string {
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
   if (bytes === 0) return '0 Bytes'
   const i = Math.floor(Math.log(bytes) / Math.log(1024))
-  return Math.round(bytes / Math.pow(1024, i) * 100) / 100 + ' ' + sizes[i]
+  return Math.round((bytes / Math.pow(1024, i)) * 100) / 100 + ' ' + sizes[i]
 }

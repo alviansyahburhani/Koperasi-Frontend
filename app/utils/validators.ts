@@ -33,15 +33,17 @@ export function isValidNIK(nik: string): boolean {
  */
 export function isValidPhone(phone: string): boolean {
   const cleaned = phone.replace(/\D/g, '')
-  return cleaned.length >= VALIDATION.PHONE_MIN_LENGTH && 
-         cleaned.length <= VALIDATION.PHONE_MAX_LENGTH &&
-         (cleaned.startsWith('08') || cleaned.startsWith('628'))
+  return (
+    cleaned.length >= VALIDATION.PHONE_MIN_LENGTH &&
+    cleaned.length <= VALIDATION.PHONE_MAX_LENGTH &&
+    (cleaned.startsWith('08') || cleaned.startsWith('628'))
+  )
 }
 
 /**
  * Validate required field
  */
-export function isRequired(value: any): boolean {
+export function isRequired(value: unknown): boolean {
   if (typeof value === 'string') {
     return value.trim().length > 0
   }

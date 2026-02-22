@@ -9,7 +9,7 @@ interface Props {
   sticky?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   transparent: false,
   sticky: true,
 })

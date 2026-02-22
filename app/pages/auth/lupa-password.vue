@@ -5,19 +5,19 @@ const step = ref<'request' | 'success'>('request')
 const loading = ref(false)
 
 const form = reactive({
-  email: ''
+  email: '',
 })
 
 const handleSubmit = async () => {
   loading.value = true
-  
+
   try {
     // ✅ Panggil API
-    const response = await $fetch('/api/auth/forgot-password.post', {
+    const _response = await $fetch('/api/auth/forgot-password.post', {
       method: 'POST',
-      body: { email: form.email }
+      body: { email: form.email },
     })
-    
+
     step.value = 'success'
   } catch (error: any) {
     // Handle error
@@ -31,16 +31,18 @@ const handleSubmit = async () => {
 <template>
   <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
     <div class="max-w-md w-full bg-white rounded-lg shadow-md p-8">
-      
       <!-- STEP 1: Request Email -->
       <div v-if="step === 'request'">
         <div class="text-center mb-6">
-          <div class="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
+          <div
+            class="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4"
+          >
             <UIcon name="i-lucide-lock-keyhole" class="w-8 h-8 text-red-600" />
           </div>
           <h1 class="text-2xl font-bold text-gray-900 mb-2">Lupa Kata Sandi?</h1>
           <p class="text-sm text-gray-600">
-            Masukkan email yang terdaftar, kami akan mengirimkan link untuk mengatur ulang kata sandi Anda.
+            Masukkan email yang terdaftar, kami akan mengirimkan link untuk mengatur ulang kata
+            sandi Anda.
           </p>
         </div>
 
@@ -49,7 +51,7 @@ const handleSubmit = async () => {
             <label class="block text-xs font-medium text-gray-700 mb-1">
               Email <span class="text-red-500">*</span>
             </label>
-            <input 
+            <input
               v-model="form.email"
               type="email"
               required
@@ -58,7 +60,7 @@ const handleSubmit = async () => {
             />
           </div>
 
-          <button 
+          <button
             type="submit"
             :disabled="loading"
             class="w-full px-6 py-2.5 bg-red-700 text-white text-sm font-semibold rounded-md hover:bg-red-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
@@ -78,12 +80,15 @@ const handleSubmit = async () => {
 
       <!-- STEP 2: Success Message -->
       <div v-if="step === 'success'" class="text-center">
-        <div class="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+        <div
+          class="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4"
+        >
           <UIcon name="i-lucide-mail-check" class="w-8 h-8 text-green-600" />
         </div>
         <h1 class="text-2xl font-bold text-gray-900 mb-2">Cek Email Anda</h1>
         <p class="text-sm text-gray-600 mb-6">
-          Kami telah mengirimkan link untuk mengatur ulang kata sandi ke <strong class="text-gray-900">{{ form.email }}</strong>
+          Kami telah mengirimkan link untuk mengatur ulang kata sandi ke
+          <strong class="text-gray-900">{{ form.email }}</strong>
         </p>
 
         <div class="bg-blue-50 border border-blue-200 rounded-md p-4 mb-6">
@@ -100,10 +105,7 @@ const handleSubmit = async () => {
           </div>
         </div>
 
-        <button 
-          @click="step = 'request'"
-          class="text-sm text-red-700 hover:underline font-medium"
-        >
+        <button @click="step = 'request'" class="text-sm text-red-700 hover:underline font-medium">
           Kirim ulang email
         </button>
 
@@ -114,7 +116,6 @@ const handleSubmit = async () => {
           </NuxtLink>
         </div>
       </div>
-
     </div>
   </div>
 </template>

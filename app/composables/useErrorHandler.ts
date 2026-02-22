@@ -146,7 +146,7 @@ export const useErrorHandler = () => {
       message: originalMessage || message,
       statusCode,
       timestamp: new Date(),
-      url: process.client ? window.location.href : undefined,
+      url: import.meta.client ? window.location.href : undefined,
       stack,
       metadata: {
         response: error.response?.data,
@@ -157,12 +157,12 @@ export const useErrorHandler = () => {
     logError(errorLog)
 
     // Show toast
-    if (shouldShowToast && process.client) {
+    if (shouldShowToast && import.meta.client) {
       showErrorToast(message, severity)
     }
 
     // Handle specific cases
-    if (statusCode === 401 && process.client) {
+    if (statusCode === 401 && import.meta.client) {
       // Clear auth and redirect to login
       const authStore = useAuthStore()
       authStore.logout()
@@ -173,7 +173,7 @@ export const useErrorHandler = () => {
     }
 
     // Redirect if specified
-    if (redirect && process.client) {
+    if (redirect && import.meta.client) {
       navigateTo(redirect)
     }
 

@@ -6,7 +6,7 @@
 export interface AppError {
   statusCode: number
   message: string
-  data?: any
+  data?: unknow
   stack?: string
 }
 
@@ -17,13 +17,13 @@ export interface ApiErrorResponse {
   statusCode?: number
 }
 
-export interface ApiSuccessResponse<T = any> {
+export interface ApiSuccessResponse<T = unknow> {
   success: true
   data: T
   message?: string
 }
 
-export type ApiResponse<T = any> = ApiSuccessResponse<T> | ApiErrorResponse
+export type ApiResponse<T = unknow> = ApiSuccessResponse<T> | ApiErrorResponse
 
 // Error categories
 export enum ErrorCategory {
@@ -33,15 +33,15 @@ export enum ErrorCategory {
   SERVER = 'server',
   NOT_FOUND = 'not_found',
   PERMISSION = 'permission',
-  UNKNOWN = 'unknown'
+  UNKNOWN = 'unknown',
 }
 
 // Error severity
 export enum ErrorSeverity {
-  LOW = 'low',       // Minor issues, can continue
+  LOW = 'low', // Minor issues, can continue
   MEDIUM = 'medium', // Important but not critical
-  HIGH = 'high',     // Critical, blocks functionality
-  FATAL = 'fatal'    // App cannot continue
+  HIGH = 'high', // Critical, blocks functionality
+  FATAL = 'fatal', // App cannot continue
 }
 
 export interface ErrorLog {
@@ -53,5 +53,5 @@ export interface ErrorLog {
   url?: string
   userId?: string
   stack?: string
-  metadata?: Record<string, any>
+  metadata?: Record<string, unknow>
 }

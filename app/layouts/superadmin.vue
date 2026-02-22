@@ -7,32 +7,36 @@ const menuItems = [
   {
     label: 'Dashboard',
     icon: 'i-lucide-layout-dashboard',
-    to: '/superadmin'
+    to: '/superadmin',
   },
   {
     label: 'Permohonan Pendaftaran',
     icon: 'i-lucide-inbox',
     to: '/superadmin/permohonan',
-    badge: 5
+    badge: 5,
   },
   {
     label: 'Koperasi Aktif',
     icon: 'i-lucide-building-2',
-    to: '/superadmin/koperasi'
+    to: '/superadmin/koperasi',
   },
   {
     label: 'Monitoring',
     icon: 'i-lucide-activity',
-    to: '/superadmin/monitoring/activity-log'
+    to: '/superadmin/monitoring/activity-log',
   },
   {
     label: 'Master Data',
     icon: 'i-lucide-database',
     children: [
       { label: 'Wilayah', to: '/superadmin/master-data/wilayah', icon: 'i-lucide-map' },
-      { label: 'Email Template', to: '/superadmin/master-data/email-template', icon: 'i-lucide-mail' }
-    ]
-  }
+      {
+        label: 'Email Template',
+        to: '/superadmin/master-data/email-template',
+        icon: 'i-lucide-mail',
+      },
+    ],
+  },
 ]
 
 const handleLogout = async () => {
@@ -45,7 +49,9 @@ const handleLogout = async () => {
 <template>
   <div class="min-h-screen bg-gray-50">
     <!-- Sidebar Desktop -->
-    <aside class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col bg-gradient-to-b from-purple-900 to-purple-800">
+    <aside
+      class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col bg-gradient-to-b from-purple-900 to-purple-800"
+    >
       <div class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto">
         <!-- Logo -->
         <div class="flex items-center flex-shrink-0 px-4 mb-5">
@@ -89,7 +95,10 @@ const handleLogout = async () => {
             >
               <UIcon :name="item.icon" class="mr-3 flex-shrink-0 h-5 w-5" />
               {{ item.label }}
-              <span v-if="item.badge" class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-400 text-yellow-900">
+              <span
+                v-if="item.badge"
+                class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-400 text-yellow-900"
+              >
                 {{ item.badge }}
               </span>
             </NuxtLink>
@@ -100,7 +109,9 @@ const handleLogout = async () => {
         <div class="flex-shrink-0 flex border-t border-purple-700 p-4">
           <div class="flex items-center w-full">
             <div class="flex-shrink-0">
-              <div class="h-10 w-10 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold ring-2 ring-purple-400">
+              <div
+                class="h-10 w-10 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold ring-2 ring-purple-400"
+              >
                 {{ user?.name?.charAt(0) || 'S' }}
               </div>
             </div>
@@ -108,7 +119,10 @@ const handleLogout = async () => {
               <p class="text-sm font-medium text-white truncate">{{ user?.name }}</p>
               <p class="text-xs text-purple-200 truncate">{{ user?.email }}</p>
             </div>
-            <button @click="handleLogout" class="ml-2 text-purple-200 hover:text-white transition-colors">
+            <button
+              @click="handleLogout"
+              class="ml-2 text-purple-200 hover:text-white transition-colors"
+            >
               <UIcon name="i-lucide-log-out" class="h-5 w-5" />
             </button>
           </div>
@@ -173,7 +187,10 @@ const handleLogout = async () => {
             >
               <UIcon :name="item.icon" class="mr-3 flex-shrink-0 h-5 w-5" />
               {{ item.label }}
-              <span v-if="item.badge" class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-400 text-yellow-900">
+              <span
+                v-if="item.badge"
+                class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-400 text-yellow-900"
+              >
                 {{ item.badge }}
               </span>
             </NuxtLink>
@@ -215,13 +232,19 @@ const handleLogout = async () => {
             </div>
 
             <!-- Notifications -->
-            <button class="relative p-2 rounded-full text-gray-400 hover:text-gray-500 hover:bg-gray-100 transition-colors">
+            <button
+              class="relative p-2 rounded-full text-gray-400 hover:text-gray-500 hover:bg-gray-100 transition-colors"
+            >
               <UIcon name="i-lucide-bell" class="h-6 w-6" />
-              <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"></span>
+              <span
+                class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"
+              ></span>
             </button>
 
             <!-- Settings -->
-            <button class="p-2 rounded-full text-gray-400 hover:text-gray-500 hover:bg-gray-100 transition-colors">
+            <button
+              class="p-2 rounded-full text-gray-400 hover:text-gray-500 hover:bg-gray-100 transition-colors"
+            >
               <UIcon name="i-lucide-settings" class="h-6 w-6" />
             </button>
           </div>

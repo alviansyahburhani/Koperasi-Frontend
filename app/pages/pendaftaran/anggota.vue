@@ -1,13 +1,11 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'default'
+  layout: 'default',
 })
 
 useHead({
   title: 'Daftar Sebagai Anggota - Koperasi Merah Putih',
-  meta: [
-    { name: 'description', content: 'Daftar menjadi anggota koperasi pilihan Anda' }
-  ]
+  meta: [{ name: 'description', content: 'Daftar menjadi anggota koperasi pilihan Anda' }],
 })
 
 interface AnggotaForm {
@@ -36,7 +34,7 @@ interface AnggotaForm {
 
 const router = useRouter()
 const loading = ref(false)
-const loadingKoperasi = ref(false)
+const _loadingKoperasi = ref(false)
 
 // List koperasi (TODO: load from API)
 const koperasiList = ref([
@@ -66,20 +64,22 @@ const form = reactive<AnggotaForm>({
   email: '',
   noTeleponDarurat: '',
   namaKontakDarurat: '',
-  hubunganKontakDarurat: ''
+  hubunganKontakDarurat: '',
 })
 
 const selectedKoperasi = computed(() => {
-  return koperasiList.value.find(k => k.id === form.koperasiId)
+  return koperasiList.value.find((k) => k.id === form.koperasiId)
 })
 
 const handleSubmit = async () => {
   loading.value = true
-  
+
   // TODO: Implementasi API call
   setTimeout(() => {
     loading.value = false
-    alert(`Pendaftaran berhasil dikirim ke ${selectedKoperasi.value?.nama}!\n\nSilakan tunggu konfirmasi dari admin koperasi melalui email atau WhatsApp.`)
+    alert(
+      `Pendaftaran berhasil dikirim ke ${selectedKoperasi.value?.nama}!\n\nSilakan tunggu konfirmasi dari admin koperasi melalui email atau WhatsApp.`
+    )
     router.push('/')
   }, 1500)
 }
@@ -97,7 +97,6 @@ const handleNIKChange = () => {
 <template>
   <div class="min-h-screen bg-gray-50 py-12 px-4">
     <div class="max-w-4xl mx-auto">
-      
       <!-- Header -->
       <div class="text-center mb-8">
         <h1 class="text-3xl font-bold text-red-800 mb-3">Daftar Sebagai Anggota Koperasi</h1>
@@ -109,34 +108,34 @@ const handleNIKChange = () => {
       <!-- Form Card -->
       <div class="bg-white rounded-lg shadow-md p-8">
         <form @submit.prevent="handleSubmit" class="space-y-6">
-          
           <!-- Section 0: Pilih Koperasi -->
-          <div class="bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-lg p-5">
+          <div
+            class="bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-lg p-5"
+          >
             <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
               <UIcon name="i-heroicons-building-office-2" class="w-5 h-5 text-red-600" />
               Pilih Koperasi
             </h2>
-            
+
             <div>
               <label class="block text-xs text-gray-700 mb-2">
                 Koperasi Tujuan <span class="text-red-500">*</span>
               </label>
-              <select 
+              <select
                 v-model="form.koperasiId"
                 required
                 class="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
               >
                 <option value="">-- Pilih Koperasi --</option>
-                <option 
-                  v-for="koperasi in koperasiList" 
-                  :key="koperasi.id" 
-                  :value="koperasi.id"
-                >
+                <option v-for="koperasi in koperasiList" :key="koperasi.id" :value="koperasi.id">
                   {{ koperasi.nama }} - {{ koperasi.kota }}
                 </option>
               </select>
-              
-              <div v-if="selectedKoperasi" class="mt-3 p-3 bg-white border border-green-200 rounded-md">
+
+              <div
+                v-if="selectedKoperasi"
+                class="mt-3 p-3 bg-white border border-green-200 rounded-md"
+              >
                 <div class="flex items-center gap-2 text-sm text-green-700">
                   <UIcon name="i-heroicons-check-circle" class="w-5 h-5" />
                   <span class="font-medium">Koperasi dipilih: {{ selectedKoperasi.nama }}</span>
@@ -151,14 +150,14 @@ const handleNIKChange = () => {
               <UIcon name="i-heroicons-user" class="w-5 h-5 text-red-600" />
               Data Pribadi
             </h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <!-- NIK -->
               <div class="md:col-span-2">
                 <label class="block text-xs text-gray-700 mb-1">
                   NIK (Nomor Induk Kependudukan) <span class="text-red-500">*</span>
                 </label>
-                <input 
+                <input
                   v-model="form.nik"
                   type="text"
                   required
@@ -178,7 +177,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   Nama Lengkap <span class="text-red-500">*</span>
                 </label>
-                <input 
+                <input
                   v-model="form.namaLengkap"
                   type="text"
                   required
@@ -192,7 +191,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   Tempat Lahir <span class="text-red-500">*</span>
                 </label>
-                <input 
+                <input
                   v-model="form.tempatLahir"
                   type="text"
                   required
@@ -206,7 +205,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   Tanggal Lahir <span class="text-red-500">*</span>
                 </label>
-                <input 
+                <input
                   v-model="form.tanggalLahir"
                   type="date"
                   required
@@ -219,7 +218,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   Jenis Kelamin <span class="text-red-500">*</span>
                 </label>
-                <select 
+                <select
                   v-model="form.jenisKelamin"
                   required
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
@@ -235,7 +234,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   Agama <span class="text-red-500">*</span>
                 </label>
-                <select 
+                <select
                   v-model="form.agama"
                   required
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
@@ -255,7 +254,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   Status Perkawinan <span class="text-red-500">*</span>
                 </label>
-                <select 
+                <select
                   v-model="form.statusPerkawinan"
                   required
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
@@ -273,7 +272,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   Pekerjaan <span class="text-red-500">*</span>
                 </label>
-                <input 
+                <input
                   v-model="form.pekerjaan"
                   type="text"
                   required
@@ -287,7 +286,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   Pendidikan Terakhir <span class="text-red-500">*</span>
                 </label>
-                <select 
+                <select
                   v-model="form.pendidikan"
                   required
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
@@ -311,14 +310,14 @@ const handleNIKChange = () => {
               <UIcon name="i-heroicons-map-pin" class="w-5 h-5 text-red-600" />
               Alamat Domisili
             </h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <!-- Alamat Lengkap -->
               <div class="md:col-span-2">
                 <label class="block text-xs text-gray-700 mb-1">
                   Alamat Lengkap <span class="text-red-500">*</span>
                 </label>
-                <textarea 
+                <textarea
                   v-model="form.alamatLengkap"
                   rows="3"
                   required
@@ -332,7 +331,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   Provinsi <span class="text-red-500">*</span>
                 </label>
-                <select 
+                <select
                   v-model="form.provinsi"
                   required
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
@@ -350,7 +349,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   Kabupaten/Kota <span class="text-red-500">*</span>
                 </label>
-                <input 
+                <input
                   v-model="form.kabupaten"
                   type="text"
                   required
@@ -364,7 +363,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   Kecamatan <span class="text-red-500">*</span>
                 </label>
-                <input 
+                <input
                   v-model="form.kecamatan"
                   type="text"
                   required
@@ -378,7 +377,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   Kelurahan/Desa <span class="text-red-500">*</span>
                 </label>
-                <input 
+                <input
                   v-model="form.kelurahan"
                   type="text"
                   required
@@ -392,7 +391,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   Kode Pos <span class="text-red-500">*</span>
                 </label>
-                <input 
+                <input
                   v-model="form.kodePos"
                   type="text"
                   required
@@ -410,14 +409,14 @@ const handleNIKChange = () => {
               <UIcon name="i-heroicons-phone" class="w-5 h-5 text-red-600" />
               Informasi Kontak
             </h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <!-- No. Telepon -->
               <div>
                 <label class="block text-xs text-gray-700 mb-1">
                   No. Telepon/HP <span class="text-red-500">*</span>
                 </label>
-                <input 
+                <input
                   v-model="form.noTelepon"
                   type="tel"
                   required
@@ -431,7 +430,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   Email <span class="text-red-500">*</span>
                 </label>
-                <input 
+                <input
                   v-model="form.email"
                   type="email"
                   required
@@ -448,14 +447,14 @@ const handleNIKChange = () => {
               <UIcon name="i-heroicons-shield-exclamation" class="w-5 h-5 text-red-600" />
               Kontak Darurat
             </h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <!-- Nama Kontak Darurat -->
               <div>
                 <label class="block text-xs text-gray-700 mb-1">
                   Nama Kontak Darurat <span class="text-red-500">*</span>
                 </label>
-                <input 
+                <input
                   v-model="form.namaKontakDarurat"
                   type="text"
                   required
@@ -469,7 +468,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   Hubungan <span class="text-red-500">*</span>
                 </label>
-                <select 
+                <select
                   v-model="form.hubunganKontakDarurat"
                   required
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
@@ -488,7 +487,7 @@ const handleNIKChange = () => {
                 <label class="block text-xs text-gray-700 mb-1">
                   No. Telepon Darurat <span class="text-red-500">*</span>
                 </label>
-                <input 
+                <input
                   v-model="form.noTeleponDarurat"
                   type="tel"
                   required
@@ -502,7 +501,10 @@ const handleNIKChange = () => {
           <!-- Info -->
           <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
             <div class="flex items-start gap-3">
-              <UIcon name="i-heroicons-exclamation-triangle" class="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+              <UIcon
+                name="i-heroicons-exclamation-triangle"
+                class="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5"
+              />
               <div class="text-xs text-yellow-800">
                 <p class="font-semibold mb-1">Perhatian:</p>
                 <ul class="list-disc list-inside space-y-1 text-yellow-700">
@@ -517,13 +519,13 @@ const handleNIKChange = () => {
 
           <!-- Submit Button -->
           <div class="flex gap-3">
-            <NuxtLink 
+            <NuxtLink
               to="/"
               class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 text-sm font-semibold rounded-md hover:bg-gray-50 transition-colors text-center"
             >
               Batal
             </NuxtLink>
-            <button 
+            <button
               type="submit"
               :disabled="loading || !form.koperasiId"
               class="flex-1 px-6 py-3 bg-red-700 text-white text-sm font-semibold rounded-md hover:bg-red-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
@@ -535,7 +537,7 @@ const handleNIKChange = () => {
           <!-- Footer Link -->
           <div class="text-center pt-4">
             <p class="text-xs text-gray-600">
-              Sudah menjadi anggota? 
+              Sudah menjadi anggota?
               <NuxtLink to="/auth/login" class="text-red-700 hover:underline font-medium">
                 Login di sini
               </NuxtLink>

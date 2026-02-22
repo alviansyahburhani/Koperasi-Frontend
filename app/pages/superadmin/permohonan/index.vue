@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'admin'
+  layout: 'admin',
 })
 
 interface Application {
@@ -33,7 +33,7 @@ const applications = ref<Application[]>([
     picEmail: 'budi@kudsejahtera.com',
     picPhone: '081234567890',
     submittedAt: '2026-02-19 14:30',
-    status: 'PENDING'
+    status: 'PENDING',
   },
   {
     id: 2,
@@ -48,7 +48,7 @@ const applications = ref<Application[]>([
     picEmail: 'siti@majubersama.com',
     picPhone: '082345678901',
     submittedAt: '2026-02-18 09:15',
-    status: 'PENDING'
+    status: 'PENDING',
   },
   {
     id: 3,
@@ -63,8 +63,8 @@ const applications = ref<Application[]>([
     picEmail: 'ahmad@berkah.com',
     picPhone: '083456789012',
     submittedAt: '2026-02-17 16:45',
-    status: 'PENDING'
-  }
+    status: 'PENDING',
+  },
 ])
 
 const filterStatus = ref<'ALL' | 'PENDING' | 'APPROVED' | 'REJECTED'>('PENDING')
@@ -75,16 +75,17 @@ const filteredApplications = computed(() => {
 
   // Filter by status
   if (filterStatus.value !== 'ALL') {
-    filtered = filtered.filter(app => app.status === filterStatus.value)
+    filtered = filtered.filter((app) => app.status === filterStatus.value)
   }
 
   // Filter by search
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
-    filtered = filtered.filter(app => 
-      app.cooperativeName.toLowerCase().includes(query) ||
-      app.subdomain.toLowerCase().includes(query) ||
-      app.picName.toLowerCase().includes(query)
+    filtered = filtered.filter(
+      (app) =>
+        app.cooperativeName.toLowerCase().includes(query) ||
+        app.subdomain.toLowerCase().includes(query) ||
+        app.picName.toLowerCase().includes(query)
     )
   }
 
@@ -93,9 +94,9 @@ const filteredApplications = computed(() => {
 
 const statusCounts = computed(() => ({
   all: applications.value.length,
-  pending: applications.value.filter(a => a.status === 'PENDING').length,
-  approved: applications.value.filter(a => a.status === 'APPROVED').length,
-  rejected: applications.value.filter(a => a.status === 'REJECTED').length
+  pending: applications.value.filter((a) => a.status === 'PENDING').length,
+  approved: applications.value.filter((a) => a.status === 'APPROVED').length,
+  rejected: applications.value.filter((a) => a.status === 'REJECTED').length,
 }))
 
 const getStatusBadge = (status: string) => {
@@ -121,7 +122,9 @@ const getStatusBadge = (status: string) => {
         <p class="text-sm text-gray-600 mt-1">Kelola dan verifikasi pendaftaran koperasi baru</p>
       </div>
       <div class="mt-4 sm:mt-0">
-        <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+        <span
+          class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800"
+        >
           <UIcon name="i-lucide-alert-circle" class="w-4 h-4 mr-1.5" />
           {{ statusCounts.pending }} Menunggu Verifikasi
         </span>
@@ -138,7 +141,7 @@ const getStatusBadge = (status: string) => {
               filterStatus === 'ALL'
                 ? 'border-red-500 text-red-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
-              'whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm transition-colors'
+              'whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm transition-colors',
             ]"
           >
             Semua ({{ statusCounts.all }})
@@ -149,7 +152,7 @@ const getStatusBadge = (status: string) => {
               filterStatus === 'PENDING'
                 ? 'border-red-500 text-red-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
-              'whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm transition-colors'
+              'whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm transition-colors',
             ]"
           >
             Pending ({{ statusCounts.pending }})
@@ -160,7 +163,7 @@ const getStatusBadge = (status: string) => {
               filterStatus === 'APPROVED'
                 ? 'border-red-500 text-red-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
-              'whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm transition-colors'
+              'whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm transition-colors',
             ]"
           >
             Disetujui ({{ statusCounts.approved }})
@@ -171,7 +174,7 @@ const getStatusBadge = (status: string) => {
               filterStatus === 'REJECTED'
                 ? 'border-red-500 text-red-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
-              'whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm transition-colors'
+              'whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm transition-colors',
             ]"
           >
             Ditolak ({{ statusCounts.rejected }})
@@ -199,31 +202,55 @@ const getStatusBadge = (status: string) => {
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Koperasi
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Lokasi
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 PIC
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Tanggal
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Status
               </th>
-              <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                scope="col"
+                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Aksi
               </th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-            <tr v-for="app in filteredApplications" :key="app.id" class="hover:bg-gray-50 transition-colors">
+            <tr
+              v-for="app in filteredApplications"
+              :key="app.id"
+              class="hover:bg-gray-50 transition-colors"
+            >
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center">
-                  <div class="flex-shrink-0 h-10 w-10 bg-red-100 rounded-lg flex items-center justify-center">
+                  <div
+                    class="flex-shrink-0 h-10 w-10 bg-red-100 rounded-lg flex items-center justify-center"
+                  >
                     <UIcon name="i-lucide-building-2" class="h-5 w-5 text-red-600" />
                   </div>
                   <div class="ml-4">
@@ -246,7 +273,12 @@ const getStatusBadge = (status: string) => {
                 {{ app.submittedAt }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <span :class="['inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium', getStatusBadge(app.status)]">
+                <span
+                  :class="[
+                    'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
+                    getStatusBadge(app.status),
+                  ]"
+                >
                   {{ app.status }}
                 </span>
               </td>
@@ -268,7 +300,11 @@ const getStatusBadge = (status: string) => {
           <UIcon name="i-lucide-inbox" class="mx-auto h-12 w-12 text-gray-400" />
           <h3 class="mt-2 text-sm font-medium text-gray-900">Tidak ada permohonan</h3>
           <p class="mt-1 text-sm text-gray-500">
-            {{ searchQuery ? 'Tidak ditemukan hasil pencarian' : 'Belum ada permohonan dengan status ini' }}
+            {{
+              searchQuery
+                ? 'Tidak ditemukan hasil pencarian'
+                : 'Belum ada permohonan dengan status ini'
+            }}
           </p>
         </div>
       </div>

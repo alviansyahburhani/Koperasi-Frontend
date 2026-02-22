@@ -3,27 +3,32 @@ const { user, role, logout } = useAuth()
 const { menuItems } = useMenu()
 
 const showMobileSidebar = ref(false)
-const showUserMenu = ref(false)
+const _showUserMenu = ref(false)
 
 const handleLogout = async () => {
   if (confirm('Apakah Anda yakin ingin keluar?')) {
     await logout()
   }
 }
+import { RoleConfig } from '~/utils/roles'
+const roleConfig = computed(() => (role.value ? RoleConfig[role.value] : null))
 
 // Get role config for UI
-import { RoleConfig } from '~/utils/roles'
-const roleConfig = computed(() => role.value ? RoleConfig[role.value] : null)
+
 </script>
 
 <template>
   <div class="min-h-screen bg-gray-50">
     <!-- Sidebar Desktop -->
-    <aside class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col bg-white border-r border-gray-200">
+    <aside
+      class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col bg-white border-r border-gray-200"
+    >
       <div class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto">
         <!-- Logo -->
         <div class="flex items-center flex-shrink-0 px-4 mb-5">
-          <div class="w-10 h-10 bg-gradient-to-br from-red-600 to-red-700 rounded-lg flex items-center justify-center">
+          <div
+            class="w-10 h-10 bg-gradient-to-br from-red-600 to-red-700 rounded-lg flex items-center justify-center"
+          >
             <span class="text-white font-bold text-lg">KMP</span>
           </div>
           <div class="ml-3">
@@ -63,7 +68,10 @@ const roleConfig = computed(() => role.value ? RoleConfig[role.value] : null)
             >
               <UIcon :name="item.icon" class="mr-3 flex-shrink-0 h-5 w-5" />
               {{ item.label }}
-              <span v-if="item.badge" class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+              <span
+                v-if="item.badge"
+                class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"
+              >
                 {{ item.badge }}
               </span>
             </NuxtLink>
@@ -74,7 +82,9 @@ const roleConfig = computed(() => role.value ? RoleConfig[role.value] : null)
         <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
           <div class="flex items-center w-full">
             <div class="flex-shrink-0">
-              <div class="h-10 w-10 rounded-full bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center text-white font-bold">
+              <div
+                class="h-10 w-10 rounded-full bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center text-white font-bold"
+              >
                 {{ user?.name?.charAt(0) || 'U' }}
               </div>
             </div>
@@ -82,7 +92,10 @@ const roleConfig = computed(() => role.value ? RoleConfig[role.value] : null)
               <p class="text-sm font-medium text-gray-900 truncate">{{ user?.name }}</p>
               <p class="text-xs text-gray-500 truncate">{{ user?.email }}</p>
             </div>
-            <button @click="handleLogout" class="ml-2 text-gray-400 hover:text-red-600 transition-colors">
+            <button
+              @click="handleLogout"
+              class="ml-2 text-gray-400 hover:text-red-600 transition-colors"
+            >
               <UIcon name="i-lucide-log-out" class="h-5 w-5" />
             </button>
           </div>
@@ -106,7 +119,9 @@ const roleConfig = computed(() => role.value ? RoleConfig[role.value] : null)
       <div class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto">
         <div class="flex items-center justify-between px-4 mb-5">
           <div class="flex items-center">
-            <div class="w-10 h-10 bg-gradient-to-br from-red-600 to-red-700 rounded-lg flex items-center justify-center">
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-red-600 to-red-700 rounded-lg flex items-center justify-center"
+            >
               <span class="text-white font-bold text-lg">KMP</span>
             </div>
             <div class="ml-3">
@@ -149,7 +164,10 @@ const roleConfig = computed(() => role.value ? RoleConfig[role.value] : null)
             >
               <UIcon :name="item.icon" class="mr-3 flex-shrink-0 h-5 w-5" />
               {{ item.label }}
-              <span v-if="item.badge" class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+              <span
+                v-if="item.badge"
+                class="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"
+              >
                 {{ item.badge }}
               </span>
             </NuxtLink>
@@ -177,14 +195,20 @@ const roleConfig = computed(() => role.value ? RoleConfig[role.value] : null)
 
           <div class="ml-4 flex items-center gap-3">
             <!-- Notifications -->
-            <button class="relative p-2 rounded-full text-gray-400 hover:text-gray-500 hover:bg-gray-100 transition-colors">
+            <button
+              class="relative p-2 rounded-full text-gray-400 hover:text-gray-500 hover:bg-gray-100 transition-colors"
+            >
               <UIcon name="i-lucide-bell" class="h-6 w-6" />
-              <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"></span>
+              <span
+                class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"
+              ></span>
             </button>
 
             <!-- User Avatar (Desktop) -->
             <div class="hidden sm:block">
-              <div class="h-8 w-8 rounded-full bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center text-white text-sm font-bold">
+              <div
+                class="h-8 w-8 rounded-full bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center text-white text-sm font-bold"
+              >
                 {{ user?.name?.charAt(0) || 'U' }}
               </div>
             </div>

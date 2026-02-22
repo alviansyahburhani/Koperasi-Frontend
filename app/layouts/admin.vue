@@ -13,11 +13,11 @@
         <h1 class="font-bold text-red-600">Admin Dashboard</h1>
       </div>
     </header>
-    
+
     <main class="flex-grow">
       <slot />
     </main>
-    
+
     <!-- Reuse same footer! -->
     <AppFooter />
   </div>

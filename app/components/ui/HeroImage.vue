@@ -16,7 +16,7 @@ interface Props {
   showDots?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   showDots: true,
 })
 </script>

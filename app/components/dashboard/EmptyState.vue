@@ -7,7 +7,7 @@ interface Props {
   actionTo?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   icon: 'i-lucide-inbox',
 })
 

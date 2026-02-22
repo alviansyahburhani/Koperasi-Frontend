@@ -6,7 +6,7 @@ export interface TenantRegistrationForm {
   cooperativeName: string
   subdomain: string
   skAhuKoperasi: string
-  
+
   // Step 2: Alamat
   province: string
   city: string
@@ -14,7 +14,7 @@ export interface TenantRegistrationForm {
   village: string
   alamatLengkap: string
   petaLokasi: string
-  
+
   // Step 3: Data PIC
   picFullName: string
   picNik: string
@@ -24,18 +24,18 @@ export interface TenantRegistrationForm {
   picOccupation: string
   picAddress: string
   picPhoneNumber: string
-  
+
   // Step 4: Akun Login
   email: string
   password: string
   confirmPassword: string
-  
+
   // Step 5: Dokumen
   dokPengesahanPendirianUrl: string
   dokDaftarUmumUrl: string
   dokAkteNotarisUrl: string
   dokNpwpKoperasiUrl: string
-  
+
   // Step 6: Subscription
   subscriptionPlan: SubscriptionPlan
 }

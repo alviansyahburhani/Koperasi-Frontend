@@ -1,18 +1,22 @@
 import { apiService } from './api.service'
-import type { TenantRegistrationForm, RegistrationResponse, DocumentUploadResponse } from '~/types/registration'
+import type {
+  TenantRegistrationForm,
+  RegistrationResponse,
+  DocumentUploadResponse,
+} from '~/types/registration'
 
 export class TenantRegistrationService {
   /**
-   * Check if subdomain is available
+   * Check if _subdomain is available
    */
-  async checkSubdomainAvailability(subdomain: string): Promise<{ available: boolean }> {
+  async checkSubdomainAvailability(_subdomain: string): Promise<{ available: boolean }> {
     try {
       // Backend endpoint untuk check subdomain (jika ada)
       // Untuk sekarang, kita validasi di frontend dulu
       // TODO: Add backend endpoint GET /api/public/check-subdomain/:subdomain
       return { available: true }
     } catch (error) {
-      console.error('[TenantRegistration] Check subdomain error:', error)
+      console.error('[TenantRegistration] Check _subdomain error:', error)
       return { available: false }
     }
   }
@@ -48,14 +52,16 @@ export class TenantRegistrationService {
   /**
    * Submit registration
    */
-  async submitRegistration(data: Omit<TenantRegistrationForm, 'confirmPassword'>): Promise<RegistrationResponse> {
+  async submitRegistration(
+    data: Omit<TenantRegistrationForm, 'confirmPassword'>
+  ): Promise<RegistrationResponse> {
     // Transform data to match backend DTO
     const payload = {
       // Informasi Koperasi
       cooperativeName: data.cooperativeName,
-      subdomain: data.subdomain.toLowerCase().trim(),
+      _subdomain: data.subdomain.toLowerCase().trim(),
       skAhuKoperasi: data.skAhuKoperasi || undefined,
-      
+
       // Alamat
       province: data.province,
       city: data.city,
@@ -63,7 +69,7 @@ export class TenantRegistrationService {
       village: data.village,
       alamatLengkap: data.alamatLengkap,
       petaLokasi: data.petaLokasi || undefined,
-      
+
       // Data PIC
       picFullName: data.picFullName,
       picNik: data.picNik,
@@ -73,17 +79,17 @@ export class TenantRegistrationService {
       picOccupation: data.picOccupation,
       picAddress: data.picAddress,
       picPhoneNumber: data.picPhoneNumber,
-      
+
       // Akun
       email: data.email,
       password: data.password,
-      
+
       // Dokumen
       dokPengesahanPendirianUrl: data.dokPengesahanPendirianUrl || undefined,
       dokDaftarUmumUrl: data.dokDaftarUmumUrl || undefined,
       dokAkteNotarisUrl: data.dokAkteNotarisUrl || undefined,
       dokNpwpKoperasiUrl: data.dokNpwpKoperasiUrl || undefined,
-      
+
       // Subscription
       subscriptionPlan: data.subscriptionPlan,
     }

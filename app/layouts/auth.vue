@@ -1,14 +1,12 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'auth',
-  middleware: 'guest'
+  middleware: 'guest',
 })
 
 useHead({
   title: 'Login - Koperasi Merah Putih',
-  meta: [
-    { name: 'description', content: 'Login ke platform Koperasi Merah Putih' }
-  ]
+  meta: [{ name: 'description', content: 'Login ke platform Koperasi Merah Putih' }],
 })
 
 const { login } = useAuth()
@@ -33,7 +31,7 @@ async function handleLogin() {
     const result = await login({
       email: email.value,
       password: password.value,
-      remember: remember.value
+      remember: remember.value,
     })
 
     if (result.success && result.user) {
@@ -41,7 +39,7 @@ async function handleLogin() {
       const { dashboardRoute } = RoleConfig[result.user.role]
       await router.push(dashboardRoute)
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     errorMessage.value = error.message || 'Terjadi kesalahan saat login'
   } finally {
     isLoading.value = false
@@ -49,8 +47,9 @@ async function handleLogin() {
 }
 
 // Import RoleConfig for redirect
-import { RoleConfig } from '~/utils/roles'
+
 </script>
+import { RoleConfig } from '~/utils/roles'
 
 <template>
   <div class="bg-white shadow-xl rounded-2xl p-8">
@@ -137,7 +136,10 @@ import { RoleConfig } from '~/utils/roles'
           />
           <span class="ml-2 text-sm text-gray-700">Ingat saya</span>
         </label>
-        <NuxtLink to="/auth/lupa-password" class="text-sm text-red-600 hover:text-red-700 font-medium">
+        <NuxtLink
+          to="/auth/lupa-password"
+          class="text-sm text-red-600 hover:text-red-700 font-medium"
+        >
           Lupa password?
         </NuxtLink>
       </div>

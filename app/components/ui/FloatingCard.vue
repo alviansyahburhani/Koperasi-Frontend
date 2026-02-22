@@ -21,7 +21,7 @@ interface Props {
   delay?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   iconColor: 'green',
   position: 'bottom-left',
   delay: false,

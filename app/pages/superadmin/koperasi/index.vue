@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'admin'
+  layout: 'admin',
 })
 
 interface Cooperative {
@@ -35,7 +35,7 @@ const cooperatives = ref<Cooperative[]>([
     joinedAt: '2025-08-15',
     lastActive: '2026-02-20 09:30',
     status: 'ACTIVE',
-    subscriptionExpiry: '2027-08-15'
+    subscriptionExpiry: '2027-08-15',
   },
   {
     id: 2,
@@ -51,7 +51,7 @@ const cooperatives = ref<Cooperative[]>([
     joinedAt: '2025-09-20',
     lastActive: '2026-02-19 15:22',
     status: 'ACTIVE',
-    subscriptionExpiry: '2027-09-20'
+    subscriptionExpiry: '2027-09-20',
   },
   {
     id: 3,
@@ -67,8 +67,8 @@ const cooperatives = ref<Cooperative[]>([
     joinedAt: '2025-10-05',
     lastActive: '2026-02-15 11:05',
     status: 'SUSPENDED',
-    subscriptionExpiry: '2026-02-10'
-  }
+    subscriptionExpiry: '2026-02-10',
+  },
 ])
 
 const searchQuery = ref('')
@@ -81,23 +81,24 @@ const filteredCooperatives = computed(() => {
 
   // Filter by status
   if (filterStatus.value !== 'ALL') {
-    filtered = filtered.filter(coop => coop.status === filterStatus.value)
+    filtered = filtered.filter((coop) => coop.status === filterStatus.value)
   }
 
   // Filter by search
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
-    filtered = filtered.filter(coop =>
-      coop.name.toLowerCase().includes(query) ||
-      coop.subdomain.toLowerCase().includes(query) ||
-      coop.city.toLowerCase().includes(query)
+    filtered = filtered.filter(
+      (coop) =>
+        coop.name.toLowerCase().includes(query) ||
+        coop.subdomain.toLowerCase().includes(query) ||
+        coop.city.toLowerCase().includes(query)
     )
   }
 
   // Sort
   filtered.sort((a, b) => {
     let comparison = 0
-    
+
     switch (sortBy.value) {
       case 'name':
         comparison = a.name.localeCompare(b.name)
@@ -118,12 +119,12 @@ const filteredCooperatives = computed(() => {
 
 const statusCounts = computed(() => ({
   all: cooperatives.value.length,
-  active: cooperatives.value.filter(c => c.status === 'ACTIVE').length,
-  suspended: cooperatives.value.filter(c => c.status === 'SUSPENDED').length,
-  inactive: cooperatives.value.filter(c => c.status === 'INACTIVE').length
+  active: cooperatives.value.filter((c) => c.status === 'ACTIVE').length,
+  suspended: cooperatives.value.filter((c) => c.status === 'SUSPENDED').length,
+  inactive: cooperatives.value.filter((c) => c.status === 'INACTIVE').length,
 }))
 
-const totalMembers = computed(() => 
+const totalMembers = computed(() =>
   cooperatives.value.reduce((sum, coop) => sum + coop.totalMembers, 0)
 )
 
@@ -144,14 +145,14 @@ const formatDate = (date: string) => {
   return new Date(date).toLocaleDateString('id-ID', {
     year: 'numeric',
     month: 'short',
-    day: 'numeric'
+    day: 'numeric',
   })
 }
 
 const getLastActiveColor = (lastActive: string) => {
   const diff = Date.now() - new Date(lastActive).getTime()
   const days = diff / (1000 * 60 * 60 * 24)
-  
+
   if (days < 1) return 'text-green-600'
   if (days < 7) return 'text-yellow-600'
   return 'text-red-600'
@@ -281,7 +282,10 @@ const exportData = () => {
               @click="sortOrder = sortOrder === 'asc' ? 'desc' : 'asc'"
               class="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
             >
-              <UIcon :name="sortOrder === 'asc' ? 'i-lucide-arrow-up' : 'i-lucide-arrow-down'" class="w-4 h-4 text-gray-600" />
+              <UIcon
+                :name="sortOrder === 'asc' ? 'i-lucide-arrow-up' : 'i-lucide-arrow-down'"
+                class="w-4 h-4 text-gray-600"
+              />
             </button>
           </div>
         </div>
@@ -292,40 +296,69 @@ const exportData = () => {
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Koperasi
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Lokasi
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 PIC
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Anggota
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Aktivitas Terakhir
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Status
               </th>
-              <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th
+                scope="col"
+                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Aksi
               </th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-            <tr v-for="coop in filteredCooperatives" :key="coop.id" class="hover:bg-gray-50 transition-colors">
+            <tr
+              v-for="coop in filteredCooperatives"
+              :key="coop.id"
+              class="hover:bg-gray-50 transition-colors"
+            >
               <td class="px-6 py-4">
                 <div class="flex items-center">
-                  <div class="flex-shrink-0 h-10 w-10 bg-red-100 rounded-lg flex items-center justify-center">
+                  <div
+                    class="flex-shrink-0 h-10 w-10 bg-red-100 rounded-lg flex items-center justify-center"
+                  >
                     <UIcon name="i-lucide-building-2" class="h-5 w-5 text-red-600" />
                   </div>
                   <div class="ml-4">
                     <div class="text-sm font-medium text-gray-900">{{ coop.name }}</div>
                     <div class="text-xs text-gray-500">{{ coop.subdomain }}.koperasi.com</div>
-                    <div class="text-xs text-gray-400 mt-0.5">Gabung {{ formatDate(coop.joinedAt) }}</div>
+                    <div class="text-xs text-gray-400 mt-0.5">
+                      Gabung {{ formatDate(coop.joinedAt) }}
+                    </div>
                   </div>
                 </div>
               </td>
@@ -347,7 +380,12 @@ const exportData = () => {
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <span :class="['inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium', getStatusBadge(coop.status).class]">
+                <span
+                  :class="[
+                    'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium',
+                    getStatusBadge(coop.status).class,
+                  ]"
+                >
                   <UIcon :name="getStatusBadge(coop.status).icon" class="w-3 h-3" />
                   {{ getStatusBadge(coop.status).label }}
                 </span>
