@@ -3,7 +3,7 @@
  * Wrapper untuk API calls dengan error handling
  */
 
-import type { ApiResponse } from '../types'
+import type { ApiResponse } from '~/types'
 
 interface UseApiOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
@@ -49,10 +49,11 @@ export const useApi = () => {
       // Handle error
       console.error('API Error:', error)
 
+      const err = error as { message?: string; data?: { errors?: unknown } }
       return {
         success: false,
-        message: error.message || 'Terjadi kesalahan pada server',
-        errors: error.data?.errors,
+        message: err.message || 'Terjadi kesalahan pada server',
+        errors: err.data?.errors,
       }
     }
   }

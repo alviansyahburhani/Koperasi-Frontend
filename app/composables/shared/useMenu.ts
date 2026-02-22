@@ -1,4 +1,4 @@
-import type { MenuItem } from '~/types'
+import type { MenuItem, Permission } from '~/types'
 import { getMenuByRole } from '~/utils/menus'
 
 export const useMenu = () => {

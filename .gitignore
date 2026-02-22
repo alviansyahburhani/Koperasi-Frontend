@@ -8,10 +8,15 @@
 # KECUALI .env.example (boleh commit)
 !.env.example
 
+# Node modules
+node_modules/
+
 # Nuxt build artifacts
-.nuxt/dev
-.nuxt/dist
-.nuxt/manifest/latest.json
-.nuxt/manifest/meta/dev.json
-.nuxt/nitro.json
-.nuxt/nuxt-fonts-global.css
+.nuxt/
+.output/
+
+# TypeScript build info
+tsconfig.tsbuildinfo
+
+# Build artifacts
+dist/
