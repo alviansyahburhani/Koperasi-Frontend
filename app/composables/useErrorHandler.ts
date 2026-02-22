@@ -98,14 +98,14 @@ export const useErrorHandler = () => {
       [ErrorSeverity.LOW]: 'orange',
       [ErrorSeverity.MEDIUM]: 'red',
       [ErrorSeverity.HIGH]: 'red',
-      [ErrorSeverity.FATAL]: 'red'
+      [ErrorSeverity.FATAL]: 'red',
     }
 
     const icons: Record<ErrorSeverity, string> = {
       [ErrorSeverity.LOW]: 'i-lucide-alert-circle',
       [ErrorSeverity.MEDIUM]: 'i-lucide-alert-triangle',
       [ErrorSeverity.HIGH]: 'i-lucide-octagon-alert',
-      [ErrorSeverity.FATAL]: 'i-lucide-x-circle'
+      [ErrorSeverity.FATAL]: 'i-lucide-x-circle',
     }
 
     toast.add({
@@ -119,16 +119,15 @@ export const useErrorHandler = () => {
   /**
    * Handle error dengan complete flow
    */
-  const handleError = (error: any, options: {
-    showToast?: boolean
-    redirect?: string
-    customMessage?: string
-  } = {}) => {
-    const {
-      showToast: shouldShowToast = true,
-      redirect,
-      customMessage
-    } = options
+  const handleError = (
+    error: any,
+    options: {
+      showToast?: boolean
+      redirect?: string
+      customMessage?: string
+    } = {}
+  ) => {
+    const { showToast: shouldShowToast = true, redirect, customMessage } = options
 
     // Extract error info
     const statusCode = error.statusCode || error.response?.status || 500
@@ -151,8 +150,8 @@ export const useErrorHandler = () => {
       stack,
       metadata: {
         response: error.response?.data,
-        request: error.config
-      }
+        request: error.config,
+      },
     }
 
     logError(errorLog)
@@ -167,7 +166,7 @@ export const useErrorHandler = () => {
       // Clear auth and redirect to login
       const authStore = useAuthStore()
       authStore.logout()
-      
+
       if (!redirect) {
         navigateTo('/auth/login')
       }
@@ -182,7 +181,7 @@ export const useErrorHandler = () => {
       statusCode,
       message,
       category,
-      severity
+      severity,
     }
   }
 
@@ -192,6 +191,6 @@ export const useErrorHandler = () => {
     showErrorToast,
     getUserFriendlyMessage,
     getErrorCategory,
-    getErrorSeverity
+    getErrorSeverity,
   }
 }
