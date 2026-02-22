@@ -58,7 +58,7 @@ const produkList = [
   <section class="py-24 bg-white relative overflow-hidden">
     <div
       class="absolute top-[20%] left-[-15%] w-[40rem] h-[40rem] bg-rose-50/60 rounded-full blur-[100px] pointer-events-none"
-    ></div>
+    />
 
     <div class="container mx-auto px-4 lg:max-w-7xl relative z-10">
       <div class="text-center mb-12 max-w-3xl mx-auto">
@@ -81,13 +81,13 @@ const produkList = [
         <button
           v-for="kategori in categories"
           :key="kategori"
-          @click="activeCategory = kategori"
           :class="[
             'px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 shadow-sm active:scale-95',
             activeCategory === kategori
               ? 'bg-red-600 text-white shadow-red-600/30'
               : 'bg-white border border-slate-200 text-slate-600 hover:border-red-300 hover:text-red-600 hover:bg-red-50',
           ]"
+          @click="activeCategory = kategori"
         >
           {{ kategori }}
         </button>
@@ -104,7 +104,7 @@ const produkList = [
               :src="produk.image"
               :alt="produk.name"
               class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            />
+            >
 
             <div v-if="produk.badge" class="absolute top-4 left-4 z-20">
               <span

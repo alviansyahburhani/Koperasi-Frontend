@@ -14,7 +14,7 @@ const isTenant = true
     <div v-if="isTenant">
       <div
         class="w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent my-8"
-      ></div>
+      />
 
       <TenantBerita />
       <TenantProduk />

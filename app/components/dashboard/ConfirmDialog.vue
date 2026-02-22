@@ -55,7 +55,7 @@ const buttonColor = computed(() => {
       <div
         class="fixed inset-0 transition-opacity bg-gray-900 bg-opacity-75"
         @click="emit('cancel')"
-      ></div>
+      />
 
       <div
         class="relative inline-block w-full max-w-lg px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:p-6"
@@ -74,19 +74,19 @@ const buttonColor = computed(() => {
 
         <div class="flex items-center gap-3 mt-6">
           <button
-            @click="emit('cancel')"
             :disabled="loading"
             class="flex-1 px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            @click="emit('cancel')"
           >
             {{ cancelLabel }}
           </button>
           <button
-            @click="emit('confirm')"
             :disabled="loading"
             :class="[
               'flex-1 px-4 py-2.5 text-sm font-medium text-white rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed',
               buttonColor,
             ]"
+            @click="emit('confirm')"
           >
             {{ loading ? 'Memproses...' : confirmLabel }}
           </button>

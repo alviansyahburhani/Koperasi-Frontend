@@ -40,7 +40,7 @@ withDefaults(defineProps<Props>(), {
         :alt="alt"
         class="rounded-xl w-full h-auto object-cover border border-slate-100"
         loading="lazy"
-      />
+      >
     </div>
 
     <!-- Floating cards slot -->

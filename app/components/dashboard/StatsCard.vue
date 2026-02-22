@@ -11,6 +11,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   color: 'blue',
+  change: undefined,
   changeType: 'neutral',
   loading: false,
 })
@@ -47,7 +48,7 @@ const changeColorClass = computed(() => {
           <dl>
             <dt class="text-sm font-medium text-gray-500 truncate">{{ label }}</dt>
             <dd class="flex items-baseline">
-              <div v-if="loading" class="h-8 w-24 bg-gray-200 animate-pulse rounded"></div>
+              <div v-if="loading" class="h-8 w-24 bg-gray-200 animate-pulse rounded"/>
               <div v-else class="text-2xl font-semibold text-gray-900">{{ value }}</div>
               <div
                 v-if="change && !loading"

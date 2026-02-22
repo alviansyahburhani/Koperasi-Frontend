@@ -1,0 +1,1 @@
+export { default } from "file:///home/runner/work/Koperasi-Frontend/Koperasi-Frontend/node_modules/@nuxt/vite-builder/dist/vite-node-entry.mjs"

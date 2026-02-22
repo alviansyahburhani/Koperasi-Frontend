@@ -9,6 +9,9 @@ interface Props {
 
 withDefaults(defineProps<Props>(), {
   icon: 'i-lucide-inbox',
+  description: undefined,
+  actionLabel: undefined,
+  actionTo: undefined,
 })
 
 const emit = defineEmits<{
@@ -33,8 +36,8 @@ const emit = defineEmits<{
       </NuxtLink>
       <button
         v-else
-        @click="emit('action')"
         class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none"
+        @click="emit('action')"
       >
         <UIcon name="i-lucide-plus" class="w-4 h-4 mr-2" />
         {{ actionLabel }}

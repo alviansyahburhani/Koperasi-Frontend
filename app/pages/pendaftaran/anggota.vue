@@ -107,7 +107,7 @@ const handleNIKChange = () => {
 
       <!-- Form Card -->
       <div class="bg-white rounded-lg shadow-md p-8">
-        <form @submit.prevent="handleSubmit" class="space-y-6">
+        <form class="space-y-6" @submit.prevent="handleSubmit">
           <!-- Section 0: Pilih Koperasi -->
           <div
             class="bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-lg p-5"
@@ -163,9 +163,9 @@ const handleNIKChange = () => {
                   required
                   maxlength="16"
                   placeholder="16 digit sesuai KTP"
-                  @input="handleNIKChange"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
+                  @input="handleNIKChange"
+                >
                 <p class="text-xs text-gray-500 mt-1">
                   <UIcon name="i-heroicons-information-circle" class="w-3 h-3 inline" />
                   NIK harus 16 digit sesuai KTP
@@ -183,7 +183,7 @@ const handleNIKChange = () => {
                   required
                   placeholder="Nama lengkap sesuai KTP"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
+                >
               </div>
 
               <!-- Tempat Lahir -->
@@ -197,7 +197,7 @@ const handleNIKChange = () => {
                   required
                   placeholder="Kota/Kabupaten"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
+                >
               </div>
 
               <!-- Tanggal Lahir -->
@@ -210,7 +210,7 @@ const handleNIKChange = () => {
                   type="date"
                   required
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
+                >
               </div>
 
               <!-- Jenis Kelamin -->
@@ -278,7 +278,7 @@ const handleNIKChange = () => {
                   required
                   placeholder="Contoh: Karyawan Swasta"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
+                >
               </div>
 
               <!-- Pendidikan -->
@@ -323,7 +323,7 @@ const handleNIKChange = () => {
                   required
                   placeholder="Jalan, nomor rumah, RT/RW, dll"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                ></textarea>
+                />
               </div>
 
               <!-- Provinsi -->
@@ -355,7 +355,7 @@ const handleNIKChange = () => {
                   required
                   placeholder="Contoh: Bandung"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
+                >
               </div>
 
               <!-- Kecamatan -->
@@ -369,7 +369,7 @@ const handleNIKChange = () => {
                   required
                   placeholder="Contoh: Coblong"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
+                >
               </div>
 
               <!-- Kelurahan/Desa -->
@@ -383,7 +383,7 @@ const handleNIKChange = () => {
                   required
                   placeholder="Contoh: Lebak Gede"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
+                >
               </div>
 
               <!-- Kode Pos -->
@@ -398,7 +398,7 @@ const handleNIKChange = () => {
                   maxlength="5"
                   placeholder="40132"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
+                >
               </div>
             </div>
           </div>
@@ -422,7 +422,7 @@ const handleNIKChange = () => {
                   required
                   placeholder="08123456789"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
+                >
               </div>
 
               <!-- Email -->
@@ -436,7 +436,7 @@ const handleNIKChange = () => {
                   required
                   placeholder="email@example.com"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
+                >
               </div>
             </div>
           </div>
@@ -460,7 +460,7 @@ const handleNIKChange = () => {
                   required
                   placeholder="Nama keluarga/kerabat terdekat"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
+                >
               </div>
 
               <!-- Hubungan -->
@@ -493,7 +493,7 @@ const handleNIKChange = () => {
                   required
                   placeholder="08123456789"
                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                />
+                >
               </div>
             </div>
           </div>

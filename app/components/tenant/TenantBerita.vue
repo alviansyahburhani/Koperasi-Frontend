@@ -32,10 +32,10 @@ const beritaList = [
   <section class="py-24 bg-slate-50 relative overflow-hidden">
     <div
       class="absolute top-0 right-[-10%] w-[40rem] h-[40rem] bg-red-100/40 rounded-full blur-[100px] pointer-events-none"
-    ></div>
+    />
     <div
       class="absolute bottom-0 left-[-10%] w-[30rem] h-[30rem] bg-rose-50/50 rounded-full blur-[100px] pointer-events-none"
-    ></div>
+    />
 
     <div class="container mx-auto px-4 lg:max-w-7xl relative z-10">
       <div class="flex flex-col sm:flex-row justify-between items-end mb-12 gap-6">
@@ -74,10 +74,10 @@ const beritaList = [
               :src="berita.image"
               :alt="berita.title"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            />
+            >
             <div
               class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            ></div>
+            />
           </div>
 
           <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10 bg-white">
@@ -97,7 +97,7 @@ const beritaList = [
               {{ berita.excerpt }}
             </p>
 
-            <div class="w-full h-px bg-slate-100 mt-auto mb-4"></div>
+            <div class="w-full h-px bg-slate-100 mt-auto mb-4"/>
             <div
               class="flex items-center text-sm font-semibold text-slate-700 group-hover:text-red-600 transition-colors"
             >

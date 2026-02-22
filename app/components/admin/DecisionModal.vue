@@ -59,7 +59,7 @@ watch(
       <div
         class="fixed inset-0 transition-opacity bg-gray-900 bg-opacity-75"
         @click="handleClose"
-      ></div>
+      />
 
       <!-- Modal -->
       <div
@@ -92,7 +92,7 @@ watch(
         </div>
 
         <!-- Form -->
-        <form @submit.prevent="handleSubmit" class="space-y-4">
+        <form class="space-y-4" @submit.prevent="handleSubmit">
           <!-- Note for Approval (Optional) -->
           <div v-if="decision === 'approve'">
             <label class="block text-sm font-medium text-gray-700 mb-2"> Catatan (Opsional) </label>
@@ -101,7 +101,7 @@ watch(
               rows="3"
               placeholder="Tambahkan catatan jika diperlukan..."
               class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
-            ></textarea>
+            />
           </div>
 
           <!-- Note for Rejection (Required) -->
@@ -115,7 +115,7 @@ watch(
               required
               placeholder="Jelaskan alasan penolakan permohonan ini..."
               class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            ></textarea>
+            />
             <p class="text-xs text-gray-500 mt-1">Alasan ini akan dikirimkan ke email pendaftar</p>
           </div>
 
@@ -123,9 +123,9 @@ watch(
           <div class="flex items-center gap-3 mt-6">
             <button
               type="button"
-              @click="handleClose"
               :disabled="loading"
               class="flex-1 px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              @click="handleClose"
             >
               Batal
             </button>
@@ -143,7 +143,7 @@ watch(
                 {{ decision === 'approve' ? 'Setujui' : 'Tolak' }}
               </span>
               <span v-else class="inline-flex items-center gap-2">
-                <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"/>
                 Memproses...
               </span>
             </button>

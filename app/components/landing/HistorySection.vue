@@ -2,7 +2,7 @@
   <section class="py-24 bg-white relative overflow-hidden">
     <div
       class="absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-[800px] h-[800px] bg-slate-50 rounded-full blur-3xl opacity-50 pointer-events-none"
-    ></div>
+    />
 
     <div class="container mx-auto px-4 lg:max-w-7xl relative z-10">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -13,10 +13,10 @@
             src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2064&auto=format&fit=crop"
             alt="Pengurus Koperasi Modern"
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 opacity-90"
-          />
+          >
           <div
             class="absolute inset-0 bg-gradient-to-tr from-slate-900/80 via-slate-900/40 to-transparent"
-          ></div>
+          />
 
           <div
             class="absolute bottom-8 left-8 right-8 bg-white/10 backdrop-blur-xl border border-white/20 p-5 rounded-2xl text-white transform group-hover:-translate-y-2 transition-transform duration-500 shadow-2xl"

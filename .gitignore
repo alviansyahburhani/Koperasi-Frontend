@@ -7,3 +7,11 @@
 
 # KECUALI .env.example (boleh commit)
 !.env.example
+
+# Nuxt build artifacts
+.nuxt/dev
+.nuxt/dist
+.nuxt/manifest/latest.json
+.nuxt/manifest/meta/dev.json
+.nuxt/nitro.json
+.nuxt/nuxt-fonts-global.css

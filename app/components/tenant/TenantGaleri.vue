@@ -55,7 +55,7 @@ const openLightbox = (img: (typeof galeriList)[0]) => {
   <section class="py-24 bg-white relative overflow-hidden">
     <div
       class="absolute top-1/2 right-[-20%] -translate-y-1/2 w-[50rem] h-[50rem] bg-red-50/60 rounded-full blur-[120px] pointer-events-none"
-    ></div>
+    />
 
     <div class="container mx-auto px-4 lg:max-w-7xl relative z-10">
       <div class="text-center mb-16 max-w-3xl mx-auto">
@@ -77,17 +77,17 @@ const openLightbox = (img: (typeof galeriList)[0]) => {
         <div
           v-for="foto in galeriList"
           :key="foto.id"
-          @click="openLightbox(foto)"
           :class="[
             'group relative rounded-3xl overflow-hidden cursor-pointer bg-slate-100 shadow-sm hover:shadow-xl transition-all duration-500',
             foto.size === 'large' ? 'md:col-span-2 md:row-span-2' : '', // Logika untuk gambar besar
           ]"
+          @click="openLightbox(foto)"
         >
           <img
             :src="foto.src"
             :alt="foto.title"
             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-          />
+          >
 
           <div
             class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6"
@@ -135,13 +135,13 @@ const openLightbox = (img: (typeof galeriList)[0]) => {
             :src="selectedImage.src"
             :alt="selectedImage.title"
             class="max-w-full max-h-[85vh] object-contain"
-          />
+          >
         </div>
 
         <div class="bg-white p-8 md:w-1/3 flex flex-col justify-center relative">
           <button
-            @click="isOpen = false"
             class="absolute top-4 right-4 p-2 bg-slate-100 text-slate-500 rounded-full hover:bg-red-50 hover:text-red-600 transition-colors"
+            @click="isOpen = false"
           >
             <UIcon name="i-lucide-x" class="w-5 h-5" />
           </button>

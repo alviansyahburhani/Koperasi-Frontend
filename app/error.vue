@@ -128,24 +128,24 @@ Stack: ${props.error.stack || 'No stack trace'}
 
       <!-- Actions -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-        <UButton @click="handleClearError" color="red" size="lg" class="px-8">
+        <UButton color="red" size="lg" class="px-8" @click="handleClearError">
           <UIcon name="i-lucide-home" class="w-5 h-5" />
           Kembali ke Beranda
         </UButton>
 
         <UButton
           v-if="!isNotFound"
-          @click="handleGoBack"
           variant="outline"
           color="gray"
           size="lg"
           class="px-8"
+          @click="handleGoBack"
         >
           <UIcon name="i-lucide-arrow-left" class="w-5 h-5" />
           Halaman Sebelumnya
         </UButton>
 
-        <UButton v-if="isAuthError" @click="handleLogin" color="blue" size="lg" class="px-8">
+        <UButton v-if="isAuthError" color="blue" size="lg" class="px-8" @click="handleLogin">
           <UIcon name="i-lucide-log-in" class="w-5 h-5" />
           Login
         </UButton>
@@ -158,7 +158,7 @@ Stack: ${props.error.stack || 'No stack trace'}
             <UIcon name="i-lucide-bug" class="w-4 h-4" />
             Debug Information
           </h3>
-          <UButton @click="copyErrorToClipboard" size="xs" variant="outline" color="red">
+          <UButton size="xs" variant="outline" color="red" @click="copyErrorToClipboard">
             <UIcon name="i-lucide-copy" class="w-3 h-3" />
             Copy
           </UButton>

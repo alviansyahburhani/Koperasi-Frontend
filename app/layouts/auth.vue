@@ -100,7 +100,7 @@ import { RoleConfig } from '~/utils/roles'
             :disabled="isLoading"
             placeholder="email@example.com"
             class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 disabled:bg-gray-100"
-          />
+          >
         </div>
       </div>
 
@@ -121,7 +121,7 @@ import { RoleConfig } from '~/utils/roles'
             :disabled="isLoading"
             placeholder="••••••••"
             class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 disabled:bg-gray-100"
-          />
+          >
         </div>
       </div>
 
@@ -133,7 +133,7 @@ import { RoleConfig } from '~/utils/roles'
             type="checkbox"
             :disabled="isLoading"
             class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
-          />
+          >
           <span class="ml-2 text-sm text-gray-700">Ingat saya</span>
         </label>
         <NuxtLink
@@ -152,7 +152,7 @@ import { RoleConfig } from '~/utils/roles'
       >
         <span v-if="!isLoading">Masuk</span>
         <span v-else class="flex items-center justify-center gap-2">
-          <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+          <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"/>
           Memproses...
         </span>
       </button>
@@ -161,7 +161,7 @@ import { RoleConfig } from '~/utils/roles'
     <!-- Divider -->
     <div class="relative my-6">
       <div class="absolute inset-0 flex items-center">
-        <div class="w-full border-t border-gray-300"></div>
+        <div class="w-full border-t border-gray-300"/>
       </div>
       <div class="relative flex justify-center text-sm">
         <span class="px-2 bg-white text-gray-500">Atau</span>
