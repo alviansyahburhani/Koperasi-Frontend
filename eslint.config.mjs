@@ -19,6 +19,4 @@ export default withNuxt(
       'prefer-const': 'error',
     },
   }
-).append({
-  ignores: ['eslint-config-prettier'],
-})
+)

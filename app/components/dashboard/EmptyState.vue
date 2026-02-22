@@ -8,7 +8,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  icon: 'i-lucide-inbox'
+  icon: 'i-lucide-inbox',
 })
 
 const emit = defineEmits<{
@@ -21,7 +21,7 @@ const emit = defineEmits<{
     <UIcon :name="icon" class="mx-auto h-12 w-12 text-gray-400" />
     <h3 class="mt-2 text-sm font-medium text-gray-900">{{ title }}</h3>
     <p v-if="description" class="mt-1 text-sm text-gray-500">{{ description }}</p>
-    
+
     <div v-if="actionLabel" class="mt-6">
       <NuxtLink
         v-if="actionTo"

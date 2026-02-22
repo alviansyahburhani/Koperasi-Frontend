@@ -12,7 +12,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   color: 'blue',
   changeType: 'neutral',
-  loading: false
+  loading: false,
 })
 
 const colorClasses = computed(() => {
@@ -22,7 +22,7 @@ const colorClasses = computed(() => {
     red: 'bg-red-100 text-red-600',
     yellow: 'bg-yellow-100 text-yellow-600',
     purple: 'bg-purple-100 text-purple-600',
-    orange: 'bg-orange-100 text-orange-600'
+    orange: 'bg-orange-100 text-orange-600',
   }
   return colors[props.color]
 })
@@ -49,16 +49,19 @@ const changeColorClass = computed(() => {
             <dd class="flex items-baseline">
               <div v-if="loading" class="h-8 w-24 bg-gray-200 animate-pulse rounded"></div>
               <div v-else class="text-2xl font-semibold text-gray-900">{{ value }}</div>
-              <div v-if="change && !loading" :class="['ml-2 flex items-baseline text-sm font-semibold', changeColorClass]">
-                <UIcon 
-                  v-if="changeType === 'increase'" 
-                  name="i-lucide-trending-up" 
-                  class="w-4 h-4 mr-0.5" 
+              <div
+                v-if="change && !loading"
+                :class="['ml-2 flex items-baseline text-sm font-semibold', changeColorClass]"
+              >
+                <UIcon
+                  v-if="changeType === 'increase'"
+                  name="i-lucide-trending-up"
+                  class="w-4 h-4 mr-0.5"
                 />
-                <UIcon 
-                  v-else-if="changeType === 'decrease'" 
-                  name="i-lucide-trending-down" 
-                  class="w-4 h-4 mr-0.5" 
+                <UIcon
+                  v-else-if="changeType === 'decrease'"
+                  name="i-lucide-trending-down"
+                  class="w-4 h-4 mr-0.5"
                 />
                 {{ change }}
               </div>
