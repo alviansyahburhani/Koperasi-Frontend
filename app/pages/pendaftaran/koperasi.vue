@@ -1,6 +1,15 @@
 <script setup>
 import { reactive, ref } from 'vue'
 
+useHead({
+  link: [
+    {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
+    },
+  ],
+})
+
 // --- LOGIKA FORM ---
 const currentStep = ref(1)
 const totalSteps = 4
@@ -42,7 +51,9 @@ const formData = reactive({
 const errors = reactive({})
 
 const validateStep = (step) => {
-  Object.keys(errors).forEach((key) => delete errors[key])
+  Object.keys(errors).forEach((key) => {
+    Reflect.deleteProperty(errors, key)
+  })
 
   if (step === 1) {
     if (!formData.cooperativeName) errors.cooperativeName = 'Nama Koperasi wajib diisi'
@@ -105,11 +116,6 @@ const sectionTitleClass =
 </script>
 
 <template>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
   <div class="min-h-screen bg-[#F8FAFC] pt-16 pb-20 font-['Inter',sans-serif] text-left">
     <main class="max-w-4xl mx-auto px-6">
       <div class="text-center mb-12">

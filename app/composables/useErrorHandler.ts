@@ -5,6 +5,17 @@
 
 import { ErrorCategory, ErrorSeverity, type ErrorLog } from '~/types/error.types'
 
+interface HandleableError {
+  statusCode?: number
+  message?: string
+  stack?: string
+  response?: {
+    status?: number
+    data?: { message?: string; [key: string]: unknown }
+  }
+  config?: unknown
+}
+
 export const useErrorHandler = () => {
   const toast = useToast()
   const config = useRuntimeConfig()
@@ -120,7 +131,7 @@ export const useErrorHandler = () => {
    * Handle error dengan complete flow
    */
   const handleError = (
-    error: any,
+    error: HandleableError,
     options: {
       showToast?: boolean
       redirect?: string

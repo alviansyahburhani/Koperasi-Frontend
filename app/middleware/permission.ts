@@ -1,4 +1,4 @@
-import { Permission } from '~/types'
+import type { Permission } from '~/types'
 import { hasPermission } from '~/utils/roles'
 
 export default defineNuxtRouteMiddleware((to) => {

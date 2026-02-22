@@ -9,7 +9,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   // ========================================
   // 1. Vue Error Handler
   // ========================================
-  nuxtApp.vueApp.config.errorHandler = (error: any, instance, info) => {
+  nuxtApp.vueApp.config.errorHandler = (error: unknown, instance, info) => {
     console.error('🔴 Vue Error Handler')
     console.error('Error:', error)
     console.error('Component:', instance?.$options.name || 'Unknown')
@@ -18,7 +18,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     // Show toast
     toast.add({
       title: 'Terjadi Kesalahan',
-      description: error.message || 'Terjadi kesalahan pada aplikasi',
+      description: error instanceof Error ? error.message : 'Terjadi kesalahan pada aplikasi',
       color: 'red',
       icon: 'i-lucide-alert-triangle',
     })

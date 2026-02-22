@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { RoleConfig } from '~/utils/roles'
+
 const { user, role, logout } = useAuth()
 const { menuItems } = useMenu()
 
@@ -10,7 +12,7 @@ const handleLogout = async () => {
     await logout()
   }
 }
-import { RoleConfig } from '~/utils/roles'
+
 const roleConfig = computed(() => (role.value ? RoleConfig[role.value] : null))
 
 // Get role config for UI

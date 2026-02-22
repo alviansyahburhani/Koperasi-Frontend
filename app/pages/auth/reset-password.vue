@@ -70,9 +70,9 @@ const handleSubmit = async () => {
         router.push('/login')
       }, 3000)
     }, 1500)
-  } catch (_error) {
+  } catch {
     loading.value = false
-    // Handle _error
+    // Error intentionally ignored
   }
 }
 </script>
