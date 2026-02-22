@@ -9,7 +9,8 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/ui',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    '@nuxt/eslint'
   ],
 
  // Runtime Config (Load dari .env)

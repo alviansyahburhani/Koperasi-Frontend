@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
     "type-check": "nuxt typecheck",
     "clean": "rm -rf .nuxt .output node_modules/.cache"
   },
@@ -29,6 +30,8 @@
     "@nuxt/image": "^2.0.0",
     "@types/node": "^25.3.0",
     "eslint": "^10.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.1",
     "typescript": "^5.9.3",
     "vue-tsc": "^3.2.4"
   },
