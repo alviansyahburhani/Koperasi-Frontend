@@ -6,11 +6,11 @@ type ComponentProps<T> = T extends new(...args: any) => { $props: infer P } ? No
 
 declare module 'nuxt/app' {
   interface NuxtLayouts {
-    admin: ComponentProps<typeof import("/home/runner/work/Koperasi-Frontend/Koperasi-Frontend/app/layouts/admin.vue").default>,
-    auth: ComponentProps<typeof import("/home/runner/work/Koperasi-Frontend/Koperasi-Frontend/app/layouts/auth.vue").default>,
-    dashboard: ComponentProps<typeof import("/home/runner/work/Koperasi-Frontend/Koperasi-Frontend/app/layouts/dashboard.vue").default>,
-    default: ComponentProps<typeof import("/home/runner/work/Koperasi-Frontend/Koperasi-Frontend/app/layouts/default.vue").default>,
-    superadmin: ComponentProps<typeof import("/home/runner/work/Koperasi-Frontend/Koperasi-Frontend/app/layouts/superadmin.vue").default>,
+    admin: ComponentProps<typeof import("D:/SEMESTER 6/Koperasi-Frontend/app/layouts/admin.vue").default>,
+    auth: ComponentProps<typeof import("D:/SEMESTER 6/Koperasi-Frontend/app/layouts/auth.vue").default>,
+    dashboard: ComponentProps<typeof import("D:/SEMESTER 6/Koperasi-Frontend/app/layouts/dashboard.vue").default>,
+    default: ComponentProps<typeof import("D:/SEMESTER 6/Koperasi-Frontend/app/layouts/default.vue").default>,
+    superadmin: ComponentProps<typeof import("D:/SEMESTER 6/Koperasi-Frontend/app/layouts/superadmin.vue").default>,
 }
   export type LayoutKey = keyof NuxtLayouts extends never ? string : keyof NuxtLayouts
   interface PageMeta {

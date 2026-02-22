@@ -16,10 +16,15 @@ type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {},
 
 export const AppLogo: typeof import("../app/components/AppLogo.vue")['default']
 export const TemplateMenu: typeof import("../app/components/TemplateMenu.vue")['default']
-export const AdminDecisionModal: typeof import("../app/components/admin/DecisionModal.vue")['default']
 export const AdminDocumentViewer: typeof import("../app/components/admin/DocumentViewer.vue")['default']
 export const AdminChartsChartsBarChart: typeof import("../app/components/admin/charts/charts/BarChart.vue")['default']
 export const AdminChartsChartsLineChart: typeof import("../app/components/admin/charts/charts/LineChart.vue")['default']
+export const BaseButton: typeof import("../app/components/base/BaseButton.vue")['default']
+export const BaseCard: typeof import("../app/components/base/BaseCard.vue")['default']
+export const BaseInput: typeof import("../app/components/base/BaseInput.vue")['default']
+export const BaseModal: typeof import("../app/components/base/BaseModal.vue")['default']
+export const BaseSelect: typeof import("../app/components/base/BaseSelect.vue")['default']
+export const BaseTable: typeof import("../app/components/base/BaseTable.vue")['default']
 export const DashboardConfirmDialog: typeof import("../app/components/dashboard/ConfirmDialog.vue")['default']
 export const DashboardEmptyState: typeof import("../app/components/dashboard/EmptyState.vue")['default']
 export const DashboardLoadingSpinner: typeof import("../app/components/dashboard/LoadingSpinner.vue")['default']
@@ -33,6 +38,9 @@ export const LandingHistorySection: typeof import("../app/components/landing/His
 export const LandingStatsSection: typeof import("../app/components/landing/StatsSection.vue")['default']
 export const LayoutAppFooter: typeof import("../app/components/layout/AppFooter.vue")['default']
 export const LayoutAppHeader: typeof import("../app/components/layout/AppHeader.vue")['default']
+export const SuperadminApplicationTable: typeof import("../app/components/superadmin/ApplicationTable.vue")['default']
+export const SuperadminCooperativeTable: typeof import("../app/components/superadmin/CooperativeTable.vue")['default']
+export const SuperadminDecisionModal: typeof import("../app/components/superadmin/DecisionModal.vue")['default']
 export const TenantBerita: typeof import("../app/components/tenant/TenantBerita.vue")['default']
 export const TenantGaleri: typeof import("../app/components/tenant/TenantGaleri.vue")['default']
 export const TenantProduk: typeof import("../app/components/tenant/TenantProduk.vue")['default']
@@ -188,10 +196,15 @@ export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
 export const LazyAppLogo: LazyComponent<typeof import("../app/components/AppLogo.vue")['default']>
 export const LazyTemplateMenu: LazyComponent<typeof import("../app/components/TemplateMenu.vue")['default']>
-export const LazyAdminDecisionModal: LazyComponent<typeof import("../app/components/admin/DecisionModal.vue")['default']>
 export const LazyAdminDocumentViewer: LazyComponent<typeof import("../app/components/admin/DocumentViewer.vue")['default']>
 export const LazyAdminChartsChartsBarChart: LazyComponent<typeof import("../app/components/admin/charts/charts/BarChart.vue")['default']>
 export const LazyAdminChartsChartsLineChart: LazyComponent<typeof import("../app/components/admin/charts/charts/LineChart.vue")['default']>
+export const LazyBaseButton: LazyComponent<typeof import("../app/components/base/BaseButton.vue")['default']>
+export const LazyBaseCard: LazyComponent<typeof import("../app/components/base/BaseCard.vue")['default']>
+export const LazyBaseInput: LazyComponent<typeof import("../app/components/base/BaseInput.vue")['default']>
+export const LazyBaseModal: LazyComponent<typeof import("../app/components/base/BaseModal.vue")['default']>
+export const LazyBaseSelect: LazyComponent<typeof import("../app/components/base/BaseSelect.vue")['default']>
+export const LazyBaseTable: LazyComponent<typeof import("../app/components/base/BaseTable.vue")['default']>
 export const LazyDashboardConfirmDialog: LazyComponent<typeof import("../app/components/dashboard/ConfirmDialog.vue")['default']>
 export const LazyDashboardEmptyState: LazyComponent<typeof import("../app/components/dashboard/EmptyState.vue")['default']>
 export const LazyDashboardLoadingSpinner: LazyComponent<typeof import("../app/components/dashboard/LoadingSpinner.vue")['default']>
@@ -205,6 +218,9 @@ export const LazyLandingHistorySection: LazyComponent<typeof import("../app/comp
 export const LazyLandingStatsSection: LazyComponent<typeof import("../app/components/landing/StatsSection.vue")['default']>
 export const LazyLayoutAppFooter: LazyComponent<typeof import("../app/components/layout/AppFooter.vue")['default']>
 export const LazyLayoutAppHeader: LazyComponent<typeof import("../app/components/layout/AppHeader.vue")['default']>
+export const LazySuperadminApplicationTable: LazyComponent<typeof import("../app/components/superadmin/ApplicationTable.vue")['default']>
+export const LazySuperadminCooperativeTable: LazyComponent<typeof import("../app/components/superadmin/CooperativeTable.vue")['default']>
+export const LazySuperadminDecisionModal: LazyComponent<typeof import("../app/components/superadmin/DecisionModal.vue")['default']>
 export const LazyTenantBerita: LazyComponent<typeof import("../app/components/tenant/TenantBerita.vue")['default']>
 export const LazyTenantGaleri: LazyComponent<typeof import("../app/components/tenant/TenantGaleri.vue")['default']>
 export const LazyTenantProduk: LazyComponent<typeof import("../app/components/tenant/TenantProduk.vue")['default']>

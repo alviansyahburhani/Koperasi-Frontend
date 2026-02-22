@@ -1,7 +1,7 @@
 /**
  * useFileUpload - Shared composable for file upload handling
  */
-export const useFileUpload = () => {
+export const useAppFileUpload = () => {
   const uploading = ref(false)
   const progress = ref(0)
 
