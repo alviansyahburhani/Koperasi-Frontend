@@ -3,7 +3,7 @@ import type {
   TenantRegistrationForm,
   RegistrationResponse,
   DocumentUploadResponse,
-} from '~/types/registration'
+} from '~/types/application.types'
 
 export class TenantRegistrationService {
   /**

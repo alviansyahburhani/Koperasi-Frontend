@@ -1,26 +1,25 @@
 <script setup lang="ts">
-// UBAH KE 'false' UNTUK MELIHAT VERSI SUPER ADMIN
-// UBAH KE 'true' UNTUK MELIHAT VERSI TENANT (KOPERASI KLIEN)
-const isTenant = true
+import { LANDING_HERO } from '~/utils/landing'
+
+const koperasiQuery = ref('')
+
+const handleSearchKoperasi = (query: string) => {
+  // sementara: nanti bisa diarahkan ke halaman list koperasi atau hasil pencarian
+  // contoh: navigateTo({ path: '/koperasi', query: { q: query } })
+  console.log('[Landing] search koperasi:', query)
+}
 </script>
 
 <template>
   <div class="bg-white min-h-screen">
-    <LandingHeroSection />
+    <LandingHeroSection
+      v-model="koperasiQuery"
+      :content="LANDING_HERO"
+      @search="handleSearchKoperasi"
+    />
     <LandingStatsSection />
     <LandingHistorySection />
     <LandingFeaturesSection />
-
-    <div v-if="isTenant">
-      <div
-        class="w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent my-8"
-      />
-
-      <TenantBerita />
-      <TenantProduk />
-      <TenantGaleri />
-    </div>
-
     <LandingCtaSection />
   </div>
 </template>
