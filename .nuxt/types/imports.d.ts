@@ -9,9 +9,12 @@ declare global {
   const AdminMenu: typeof import('../../app/utils/menus').AdminMenu
   const ApiService: typeof import('../../app/services/api.service').ApiService
   const AuthService: typeof import('../../app/services/auth.service').AuthService
+  const BUKU_WAJIB_LIST: typeof import('../../app/utils/landing').BUKU_WAJIB_LIST
   const CURRENCY: typeof import('../../app/utils/constants').CURRENCY
   const DATE_FORMATS: typeof import('../../app/utils/constants').DATE_FORMATS
   const KOPERASI_STATUS: typeof import('../../app/utils/constants').KOPERASI_STATUS
+  const LANDING_HERO: typeof import('../../app/utils/landing').LANDING_HERO
+  const LANDING_STATS: typeof import('../../app/utils/landing').LANDING_STATS
   const PAGINATION: typeof import('../../app/utils/constants').PAGINATION
   const PINJAMAN_STATUS: typeof import('../../app/utils/constants').PINJAMAN_STATUS
   const ROLE_LABELS: typeof import('../../app/utils/constants').ROLE_LABELS
@@ -164,7 +167,7 @@ declare global {
   const useApi: typeof import('../../app/composables/core/useApi').useApi
   const useAppConfig: typeof import('../../node_modules/nuxt/dist/app/config').useAppConfig
   const useAppFileUpload: typeof import('../../app/composables/shared/useFileUpload').useAppFileUpload
-  const useAppToast: typeof import('../../app/composables/core/useAppToast').useAppToast
+  const useAppToast: typeof import('../../app/composables/core/useToast').useAppToast
   const useApplications: typeof import('../../app/composables/superadmin/useApplications').useApplications
   const useAsyncData: typeof import('../../node_modules/nuxt/dist/app/composables/asyncData').useAsyncData
   const useAttrs: typeof import('../../node_modules/vue').useAttrs
@@ -192,11 +195,13 @@ declare global {
   const useId: typeof import('../../node_modules/vue').useId
   const useKbd: typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useKbd').useKbd
   const useKoperasiRegistration: typeof import('../../app/composables/public/useKoperasiRegistration').useKoperasiRegistration
+  const useLandingFeaturesSlider: typeof import('../../app/composables/public/useLandingFeaturesSlider').useLandingFeaturesSlider
   const useLazyAsyncData: typeof import('../../node_modules/nuxt/dist/app/composables/asyncData').useLazyAsyncData
   const useLazyFetch: typeof import('../../node_modules/nuxt/dist/app/composables/fetch').useLazyFetch
   const useLink: typeof import('../../node_modules/vue-router').useLink
   const useLoadingIndicator: typeof import('../../node_modules/nuxt/dist/app/composables/loading-indicator').useLoadingIndicator
   const useLocale: typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useLocale').useLocale
+  const useLoginForm: typeof import('../../app/composables/core/useLoginForm').useLoginForm
   const useMasterData: typeof import('../../app/composables/superadmin/useMasterData').useMasterData
   const useMenu: typeof import('../../app/composables/shared/useMenu').useMenu
   const useModal: typeof import('../../app/composables/core/useModal').useModal
@@ -311,9 +316,12 @@ declare module 'vue' {
     readonly AdminMenu: UnwrapRef<typeof import('../../app/utils/menus')['AdminMenu']>
     readonly ApiService: UnwrapRef<typeof import('../../app/services/api.service')['ApiService']>
     readonly AuthService: UnwrapRef<typeof import('../../app/services/auth.service')['AuthService']>
+    readonly BUKU_WAJIB_LIST: UnwrapRef<typeof import('../../app/utils/landing')['BUKU_WAJIB_LIST']>
     readonly CURRENCY: UnwrapRef<typeof import('../../app/utils/constants')['CURRENCY']>
     readonly DATE_FORMATS: UnwrapRef<typeof import('../../app/utils/constants')['DATE_FORMATS']>
     readonly KOPERASI_STATUS: UnwrapRef<typeof import('../../app/utils/constants')['KOPERASI_STATUS']>
+    readonly LANDING_HERO: UnwrapRef<typeof import('../../app/utils/landing')['LANDING_HERO']>
+    readonly LANDING_STATS: UnwrapRef<typeof import('../../app/utils/landing')['LANDING_STATS']>
     readonly PAGINATION: UnwrapRef<typeof import('../../app/utils/constants')['PAGINATION']>
     readonly PINJAMAN_STATUS: UnwrapRef<typeof import('../../app/utils/constants')['PINJAMAN_STATUS']>
     readonly ROLE_LABELS: UnwrapRef<typeof import('../../app/utils/constants')['ROLE_LABELS']>
@@ -466,7 +474,7 @@ declare module 'vue' {
     readonly useApi: UnwrapRef<typeof import('../../app/composables/core/useApi')['useApi']>
     readonly useAppConfig: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/config')['useAppConfig']>
     readonly useAppFileUpload: UnwrapRef<typeof import('../../app/composables/shared/useFileUpload')['useAppFileUpload']>
-    readonly useAppToast: UnwrapRef<typeof import('../../app/composables/core/useAppToast')['useAppToast']>
+    readonly useAppToast: UnwrapRef<typeof import('../../app/composables/core/useToast')['useAppToast']>
     readonly useApplications: UnwrapRef<typeof import('../../app/composables/superadmin/useApplications')['useApplications']>
     readonly useAsyncData: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['useAsyncData']>
     readonly useAttrs: UnwrapRef<typeof import('../../node_modules/vue')['useAttrs']>
@@ -494,11 +502,13 @@ declare module 'vue' {
     readonly useId: UnwrapRef<typeof import('../../node_modules/vue')['useId']>
     readonly useKbd: UnwrapRef<typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useKbd')['useKbd']>
     readonly useKoperasiRegistration: UnwrapRef<typeof import('../../app/composables/public/useKoperasiRegistration')['useKoperasiRegistration']>
+    readonly useLandingFeaturesSlider: UnwrapRef<typeof import('../../app/composables/public/useLandingFeaturesSlider')['useLandingFeaturesSlider']>
     readonly useLazyAsyncData: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['useLazyAsyncData']>
     readonly useLazyFetch: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/fetch')['useLazyFetch']>
     readonly useLink: UnwrapRef<typeof import('../../node_modules/vue-router')['useLink']>
     readonly useLoadingIndicator: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/loading-indicator')['useLoadingIndicator']>
     readonly useLocale: UnwrapRef<typeof import('../../node_modules/@nuxt/ui/dist/runtime/composables/useLocale')['useLocale']>
+    readonly useLoginForm: UnwrapRef<typeof import('../../app/composables/core/useLoginForm')['useLoginForm']>
     readonly useMasterData: UnwrapRef<typeof import('../../app/composables/superadmin/useMasterData')['useMasterData']>
     readonly useMenu: UnwrapRef<typeof import('../../app/composables/shared/useMenu')['useMenu']>
     readonly useModal: UnwrapRef<typeof import('../../app/composables/core/useModal')['useModal']>

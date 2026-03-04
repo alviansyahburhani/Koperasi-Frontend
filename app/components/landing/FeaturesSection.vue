@@ -1,176 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { BUKU_WAJIB_LIST } from '~/utils/landing'
 
-const bukuWajibList = [
-  {
-    id: '01',
-    title: 'Daftar Anggota',
-    icon: 'i-lucide-users',
-    desc: 'Pencatatan data lengkap anggota.',
-    pengurus: 'Full Akses',
-    anggota: 'Read-only',
-    tamu: 'Terkunci',
-  },
-  {
-    id: '02',
-    title: 'Daftar Pengurus',
-    icon: 'i-lucide-user-cog',
-    desc: 'Susunan kepengurusan aktif.',
-    pengurus: 'Full Akses',
-    anggota: 'Read-only',
-    tamu: 'Terkunci',
-  },
-  {
-    id: '03',
-    title: 'Daftar Pengawas',
-    icon: 'i-lucide-shield-check',
-    desc: 'Data pengawas koperasi.',
-    pengurus: 'Full Akses',
-    anggota: 'Read-only',
-    tamu: 'Terkunci',
-  },
-  {
-    id: '04',
-    title: 'Simpanan Anggota',
-    icon: 'i-lucide-piggy-bank',
-    desc: 'Rekap pokok, wajib, sukarela.',
-    pengurus: 'Bendahara',
-    anggota: 'Pribadi',
-    tamu: 'Terkunci',
-  },
-  {
-    id: '05',
-    title: 'Pinjaman Anggota',
-    icon: 'i-lucide-hand-coins',
-    desc: 'Riwayat pinjaman & angsuran.',
-    pengurus: 'Bendahara',
-    anggota: 'Pribadi',
-    tamu: 'Terkunci',
-  },
-  {
-    id: '06',
-    title: 'Daftar Inventaris',
-    icon: 'i-lucide-box',
-    desc: 'Aset barang fisik koperasi.',
-    pengurus: 'Sekretaris',
-    anggota: 'Read-only',
-    tamu: 'Read-only',
-  },
-  {
-    id: '07',
-    title: 'Notulen Rapat Anggota',
-    icon: 'i-lucide-users-round',
-    desc: 'Catatan hasil RAT tahunan.',
-    pengurus: 'Sekretaris',
-    anggota: 'Read-only',
-    tamu: 'Read-only',
-  },
-  {
-    id: '08',
-    title: 'Notulen Rapat Pengurus',
-    icon: 'i-lucide-briefcase',
-    desc: 'Rapat internal pengurus.',
-    pengurus: 'Ketua/Sek',
-    anggota: 'Terkunci',
-    tamu: 'Terkunci',
-  },
-  {
-    id: '09',
-    title: 'Notulen Rapat Pengawas',
-    icon: 'i-lucide-gavel',
-    desc: 'Catatan evaluasi pengawas.',
-    pengurus: 'Ketua/Sek',
-    anggota: 'Terkunci',
-    tamu: 'Terkunci',
-  },
-  {
-    id: '10',
-    title: 'Daftar Karyawan',
-    icon: 'i-lucide-contact',
-    desc: 'Data staff operasional.',
-    pengurus: 'Full Akses',
-    anggota: 'Read-only',
-    tamu: 'Read-only',
-  },
-  {
-    id: '11',
-    title: 'Buku Tamu',
-    icon: 'i-lucide-book-open-check',
-    desc: 'Kunjungan fisik & website.',
-    pengurus: 'Full Akses',
-    anggota: 'Tulis/Baca',
-    tamu: 'Menulis',
-  },
-  {
-    id: '12',
-    title: 'Saran Anggota',
-    icon: 'i-lucide-message-square',
-    desc: 'Aspirasi dari anggota.',
-    pengurus: 'Full Akses',
-    anggota: 'Tulis/Baca',
-    tamu: 'Menulis',
-  },
-  {
-    id: '13',
-    title: 'Saran Pengawas',
-    icon: 'i-lucide-message-circle-warning',
-    desc: 'Teguran dari pengawas.',
-    pengurus: 'Full Akses',
-    anggota: 'Terkunci',
-    tamu: 'Terkunci',
-  },
-  {
-    id: '14',
-    title: 'Anjuran Pejabat',
-    icon: 'i-lucide-scroll-text',
-    desc: 'Arahan dinas terkait.',
-    pengurus: 'Full Akses',
-    anggota: 'Read-only',
-    tamu: 'Read-only',
-  },
-  {
-    id: '15',
-    title: 'Catatan Kejadian',
-    icon: 'i-lucide-clipboard-list',
-    desc: 'Log insiden penting.',
-    pengurus: 'Full Akses',
-    anggota: 'Read-only',
-    tamu: 'Read-only',
-  },
-  {
-    id: '16',
-    title: 'Agenda & Ekspedisi',
-    icon: 'i-lucide-calendar-days',
-    desc: 'Surat menyurat & jadwal.',
-    pengurus: 'Full Akses',
-    anggota: 'Read-only',
-    tamu: 'Read-only',
-  },
-]
-
-// Logika untuk tombol Slider
-const sliderRef = ref<HTMLElement | null>(null)
-
-const scrollLeft = () => {
-  if (sliderRef.value) {
-    sliderRef.value.scrollBy({ left: -350, behavior: 'smooth' })
-  }
-}
-
-const scrollRight = () => {
-  if (sliderRef.value) {
-    sliderRef.value.scrollBy({ left: 350, behavior: 'smooth' })
-  }
-}
-
-// Fungsi pewarnaan cerdas untuk status akses
-const getAccessColor = (status: string) => {
-  if (status === 'Terkunci') return 'text-red-500 bg-red-50'
-  if (['Full Akses', 'Ketua/Sek', 'Bendahara', 'Sekretaris'].includes(status))
-    return 'text-indigo-600 bg-indigo-50'
-  if (['Menulis', 'Tulis/Baca'].includes(status)) return 'text-blue-600 bg-blue-50'
-  return 'text-emerald-600 bg-emerald-50' // Untuk Read-only / Pribadi
-}
+const bukuWajibList = BUKU_WAJIB_LIST
+const { sliderRef, scrollLeft, scrollRight, getAccessColor } = useLandingFeaturesSlider()
 </script>
 
 <template>
@@ -254,52 +86,61 @@ const getAccessColor = (status: string) => {
                 </div>
               </div>
 
-              <p class="text-sm text-slate-500 mb-6 flex-grow">{{ buku.desc }}</p>
+              <p class="text-sm text-slate-500 mb-6 flex-grow">
+                {{ buku.desc }}
+              </p>
+
               <div
                 class="w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent mb-5"
               />
 
               <div class="space-y-3">
                 <div class="flex justify-between items-center">
-                  <span class="text-xs font-medium text-slate-500 flex items-center gap-1.5"
-                    ><UIcon name="i-lucide-briefcase" class="w-3.5 h-3.5" /> Pengurus</span
-                  >
+                  <span class="text-xs font-medium text-slate-500 flex items-center gap-1.5">
+                    <UIcon name="i-lucide-briefcase" class="w-3.5 h-3.5" /> Pengurus
+                  </span>
                   <span
                     :class="[
                       'text-xs font-bold px-2 py-1 rounded-md border border-slate-100',
                       getAccessColor(buku.pengurus),
                     ]"
-                    >{{ buku.pengurus }}</span
                   >
+                    {{ buku.pengurus }}
+                  </span>
                 </div>
+
                 <div class="flex justify-between items-center">
-                  <span class="text-xs font-medium text-slate-500 flex items-center gap-1.5"
-                    ><UIcon name="i-lucide-user" class="w-3.5 h-3.5" /> Anggota</span
-                  >
+                  <span class="text-xs font-medium text-slate-500 flex items-center gap-1.5">
+                    <UIcon name="i-lucide-user" class="w-3.5 h-3.5" /> Anggota
+                  </span>
                   <span
                     :class="[
                       'text-xs font-bold px-2 py-1 rounded-md border border-slate-100',
                       getAccessColor(buku.anggota),
                     ]"
-                    >{{ buku.anggota }}</span
                   >
+                    {{ buku.anggota }}
+                  </span>
                 </div>
+
                 <div class="flex justify-between items-center">
-                  <span class="text-xs font-medium text-slate-500 flex items-center gap-1.5"
-                    ><UIcon name="i-lucide-globe" class="w-3.5 h-3.5" /> Tamu Web</span
-                  >
+                  <span class="text-xs font-medium text-slate-500 flex items-center gap-1.5">
+                    <UIcon name="i-lucide-globe" class="w-3.5 h-3.5" /> Tamu Web
+                  </span>
                   <span
                     :class="[
                       'text-xs font-bold px-2 py-1 rounded-md border border-slate-100',
                       getAccessColor(buku.tamu),
                     ]"
-                    >{{ buku.tamu }}</span
                   >
+                    {{ buku.tamu }}
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="min-w-[1px] md:min-w-[20px] shrink-0"/>
+
+          <div class="min-w-[1px] md:min-w-[20px] shrink-0" />
         </div>
 
         <div
@@ -314,17 +155,6 @@ const getAccessColor = (status: string) => {
 </template>
 
 <style scoped>
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-</style>
-
-<style scoped>
-/* Menyembunyikan Scrollbar Bawaan Browser agar terlihat seperti Aplikasi Native */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }

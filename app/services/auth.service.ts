@@ -36,35 +36,33 @@ export interface UserProfile {
   tenantId?: string
 }
 
+/** ✅ Bentuk minimal response profile dari backend */
+type ProfileApiResponse = {
+  id?: string
+  sub?: string
+  email: string
+  role: string
+  name?: string
+  tenantId?: string
+}
+
 export class AuthService {
   /**
    * ✅ Detect if Super Admin based on URL
    * Super Admin = localhost tanpa subdomain
    * Tenant = subdomain.localhost
    */
-  private isSuperAdminContext(): boolean {
+  isSuperAdminContext(): boolean {
     if (!import.meta.client) return false
 
     const hostname = window.location.hostname
     const parts = hostname.split('.')
 
-    // localhost atau 127.0.0.1 (tanpa subdomain) = Super Admin
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
-      return true
-    }
-
-    // Jika ada subdomain (parts > 1) dan bukan 'www' = Tenant
-    if (parts.length > 1 && parts[0] !== 'www') {
-      return false
-    }
-
-    // Default: assume super admin
+    if (hostname === 'localhost' || hostname === '127.0.0.1') return true
+    if (parts.length > 1 && parts[0] !== 'www') return false
     return true
   }
 
-  /**
-   * Login - Auto detect super admin vs tenant based on URL
-   */
   async login(credentials: LoginCredentials): Promise<LoginResponse> {
     const config = useRuntimeConfig()
     const isSuperAdmin = this.isSuperAdminContext()
@@ -77,10 +75,7 @@ export class AuthService {
       })
     }
 
-    // ✅ Use different endpoint based on context
-    const endpoint = isSuperAdmin
-      ? '/api/admin/auth/login' // Super admin login
-      : '/api/auth/login' // Tenant login
+    const endpoint = isSuperAdmin ? '/api/admin/auth/login' : '/api/auth/login'
 
     if (config.public.debugMode) {
       console.log('[AuthService] Using endpoint:', endpoint)
@@ -92,21 +87,15 @@ export class AuthService {
     })
   }
 
-  /**
-   * Get User Profile from Backend
-   */
   async getProfile(): Promise<UserProfile> {
     const isSuperAdmin = this.isSuperAdminContext()
+    const endpoint = isSuperAdmin ? '/api/admin/auth/profile' : '/api/auth/profile'
 
-    // ✅ Use different endpoint based on context
-    const endpoint = isSuperAdmin
-      ? '/api/admin/auth/profile' // Jika ada
-      : '/api/auth/profile'
-
-    const response = await apiService.get<unknown>(endpoint)
+    // ✅ FIX: jangan unknown
+    const response = await apiService.get<ProfileApiResponse>(endpoint)
 
     return {
-      id: response.id || response.sub,
+      id: response.id || response.sub || '',
       email: response.email,
       role: response.role,
       name: response.name,
@@ -114,21 +103,12 @@ export class AuthService {
     }
   }
 
-  /**
-   * Refresh Token
-   */
   async refreshToken(): Promise<{ accessToken: string }> {
     const isSuperAdmin = this.isSuperAdminContext()
-
-    // ✅ Use different endpoint based on context
     const endpoint = isSuperAdmin ? '/api/admin/auth/refresh' : '/api/auth/refresh'
-
     return apiService.post<{ accessToken: string }>(endpoint, {})
   }
 
-  /**
-   * Logout
-   */
   async logout(): Promise<void> {
     if (import.meta.client) {
       localStorage.removeItem('access_token')
@@ -137,30 +117,19 @@ export class AuthService {
     }
   }
 
-  /**
-   * Decode JWT Token
-   */
   decodeToken(token: string): JwtPayload | null {
     try {
       const parts = token.split('.')
-
-      if (parts.length !== 3) {
-        console.error('[AuthService] Invalid token format')
-        return null
-      }
+      if (parts.length !== 3) return null
 
       const base64Url = parts[1]
-
-      if (!base64Url) {
-        console.error('[AuthService] Token payload is missing')
-        return null
-      }
+      if (!base64Url) return null
 
       const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
       const jsonPayload = decodeURIComponent(
         atob(base64)
           .split('')
-          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .map((c) => `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`)
           .join('')
       )
 
@@ -171,13 +140,9 @@ export class AuthService {
     }
   }
 
-  /**
-   * Check if token is expired
-   */
   isTokenExpired(token: string): boolean {
     const payload = this.decodeToken(token)
-    if (!payload || !payload.exp) return true
-
+    if (!payload?.exp) return true
     const now = Math.floor(Date.now() / 1000)
     return payload.exp < now
   }

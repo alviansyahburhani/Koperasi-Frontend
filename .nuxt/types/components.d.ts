@@ -14,23 +14,32 @@ type HydrationStrategies = {
 type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }> & T
 
 interface _GlobalComponents {
-  AppLogo: typeof import("../../app/components/AppLogo.vue")['default']
-  TemplateMenu: typeof import("../../app/components/TemplateMenu.vue")['default']
   AdminDocumentViewer: typeof import("../../app/components/admin/DocumentViewer.vue")['default']
-  AdminChartsChartsBarChart: typeof import("../../app/components/admin/charts/charts/BarChart.vue")['default']
-  AdminChartsChartsLineChart: typeof import("../../app/components/admin/charts/charts/LineChart.vue")['default']
+  AdminDashboardBarChart: typeof import("../../app/components/admin/dashboard/BarChart.vue")['default']
+  AdminDashboardLineChart: typeof import("../../app/components/admin/dashboard/LineChart.vue")['default']
+  AdminDashboardStatsCard: typeof import("../../app/components/admin/dashboard/StatsCard.vue")['default']
+  AuthForgotPasswordForm: typeof import("../../app/components/auth/ForgotPasswordForm.vue")['default']
+  AuthLoginForm: typeof import("../../app/components/auth/LoginForm.vue")['default']
+  AuthRegisterForm: typeof import("../../app/components/auth/RegisterForm.vue")['default']
+  AuthResetPasswordForm: typeof import("../../app/components/auth/ResetPasswordForm.vue")['default']
+  BaseAlert: typeof import("../../app/components/base/BaseAlert.vue")['default']
+  BaseBadge: typeof import("../../app/components/base/BaseBadge.vue")['default']
   BaseButton: typeof import("../../app/components/base/BaseButton.vue")['default']
   BaseCard: typeof import("../../app/components/base/BaseCard.vue")['default']
+  BaseCheckbox: typeof import("../../app/components/base/BaseCheckbox.vue")['default']
+  BaseFloatingCard: typeof import("../../app/components/base/BaseFloatingCard.vue")['default']
+  BaseHeroImage: typeof import("../../app/components/base/BaseHeroImage.vue")['default']
   BaseInput: typeof import("../../app/components/base/BaseInput.vue")['default']
+  BaseLogo: typeof import("../../app/components/base/BaseLogo.vue")['default']
   BaseModal: typeof import("../../app/components/base/BaseModal.vue")['default']
+  BasePasswordInput: typeof import("../../app/components/base/BasePasswordInput.vue")['default']
+  BaseSearchBar: typeof import("../../app/components/base/BaseSearchBar.vue")['default']
   BaseSelect: typeof import("../../app/components/base/BaseSelect.vue")['default']
   BaseTable: typeof import("../../app/components/base/BaseTable.vue")['default']
-  DashboardConfirmDialog: typeof import("../../app/components/dashboard/ConfirmDialog.vue")['default']
-  DashboardEmptyState: typeof import("../../app/components/dashboard/EmptyState.vue")['default']
-  DashboardLoadingSpinner: typeof import("../../app/components/dashboard/LoadingSpinner.vue")['default']
-  DashboardPageHeader: typeof import("../../app/components/dashboard/PageHeader.vue")['default']
-  DashboardRoleGate: typeof import("../../app/components/dashboard/RoleGate.vue")['default']
-  DashboardStatsCard: typeof import("../../app/components/dashboard/StatsCard.vue")['default']
+  BaseConfirmDialog: typeof import("../../app/components/base/ConfirmDialog.vue")['default']
+  BaseEmptyState: typeof import("../../app/components/base/EmptyState.vue")['default']
+  BaseLoadingSpinner: typeof import("../../app/components/base/LoadingSpinner.vue")['default']
+  BasePageHeader: typeof import("../../app/components/base/PageHeader.vue")['default']
   LandingCtaSection: typeof import("../../app/components/landing/CtaSection.vue")['default']
   LandingFeaturesSection: typeof import("../../app/components/landing/FeaturesSection.vue")['default']
   LandingHeroSection: typeof import("../../app/components/landing/HeroSection.vue")['default']
@@ -38,16 +47,15 @@ interface _GlobalComponents {
   LandingStatsSection: typeof import("../../app/components/landing/StatsSection.vue")['default']
   LayoutAppFooter: typeof import("../../app/components/layout/AppFooter.vue")['default']
   LayoutAppHeader: typeof import("../../app/components/layout/AppHeader.vue")['default']
+  LayoutAppTemplateMenu: typeof import("../../app/components/layout/AppTemplateMenu.vue")['default']
+  LayoutRoleGate: typeof import("../../app/components/layout/RoleGate.vue")['default']
+  RegisterKoperasiWizard: typeof import("../../app/components/register/koperasi/registerKoperasiWizard")['default']
   SuperadminApplicationTable: typeof import("../../app/components/superadmin/ApplicationTable.vue")['default']
   SuperadminCooperativeTable: typeof import("../../app/components/superadmin/CooperativeTable.vue")['default']
   SuperadminDecisionModal: typeof import("../../app/components/superadmin/DecisionModal.vue")['default']
   TenantBerita: typeof import("../../app/components/tenant/TenantBerita.vue")['default']
   TenantGaleri: typeof import("../../app/components/tenant/TenantGaleri.vue")['default']
   TenantProduk: typeof import("../../app/components/tenant/TenantProduk.vue")['default']
-  UiBadge: typeof import("../../app/components/ui/Badge.vue")['default']
-  UiFloatingCard: typeof import("../../app/components/ui/FloatingCard.vue")['default']
-  UiHeroImage: typeof import("../../app/components/ui/HeroImage.vue")['default']
-  UiSearchBar: typeof import("../../app/components/ui/SearchBar.vue")['default']
   UColorModeAvatar: typeof import("../../node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeAvatar.vue")['default']
   UColorModeButton: typeof import("../../node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeButton.vue")['default']
   UColorModeImage: typeof import("../../node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeImage.vue")['default']
@@ -194,23 +202,32 @@ interface _GlobalComponents {
   Html: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Html']
   Body: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Body']
   NuxtIsland: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-island")['default']
-  LazyAppLogo: LazyComponent<typeof import("../../app/components/AppLogo.vue")['default']>
-  LazyTemplateMenu: LazyComponent<typeof import("../../app/components/TemplateMenu.vue")['default']>
   LazyAdminDocumentViewer: LazyComponent<typeof import("../../app/components/admin/DocumentViewer.vue")['default']>
-  LazyAdminChartsChartsBarChart: LazyComponent<typeof import("../../app/components/admin/charts/charts/BarChart.vue")['default']>
-  LazyAdminChartsChartsLineChart: LazyComponent<typeof import("../../app/components/admin/charts/charts/LineChart.vue")['default']>
+  LazyAdminDashboardBarChart: LazyComponent<typeof import("../../app/components/admin/dashboard/BarChart.vue")['default']>
+  LazyAdminDashboardLineChart: LazyComponent<typeof import("../../app/components/admin/dashboard/LineChart.vue")['default']>
+  LazyAdminDashboardStatsCard: LazyComponent<typeof import("../../app/components/admin/dashboard/StatsCard.vue")['default']>
+  LazyAuthForgotPasswordForm: LazyComponent<typeof import("../../app/components/auth/ForgotPasswordForm.vue")['default']>
+  LazyAuthLoginForm: LazyComponent<typeof import("../../app/components/auth/LoginForm.vue")['default']>
+  LazyAuthRegisterForm: LazyComponent<typeof import("../../app/components/auth/RegisterForm.vue")['default']>
+  LazyAuthResetPasswordForm: LazyComponent<typeof import("../../app/components/auth/ResetPasswordForm.vue")['default']>
+  LazyBaseAlert: LazyComponent<typeof import("../../app/components/base/BaseAlert.vue")['default']>
+  LazyBaseBadge: LazyComponent<typeof import("../../app/components/base/BaseBadge.vue")['default']>
   LazyBaseButton: LazyComponent<typeof import("../../app/components/base/BaseButton.vue")['default']>
   LazyBaseCard: LazyComponent<typeof import("../../app/components/base/BaseCard.vue")['default']>
+  LazyBaseCheckbox: LazyComponent<typeof import("../../app/components/base/BaseCheckbox.vue")['default']>
+  LazyBaseFloatingCard: LazyComponent<typeof import("../../app/components/base/BaseFloatingCard.vue")['default']>
+  LazyBaseHeroImage: LazyComponent<typeof import("../../app/components/base/BaseHeroImage.vue")['default']>
   LazyBaseInput: LazyComponent<typeof import("../../app/components/base/BaseInput.vue")['default']>
+  LazyBaseLogo: LazyComponent<typeof import("../../app/components/base/BaseLogo.vue")['default']>
   LazyBaseModal: LazyComponent<typeof import("../../app/components/base/BaseModal.vue")['default']>
+  LazyBasePasswordInput: LazyComponent<typeof import("../../app/components/base/BasePasswordInput.vue")['default']>
+  LazyBaseSearchBar: LazyComponent<typeof import("../../app/components/base/BaseSearchBar.vue")['default']>
   LazyBaseSelect: LazyComponent<typeof import("../../app/components/base/BaseSelect.vue")['default']>
   LazyBaseTable: LazyComponent<typeof import("../../app/components/base/BaseTable.vue")['default']>
-  LazyDashboardConfirmDialog: LazyComponent<typeof import("../../app/components/dashboard/ConfirmDialog.vue")['default']>
-  LazyDashboardEmptyState: LazyComponent<typeof import("../../app/components/dashboard/EmptyState.vue")['default']>
-  LazyDashboardLoadingSpinner: LazyComponent<typeof import("../../app/components/dashboard/LoadingSpinner.vue")['default']>
-  LazyDashboardPageHeader: LazyComponent<typeof import("../../app/components/dashboard/PageHeader.vue")['default']>
-  LazyDashboardRoleGate: LazyComponent<typeof import("../../app/components/dashboard/RoleGate.vue")['default']>
-  LazyDashboardStatsCard: LazyComponent<typeof import("../../app/components/dashboard/StatsCard.vue")['default']>
+  LazyBaseConfirmDialog: LazyComponent<typeof import("../../app/components/base/ConfirmDialog.vue")['default']>
+  LazyBaseEmptyState: LazyComponent<typeof import("../../app/components/base/EmptyState.vue")['default']>
+  LazyBaseLoadingSpinner: LazyComponent<typeof import("../../app/components/base/LoadingSpinner.vue")['default']>
+  LazyBasePageHeader: LazyComponent<typeof import("../../app/components/base/PageHeader.vue")['default']>
   LazyLandingCtaSection: LazyComponent<typeof import("../../app/components/landing/CtaSection.vue")['default']>
   LazyLandingFeaturesSection: LazyComponent<typeof import("../../app/components/landing/FeaturesSection.vue")['default']>
   LazyLandingHeroSection: LazyComponent<typeof import("../../app/components/landing/HeroSection.vue")['default']>
@@ -218,16 +235,15 @@ interface _GlobalComponents {
   LazyLandingStatsSection: LazyComponent<typeof import("../../app/components/landing/StatsSection.vue")['default']>
   LazyLayoutAppFooter: LazyComponent<typeof import("../../app/components/layout/AppFooter.vue")['default']>
   LazyLayoutAppHeader: LazyComponent<typeof import("../../app/components/layout/AppHeader.vue")['default']>
+  LazyLayoutAppTemplateMenu: LazyComponent<typeof import("../../app/components/layout/AppTemplateMenu.vue")['default']>
+  LazyLayoutRoleGate: LazyComponent<typeof import("../../app/components/layout/RoleGate.vue")['default']>
+  LazyRegisterKoperasiWizard: LazyComponent<typeof import("../../app/components/register/koperasi/registerKoperasiWizard")['default']>
   LazySuperadminApplicationTable: LazyComponent<typeof import("../../app/components/superadmin/ApplicationTable.vue")['default']>
   LazySuperadminCooperativeTable: LazyComponent<typeof import("../../app/components/superadmin/CooperativeTable.vue")['default']>
   LazySuperadminDecisionModal: LazyComponent<typeof import("../../app/components/superadmin/DecisionModal.vue")['default']>
   LazyTenantBerita: LazyComponent<typeof import("../../app/components/tenant/TenantBerita.vue")['default']>
   LazyTenantGaleri: LazyComponent<typeof import("../../app/components/tenant/TenantGaleri.vue")['default']>
   LazyTenantProduk: LazyComponent<typeof import("../../app/components/tenant/TenantProduk.vue")['default']>
-  LazyUiBadge: LazyComponent<typeof import("../../app/components/ui/Badge.vue")['default']>
-  LazyUiFloatingCard: LazyComponent<typeof import("../../app/components/ui/FloatingCard.vue")['default']>
-  LazyUiHeroImage: LazyComponent<typeof import("../../app/components/ui/HeroImage.vue")['default']>
-  LazyUiSearchBar: LazyComponent<typeof import("../../app/components/ui/SearchBar.vue")['default']>
   LazyUColorModeAvatar: LazyComponent<typeof import("../../node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeAvatar.vue")['default']>
   LazyUColorModeButton: LazyComponent<typeof import("../../node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeButton.vue")['default']>
   LazyUColorModeImage: LazyComponent<typeof import("../../node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeImage.vue")['default']>
